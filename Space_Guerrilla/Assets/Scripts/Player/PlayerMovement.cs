@@ -68,7 +68,6 @@ public class PlayerMovement : MonoBehaviour
         if (actualRotate < 1 || actualRotate > 359)
         {
             // 떨림을 방지하기 위해 오차를 1도 넣음
-            playerRigidbody.angularVelocity = 0f;
             return;
         }
 

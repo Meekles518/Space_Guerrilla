@@ -81,10 +81,6 @@ public class Player_CruiseMissile : MonoBehaviour
             }
             
         }
-        if (dead)
-        {
-            gameObject.SetActive(false);
-        }
     }
     private void Find()
     {

@@ -47,7 +47,7 @@ public class PlayerShooter : MonoBehaviour
 
         // 마지막 장전 시간으로 부터의 시간이 장전주기보다 길고,  
         //탄창의 탄수가 최대 탄수보다 적을 때 혹은 탄창이 비어있다면
-        else if (Time.time - lastReloadTime >= reloadInterval && !(shooter.magAmmo == shooter.magCapacity))
+        else if (Time.time - lastReloadTime >= reloadInterval && (shooter.magAmmo == 0 || shooter.magAmmo != shooter.magCapacity))
         {
                 // 장전을 하는 Reload 매서드 실행
                 shooter.Reload();

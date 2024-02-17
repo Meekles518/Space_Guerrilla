@@ -160,7 +160,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7449352372080968768}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -222,6 +222,7 @@ MonoBehaviour:
   moveSpeed: 0
   rotateSpeed: 0
   moveDirection: {x: 0, y: 0}
+  mousePosition: {x: 0, y: 0}
 --- !u!114 &-4031607501554778923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,9 +254,6 @@ MonoBehaviour:
   Last_drone: {x: 0, y: 0}
   relativePosition: {x: 0, y: 0}
   FollowPosition: {x: 0, y: 0}
-  mousePosition: {x: 0, y: 0}
-  Player_vec: {x: 0, y: 0}
-  Drone_vec: {x: 0, y: 0}
   statename: 0
 --- !u!114 &-4442013720759300572
 MonoBehaviour:
