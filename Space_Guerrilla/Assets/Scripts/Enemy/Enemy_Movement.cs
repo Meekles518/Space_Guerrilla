@@ -165,7 +165,8 @@ public class Enemy_Movement : MonoBehaviour
          if (actualRotate < 1 || actualRotate > 359)
          {
              // 떨림을 방지하기 위해 오차를 1도 넣음
-             return;
+             enemyRigidbody.angularVelocity = 0f;
+            return;
          }
 
          // 시계방향으로 회전이 더 가까울 때 시계방향으로 회전

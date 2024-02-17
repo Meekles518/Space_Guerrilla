@@ -8,8 +8,9 @@ public class ShipEntity : MonoBehaviour
     public bool dead { get; protected set; } //우주선의 사망 여부를 알 수 있는 변수
     public float startingHealth { get; protected set; } //우주선의 초기 체력
     public float health; //우주선의 현재체력
-    public float damage; //우주선의 방어력(데미지)
-    public float shield; // 우주선의 방호막(?)
+    public float shield; // 우주선의 방어도
+    public float damage; //우주선의 공격력(방어력)
+    public float defensestat; // 우주선의 방호력(우주선의 damage와 총 health+shield에 영향을줌)
     public float collideRate; // 충돌판정을 시행하는 주기
     private bool inCollision; // 현재 충돌 여부를 판단하는 논리 변수
     private Collider2D collideEnemy; // 충돌한 상대의 콜라이더
@@ -23,7 +24,9 @@ public class ShipEntity : MonoBehaviour
         inCollision = false; // 충돌변수에 거짓 할당
         objectTag = gameObject.tag; // 자신의 태그를 태그 변수에 할당
         collideRate = 0.5f; // 주기에 값 할당
-        shield = 0; // 임시로 초기화, 나중에 지울것
+        damage = 20f;
+        defensestat = 10f;
+        
 
     }
 
@@ -55,7 +58,7 @@ public class ShipEntity : MonoBehaviour
                 if (shipEntity != null)
                 {
                     // 상대의 피격 매서드를 실행
-                    shipEntity.takeDamage(damage);                   
+                    shipEntity.takeDamage(damage + defensestat -10f);                   
                 }           
         }
         // 피격주기마다 반복
@@ -68,13 +71,13 @@ public class ShipEntity : MonoBehaviour
         // 쉴드가 남아 있다면 데미지는 쉴드로 들어감
         if (shield > 0)
         {
-            shield -= otherDamage * 100 / (100 + damage);
+            shield -= otherDamage * 1000 / (100 + damage) / defensestat;
         }
         // 쉴드가 없다면 데미지는 체력으로 들어감
         else
         {
             //임의로 식을 설정해봄, 받는 데미지는 상대 데미지에 정비례, 내 데미지 증가 시 감소
-            health -= otherDamage * 100 / (100 + damage);
+            health -= otherDamage * 1000 / (100 + damage) / defensestat;
         }
         // 체력이 0 이하 && 아직 죽지 않았다면 사망 처리 실행
         if (health <= 0 && !dead)

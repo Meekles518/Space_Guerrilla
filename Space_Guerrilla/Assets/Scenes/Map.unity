@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 11687703}
   - component: {fileID: 11687702}
   - component: {fileID: 11687701}
-  - component: {fileID: 11687704}
   m_Layer: 0
   m_Name: Node1
   m_TagString: Untagged
@@ -157,12 +156,10 @@ MonoBehaviour:
   connected:
   - {fileID: 673277940}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &11687702
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -230,41 +227,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &11687704
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 11687700}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &22573958
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,7 +365,6 @@ GameObject:
   - component: {fileID: 69979623}
   - component: {fileID: 69979622}
   - component: {fileID: 69979621}
-  - component: {fileID: 69979624}
   m_Layer: 0
   m_Name: Node10
   m_TagString: Untagged
@@ -427,12 +388,10 @@ MonoBehaviour:
   - {fileID: 1302716646}
   - {fileID: 372454082}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &69979622
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -500,41 +459,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &69979624
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 69979620}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &130736927
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,7 +470,6 @@ GameObject:
   - component: {fileID: 130736930}
   - component: {fileID: 130736929}
   - component: {fileID: 130736928}
-  - component: {fileID: 130736931}
   m_Layer: 0
   m_Name: Node3
   m_TagString: Untagged
@@ -571,12 +494,10 @@ MonoBehaviour:
   - {fileID: 1116694352}
   - {fileID: 655764590}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &130736929
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -644,41 +565,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &130736931
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 130736927}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &173934660
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +660,6 @@ GameObject:
   - component: {fileID: 174345195}
   - component: {fileID: 174345197}
   - component: {fileID: 174345196}
-  - component: {fileID: 174345198}
   m_Layer: 0
   m_Name: Node12
   m_TagString: Untagged
@@ -813,12 +698,10 @@ MonoBehaviour:
   - {fileID: 398147673}
   - {fileID: 1302716646}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &174345197
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -871,41 +754,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &174345198
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 174345194}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 0
-  m_UsedByEffector: 1
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &208881249
 GameObject:
   m_ObjectHideFlags: 0
@@ -1001,7 +849,6 @@ GameObject:
   - component: {fileID: 247203921}
   - component: {fileID: 247203920}
   - component: {fileID: 247203919}
-  - component: {fileID: 247203922}
   m_Layer: 0
   m_Name: Node2
   m_TagString: Untagged
@@ -1025,12 +872,10 @@ MonoBehaviour:
   - {fileID: 130736928}
   - {fileID: 673277940}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &247203920
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1098,41 +943,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &247203922
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 247203918}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &372454081
 GameObject:
   m_ObjectHideFlags: 0
@@ -1144,7 +954,6 @@ GameObject:
   - component: {fileID: 372454084}
   - component: {fileID: 372454083}
   - component: {fileID: 372454082}
-  - component: {fileID: 372454085}
   m_Layer: 0
   m_Name: Node9
   m_TagString: Untagged
@@ -1169,12 +978,10 @@ MonoBehaviour:
   - {fileID: 2015603700}
   - {fileID: 69979621}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &372454083
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1242,41 +1049,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &372454085
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 372454081}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &398147672
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,7 +1060,6 @@ GameObject:
   - component: {fileID: 398147675}
   - component: {fileID: 398147674}
   - component: {fileID: 398147673}
-  - component: {fileID: 398147676}
   m_Layer: 0
   m_Name: Node11
   m_TagString: Untagged
@@ -1312,12 +1083,10 @@ MonoBehaviour:
   - {fileID: 1116694352}
   - {fileID: 174345196}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &398147674
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1385,41 +1154,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &398147676
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 398147672}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &481445459
 GameObject:
   m_ObjectHideFlags: 0
@@ -1654,7 +1388,6 @@ GameObject:
   - component: {fileID: 655764592}
   - component: {fileID: 655764591}
   - component: {fileID: 655764590}
-  - component: {fileID: 655764593}
   m_Layer: 0
   m_Name: Node6
   m_TagString: Untagged
@@ -1680,12 +1413,10 @@ MonoBehaviour:
   - {fileID: 1302716646}
   - {fileID: 372454082}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &655764591
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1753,41 +1484,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &655764593
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655764589}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &673277939
 GameObject:
   m_ObjectHideFlags: 0
@@ -1799,7 +1495,6 @@ GameObject:
   - component: {fileID: 673277942}
   - component: {fileID: 673277941}
   - component: {fileID: 673277940}
-  - component: {fileID: 673277943}
   m_Layer: 0
   m_Name: Node5
   m_TagString: Untagged
@@ -1825,12 +1520,10 @@ MonoBehaviour:
   - {fileID: 655764590}
   - {fileID: 2015603700}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &673277941
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1898,41 +1591,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &673277943
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 673277939}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &681173571
 GameObject:
   m_ObjectHideFlags: 0
@@ -2046,11 +1704,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e30d33c378dec4a9ffa011f0557a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyNodeList: []
+  CurMap: {fileID: 0}
+  nodeSprites:
+  - {fileID: 11400000, guid: 4aad52a8cfb007c4aa2d3a8241489bb9, type: 2}
+  nodeList: []
   playerNode: {fileID: 0}
-  Nodes: {fileID: 0}
-  enemyPrefabs:
-  - {fileID: 3584721335691465119, guid: 0cb58dbd0584629469fc6aab9d28fa28, type: 3}
 --- !u!4 &790224637
 Transform:
   m_ObjectHideFlags: 0
@@ -2278,7 +1936,6 @@ GameObject:
   - component: {fileID: 1116694354}
   - component: {fileID: 1116694353}
   - component: {fileID: 1116694352}
-  - component: {fileID: 1116694355}
   m_Layer: 0
   m_Name: Node4
   m_TagString: Untagged
@@ -2303,12 +1960,10 @@ MonoBehaviour:
   - {fileID: 398147673}
   - {fileID: 1302716646}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &1116694353
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2376,41 +2031,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1116694355
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1116694351}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &1209239175
 GameObject:
   m_ObjectHideFlags: 0
@@ -2590,7 +2210,6 @@ GameObject:
   - component: {fileID: 1302716648}
   - component: {fileID: 1302716647}
   - component: {fileID: 1302716646}
-  - component: {fileID: 1302716649}
   m_Layer: 0
   m_Name: Node7
   m_TagString: Untagged
@@ -2616,12 +2235,10 @@ MonoBehaviour:
   - {fileID: 69979621}
   - {fileID: 174345196}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &1302716647
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2689,41 +2306,6 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &1302716649
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1302716645}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
 --- !u!1 &1337973117
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,7 +2905,6 @@ GameObject:
   - component: {fileID: 2015603702}
   - component: {fileID: 2015603701}
   - component: {fileID: 2015603700}
-  - component: {fileID: 2015603703}
   m_Layer: 0
   m_Name: Node8
   m_TagString: Untagged
@@ -3347,12 +2928,10 @@ MonoBehaviour:
   - {fileID: 673277940}
   - {fileID: 372454082}
   nodeType: 0
+  position: {x: 0, y: 0}
   state: 0
-  mouseOnScale: 0
   sR: {fileID: 0}
-  enemyObjects: []
-  verticalDistance: 0
-  horizontalDistance: 0
+  image: {fileID: 0}
 --- !u!212 &2015603701
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3420,38 +2999,3 @@ Transform:
   m_Father: {fileID: 22573959}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!58 &2015603703
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2015603699}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5

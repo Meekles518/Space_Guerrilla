@@ -60,13 +60,11 @@ public class PlayerInput : MonoBehaviour
         if (auto && isAuto == false)
         {
             isAuto = true;
-            Debug.Log("isAuto T");
         }
 
         else if (auto && isAuto == true)
         {
             isAuto = false;
-            Debug.Log("isAuto F");
         }
 
     }
