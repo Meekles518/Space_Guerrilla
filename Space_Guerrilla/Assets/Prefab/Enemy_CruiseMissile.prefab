@@ -126,7 +126,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemy: {fileID: 0}
-  speed: 10
+  speed: 15
   lifespan: 500
   Target_layer:
     serializedVersion: 2

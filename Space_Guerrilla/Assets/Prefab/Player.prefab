@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 2142833834853444847}
   - component: {fileID: 4341291868055680081}
   - component: {fileID: 7659124094205496354}
-  m_Layer: 6
+  - component: {fileID: 7510653429565846693}
+  m_Layer: 3
   m_Name: Player
-  m_TagString: Enemy
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -39,7 +40,7 @@ Transform:
   - {fileID: 6455190688266939182}
   - {fileID: 1238792138094515024}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9110481042538490623
 SpriteRenderer:
@@ -81,7 +82,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -243168001
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -145,7 +146,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9b0e98acda2d4a428c061dcd02ba131, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 5
   rotateSpeed: 100
 --- !u!114 &6504351125414039459
 MonoBehaviour:
@@ -247,6 +248,22 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: 0.1}
   m_Size: {x: 1.2, y: 1}
   m_Direction: 0
+--- !u!114 &7510653429565846693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455692199383189734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64d2b75bda6c0894284987ade55adaf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 0
+  damage: 0
+  shield: 0
+  collideRate: 0
 --- !u!1 &2977928248865939183
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,7 +275,7 @@ GameObject:
   - component: {fileID: 1238792138094515024}
   - component: {fileID: 350890446410695421}
   - component: {fileID: 998214711779161475}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player Gun(1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,9 +368,9 @@ MonoBehaviour:
   recoil: 1
   bulletType: 4
   timeBetFire: 1
-  projectilesPerFire: 0
+  projectilesPerFire: 1
   timeBetProjectiles: 0.2
-  reloadTime: 1
+  reloadTime: 5
 --- !u!1 &7444360912548527842
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,7 +382,7 @@ GameObject:
   - component: {fileID: 6455190688266939182}
   - component: {fileID: 3384493193711549620}
   - component: {fileID: 7380872934689949309}
-  m_Layer: 6
+  m_Layer: 3
   m_Name: Player Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -458,6 +475,6 @@ MonoBehaviour:
   recoil: 1
   bulletType: 4
   timeBetFire: 1
-  projectilesPerFire: 0
+  projectilesPerFire: 1
   timeBetProjectiles: 0.2
-  reloadTime: 1
+  reloadTime: 5
