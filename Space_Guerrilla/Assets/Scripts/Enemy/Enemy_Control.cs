@@ -11,6 +11,7 @@ public class Enemy_Control : MonoBehaviour
     public Transform player; // 플레이어 트랜스폼
     public Vector2 SelfSpawnposition; // 참조가능한 스폰위치
     public Vector2 FleetSpawnpoint; // 전대 스폰위치
+    public Vector2 Escapepoint; // 맵 탈출위치
 
     public float PlayertoFleetSpawn; // 플레이어와 전대 스폰위치 사이 거리
     public float EnemytoPlayer; // 플레이어와 적 사이 거리
@@ -30,7 +31,8 @@ public class Enemy_Control : MonoBehaviour
         PURSUE, // 추적 상태
         WAIT, // 대기 상태
         GOBACK, // 복귀 상태
-        RETREAT // 후퇴 상태
+        RETREAT, // 후퇴 상태
+        ESCAPE // 탈출 상태
     };
 
     public STATE statename; // STATE 변수 (Enemy_Movement 제어)
@@ -55,6 +57,7 @@ public class Enemy_Control : MonoBehaviour
         EnemytoPlayer = 1000;
         EnemytoSelfSpawn = 1000;
         EnemytoFleetSpawn = 0;
+        Escapepoint = new Vector2(80, 0);
     }
 
     

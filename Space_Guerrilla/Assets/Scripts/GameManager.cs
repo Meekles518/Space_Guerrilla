@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
         instance = this;
         isDefensiveEngage = false;
         OppControl = null;
+        playerInput = player.GetComponent<PlayerInput>();
       
 
 

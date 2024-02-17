@@ -17,7 +17,6 @@ public class Offensive_Idle : Offensive_State
     public override void Enter()
     {
         currTime = 0f; // 현재시간 초기화
-        Debug.Log("Idle");
         base.Enter();
     }
 

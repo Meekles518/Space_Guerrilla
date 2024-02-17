@@ -25,10 +25,7 @@ public class PlayerMovement : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody2D>();
         //playerAnimator = GetComponent<Animator>();
 
-        // 이동속도 설정
-        moveSpeed = 5f;
-        // 회전속도 설정
-        rotateSpeed = 100f;
+
     }
 
     // 특정 물리주기에 맞춰 Rotate와 Move 실행

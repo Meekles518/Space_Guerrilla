@@ -93,6 +93,10 @@ public class Enemy_Movement : MonoBehaviour
         {
             Targetposition = Playerposition;
         }
+        else if (control.statename == Enemy_Control.STATE.ESCAPE)
+        {
+            Targetposition = control.Escapepoint;
+        }
     }
 
 
@@ -113,7 +117,7 @@ public class Enemy_Movement : MonoBehaviour
              }
         }
         // GoBack 상태일때
-        else if(control.statename == Enemy_Control.STATE.GOBACK)
+        else if(control.statename == Enemy_Control.STATE.GOBACK || control.statename == Enemy_Control.STATE.ESCAPE)
         {
             // 이동방향 = 목표위치 - 현재위치
             moveDirection = Targetposition - new Vector2(transform.position.x, transform.position.y);

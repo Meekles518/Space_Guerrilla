@@ -9,6 +9,7 @@ public class Offensive_Pursue : Offensive_State
     public Offensive_Pursue(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
         : base(_enemy, _player, _control, _currTime)
     {
+        currTime = 0f; // 현재시간 초기화
         // 현재 State의 이름을 PURSUE로 변경
         name = STATE.PURSUE;
     }
@@ -23,7 +24,16 @@ public class Offensive_Pursue : Offensive_State
     {
         // 사격을 함
         control.isShoot = true;
-        // 공격형 적은 Pursue 상태에 진입하면 끝까지 추적을 개시하므로 Exit조건이 없음
+        // 현재 시간을 계속 동기화
+        currTime += Time.fixedDeltaTime;
+        if (currTime > 5f)
+        {
+            // 다음 스테이트를 Pursue로 설정
+            nextState = new Offensive_Escape(enemy, player, control, currTime);
+            // 다음 이벤트를 Exit으로 설정
+            stage = EVENT.EXIT;
+        }
+
     }
 
     public override void Exit()

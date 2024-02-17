@@ -102,7 +102,7 @@ MonoBehaviour:
   magCapacity: 5
   magAmmo: 0
   recoil: 1
-  bulletType: 0
+  bulletType: 1
   timeBetFire: 1
   projectilesPerFire: 0
   timeBetProjectiles: 0.2
@@ -147,7 +147,7 @@ Transform:
   - {fileID: 84308077320726359}
   - {fileID: 485336944836752812}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1472140739772654581
 SpriteRenderer:
@@ -311,6 +311,7 @@ MonoBehaviour:
   MaxAtkRange: 30
   timer: 0
   projectilesPerFire: 5
+  isAggro: 0
   statename: 0
   isShoot: 0
 --- !u!114 &3518396701203483968
@@ -504,7 +505,7 @@ MonoBehaviour:
   magCapacity: 5
   magAmmo: 0
   recoil: 1
-  bulletType: 0
+  bulletType: 1
   timeBetFire: 1
   projectilesPerFire: 0
   timeBetProjectiles: 0.2

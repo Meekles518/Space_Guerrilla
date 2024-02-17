@@ -14,7 +14,8 @@ public class Offensive_State
         PURSUE, // 추적 상태
         WAIT, // 대기 상태
         GOBACK, // 복귀 상태
-        RETREAT // 후퇴 상태
+        RETREAT, // 후퇴 상태
+        ESCAPE
     };
 
     // 각 State의 진입, 진행중, 나올때 실행할 매서드들을 enum으로 선언
