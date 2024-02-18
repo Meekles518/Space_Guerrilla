@@ -24,27 +24,18 @@ namespace Map
 
     }
 
-    [CreateAssetMenu]
-    //Key로 NodeType을, value로 Sprite를 넣는 형태로 이미지 자료를 저장해서 활용하는 방법 구현
-    public class NodeSprite : ScriptableObject
+    //Turn 상태를 열거 enum
+    public enum Turn
     {
-        public NodeType nodeType;
-        public Sprite sprite;
-
-
-    }//NodeSprite
-
-    public class NodeList
-    {
-        public List<Node> nodeList;
-        public List<List<int>> connectionList;
-
-
+        Player,
+        Enemy,
+        Engage,    
     }
 
 
 
 
 }
+
 
 
