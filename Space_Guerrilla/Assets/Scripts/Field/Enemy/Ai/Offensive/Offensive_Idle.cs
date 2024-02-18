@@ -29,7 +29,7 @@ public class Offensive_Idle : Ai_State
         currTime += Time.fixedDeltaTime;
 
         // 시간이 마지막 초기화로부터 3초 지났다면
-        if (currTime > control.timer)
+        if (currTime > control.TimeTillAtk)
         {
             // 다음 스테이트를 Pursue로 설정
             nextState = new Offensive_Pursue(enemy, player, control, currTime);

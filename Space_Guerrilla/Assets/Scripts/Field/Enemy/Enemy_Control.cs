@@ -8,22 +8,30 @@ using UnityEngine.UIElements;
 // 모든 유형의 적들이 사용가능
 public class Enemy_Control : MonoBehaviour
 {
+    [HideInInspector]
     public Transform player; // 플레이어 트랜스폼
-    public Vector2 SelfSpawnposition; // 참조가능한 스폰위치
+    [Header("좌표설정")]    
     public Vector2 FleetSpawnpoint; // 전대 스폰위치
     public Vector2 Escapepoint; // 맵 탈출위치
 
+    [Header("본인 스폰위치(자동설정됨)")]
+    public Vector2 SelfSpawnposition; // 참조가능한 스폰위치
+
+    [Header("여러 거리 확인용")]
     public float PlayertoFleetSpawn; // 플레이어와 전대 스폰위치 사이 거리
     public float EnemytoPlayer; // 플레이어와 적 사이 거리
     public float EnemytoSelfSpawn; // 적과 적 자신의 스폰위치 사이의 거리
     public float EnemytoFleetSpawn; // 적과 전대 스폰위치 사이의 거리
 
+    [Header("적 관련 수치 조정")]
     public float smallAgrro; // 작은 어그로 범위
     public float largeAgrro; // 큰 어그로 범위
     public float MaxAtkRange; // 최대 공격 사거리
-    public float timer; // 타이머 변수
-    public int projectilesPerFire; // 한번 클릭시 발사하는 투사체 수
+    public float TimeTillAtk; // 공격형적 추적 타이머
+
+    [Header("기회주의자형 적 어그로 여부")]
     public bool isAggro;
+
 
     public enum STATE
     {
@@ -44,14 +52,6 @@ public class Enemy_Control : MonoBehaviour
         player = GameObject.Find("Player").transform;
         // 자신의 스폰위치를 현재 위치로 설정
         SelfSpawnposition = transform.position;
-        // 어그로 범위 설정 (이거를 지우면 유니티 인스펙터에서 실시간으로 개별 전대별 설정가능)
-        smallAgrro = 15f;
-        largeAgrro = 25f;
-        // 에러가 나지않게 초기값들 설정
-        //statename = STATE.IDLE;
-        isShoot = false;
-        isAggro = false;
-        Escapepoint = new Vector2(80, 0);
 
         // 유일하게 Enemy_Control이 계산가능한 거리값, 나머지는 각 Ai 스크립트로 부터 가져옴
         PlayertoFleetSpawn = Vector2.Distance(player.position, FleetSpawnpoint);

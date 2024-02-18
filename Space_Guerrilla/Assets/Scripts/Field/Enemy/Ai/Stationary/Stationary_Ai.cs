@@ -8,27 +8,20 @@ using UnityEngine.UIElements;
 // 공격형 적 State들과 Enemy_Control 사이를 연결
 public class Stationary_AI : MonoBehaviour
 {
+    [Header("현재 스테이트")]
     Ai_State currentState; // 현재 스테이트
+    [HideInInspector]
     public Transform player; // 플레이어 트랜스폼
+    [HideInInspector]
     public Enemy_Control control; // Enemy_Control 컴포넌트
-
-    static public bool isShoot; // Enemy_Shooter를 제어하는데 사용할 불 변수
-
-    public Vector2 SelfSpawnposition; // 본인 스폰위치
-    public Vector2 FleetSpawnpoint; // 전대 스폰위치
-
-    public float EnemytoPlayer; // 적과 플레이어 사이 거리
-
+    [HideInInspector]
     public float currTime; // 타이머에 사용할 현재시간
-    public float timer; // 타이머에 사용할 타이머가 끝나는 시간
 
     // 값들 초기화
     void OnEnable()
     {
         control = GetComponent<Enemy_Control>(); // 컨트롤 컴포넌트를 가져옴
-        //player = GameObject.Find("Player").transform; // 플레이어 오브젝트를 찾아 트랜스폼 할당
         currentState = new Stationary_Wait(gameObject, player, control, currTime); // 초기 스테이트를 Idle로 설정
-        //SelfSpawnposition= (Vector2)transform.position; // 자신의 스폰위치를 지정
     }
 
 

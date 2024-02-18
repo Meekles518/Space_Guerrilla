@@ -8,7 +8,7 @@ using UnityEngine;
 public class PoolManager : MonoBehaviour
 {
 
-    //Prefab을 보관할  변수
+    //Prefab을 보관할  변수    
     public GameObject[] Prefabs;
 
     //Pool 을 담을 List변수

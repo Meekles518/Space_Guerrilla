@@ -88,6 +88,10 @@ public class Enemy_CruiseMissile : MonoBehaviour
             }
 
         }
+        if (dead)
+        {
+            gameObject.SetActive(false);
+        }
     }
     private void Find()
     {

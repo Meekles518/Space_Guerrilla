@@ -27,7 +27,7 @@ public class Opportunistic_Idle : Ai_State
         control.isShoot = false;
 
         // 수비형적의 어그로가 끌리거나 본인의 어그로가 끌렸다면
-        if (GameManager.instance.isDefensiveEngage || Aggro() || GameManager.OppControl.isAggro == true)
+        if (GameManager.instance.isDefensiveEngage || Aggro() )
         {
             if (Aggro())
             {

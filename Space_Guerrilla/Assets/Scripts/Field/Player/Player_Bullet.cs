@@ -7,24 +7,22 @@ using UnityEngine.AI;
 public class Player_Bullet : MonoBehaviour
 {
     private Rigidbody2D rb2; // 총알의 리지드바디
+    [HideInInspector]
     public GameObject player; // 이 총알을 발사하는 오브젝트
-    private bool dead; // 이 총알의 활성화 여부를 확인해줄 변수
-    public float speed; // 총알의 속도
 
+    private bool dead; // 이 총알의 활성화 여부를 확인해줄 변수
     private Vector3 moveDirection3; // 총알의 이동방향 (Vector3)
     private Vector2 moveDirection2; // 총알의 이동방향 (Vector2)
-    private Vector2 bulletPosition; // 현재 총알의 위치
-    public float spreadRange; // 탄퍼짐 정도
     private float spread; // 최종 탄퍼짐
+
+    [Header("총알 속성")]
+    public float speed; // 총알의 속도
+    public float spreadRange; // 탄퍼짐 정도
 
     private void Awake()
     {
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
-        // 속도 선언
-        speed = 10f;
-        // 탄퍼짐 정도 선언
-        spreadRange = 5f;
         // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
         spread = Random.Range(-spreadRange, spreadRange);
     }
@@ -40,8 +38,6 @@ public class Player_Bullet : MonoBehaviour
         moveDirection3 = Quaternion.AngleAxis(spread, new Vector3(0, 0, 1)) * player.transform.up;
         // 계산에 필요한 Vector2 값으로 위의 방향을 변경해줌
         moveDirection2 = (Vector2)moveDirection3;
-        // 총알의 현재 위치를 계산
-        bulletPosition = new Vector2(transform.position.x, transform.position.y);
         // 총알이 계속 남아있지 않도록 하는 코루틴 Disable을 실행
         StartCoroutine(Disable());
     }

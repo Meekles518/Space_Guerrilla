@@ -6,28 +6,25 @@ using UnityEngine;
 public class ShipEntity : MonoBehaviour
 {
     public bool dead { get; protected set; } //우주선의 사망 여부를 알 수 있는 변수
-    public float startingHealth { get; protected set; } //우주선의 초기 체력
+    private Collider2D collideEnemy; // 충돌한 상대의 콜라이더
+    private string objectTag; // 본인의 태그
+
+    [Header("오브젝트 스탯")]
     public float health; //우주선의 현재체력
     public float shield; // 우주선의 방어도
     public float damage; //우주선의 공격력(방어력)
     public float defensestat; // 우주선의 방호력(우주선의 damage와 총 health+shield에 영향을줌)
+    [Header("충돌 관련 수치")]
     public float collideRate; // 충돌판정을 시행하는 주기
     private bool inCollision; // 현재 충돌 여부를 판단하는 논리 변수
-    private Collider2D collideEnemy; // 충돌한 상대의 콜라이더
-    private string objectTag; // 본인의 태그
+
 
     //onEnable로 초기 값 설정
     protected virtual void OnEnable()
     {
         dead = false; // 사망변수에 거짓 할당
-        //health = startingHealth; //현재체력 = 초기체력
         inCollision = false; // 충돌변수에 거짓 할당
         objectTag = gameObject.tag; // 자신의 태그를 태그 변수에 할당
-        collideRate = 0.5f; // 주기에 값 할당
-        damage = 0f;
-        defensestat = 10f;
-        
-
     }
 
     // 충돌중일때 실행

@@ -5,20 +5,24 @@ using UnityEngine;
 // State에 따른 적의 움직임(이동, 회전)을 담당하는 스크립트
 public class Enemy_Movement : MonoBehaviour
 {
+    [HideInInspector]
     public GameObject player;    // 플레이어
     private Rigidbody2D enemyRigidbody; // 적의 리지드바디
+    [HideInInspector]
     public Enemy_Control control; // 적 제어 스크립트
 
-    public Vector2 Spawnposition; // Enemy 오브젝트의 스폰위치
-    private Vector2 Playerposition; // 현재 플레이어의 위치
-    public Vector2 Targetposition; // 이 Enemy 오브젝트가 이동, 바라볼 목표 위치
-    public float EnemytoPlayer; // 플레이어와 이 적 사이의 거리
 
+    private Vector2 Spawnposition; // Enemy 오브젝트의 스폰위치
+    private Vector2 Playerposition; // 현재 플레이어의 위치
+    private Vector2 Targetposition; // 이 Enemy 오브젝트가 이동, 바라볼 목표 위치
+    private float EnemytoPlayer; // 플레이어와 이 적 사이의 거리
+
+    [Header("적 이동 수치")]
     public float moveSpeed; // 이동 속도
     public float rotateSpeed; // 회전 속도
     public float OptimalAtkRange; // 적정 공격 사거리
 
-    public Vector2 moveDirection; // 우주선이 이동해야하는 방향
+    private Vector2 moveDirection; // 우주선이 이동해야하는 방향
     private Vector2 rotateDirection; // 우주선이 회전해야하는 방향
     private float actualRotate; // 현재 각도에서 rotateDirection을 만족하기 위해 회전해야하는 각도(도)
     private float x_Random; // x좌표 랜덤변수

@@ -10,22 +10,20 @@ public class PlayerMovement : MonoBehaviour
     private PlayerInput playerInput; // PlayerInput을 가져옴
     private Rigidbody2D playerRigidbody; // 플레이어의 리지드바디
 
-    public float moveSpeed; // 이동 속도
-    public float rotateSpeed; // 회전 속도
-
     private Vector2 moveDirection; // 우주선이 이동해야하는 방향
     private Vector2 rotateDirection; // 우주선이 회전해야하는 방향
     private Vector2 mousePosition; // 월드맵 상에서의 현재 마우스 위치
     private float actualRotate; // 현재 각도에서 rotateDirection을 만족하기 위해 회전해야하는 각도(도)
+
+    [Header("이동, 회전 속도")]
+    public float moveSpeed; // 이동 속도
+    public float rotateSpeed; // 회전 속도
 
     private void Awake()
     {
         // 사용할 컴포넌트들을 가져오기
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody2D>();
-        //playerAnimator = GetComponent<Animator>();
-
-
     }
 
     // 특정 물리주기에 맞춰 Rotate와 Move 실행
@@ -63,7 +61,6 @@ public class PlayerMovement : MonoBehaviour
         // 회전해야 하는 각도를 단위 '도'로 구함
         actualRotate = Quaternion.FromToRotation((Vector2) transform.up, rotateDirection).eulerAngles.z;
 
-
         // 회전해야 하는 각도의 값에 따라 회전 방향을 결정해줌.
         if (actualRotate < 1 || actualRotate > 359)
         {
@@ -71,20 +68,15 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody.angularVelocity = 0f;
             return;
         }
-
         // 시계방향으로 회전이 더 가까울 때 시계방향으로 회전
         else if (actualRotate > 180)
         {
             transform.Rotate(0, 0, -Time.deltaTime * rotateSpeed, Space.Self);
         }
-
         // 반시계방향으로 회전이 더 가까울 때 반시계방향으로 회전
         else if (actualRotate < 180)
         {
             transform.Rotate(0, 0, Time.deltaTime * rotateSpeed, Space.Self);
-        }
-        
-    }
-
-   
+        }      
+    }  
 }

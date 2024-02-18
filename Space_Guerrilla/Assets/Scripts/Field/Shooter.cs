@@ -15,20 +15,23 @@ public class Shooter : MonoBehaviour
     }
 
     public State state { get; private set; } // 현재 총의 상태
-
+    [HideInInspector]
     public Transform fireTransform; // 투사체가 발사될 위치
-    public Rigidbody2D objectRigidbody; // 발사자의  Rigidbody
+    [HideInInspector]
+    public Rigidbody2D objectRigidbody;  // 발사자의  Rigidbody
+    private float lastFireTime; // 총을 마지막으로 발사한 시점
 
+    [Header("총 성능 조정")]
+    public int bulletType; // 발사하는 총알의 타입 예) 플레이어 총알, 적 총알 등
     public int magCapacity; // 탄창 용량
     public int magAmmo; // 현재 탄창에 남아있는 탄약
     public float recoil; // 발사시 반동
-    public int bulletType; // 발사하는 총알의 타입 예) 플레이어 총알, 적 총알 등
-
-    private float lastFireTime; // 총을 마지막으로 발사한 시점
+    public float reloadTime; // 재장전 소요 시간
     public float timeBetFire; // 투사체 발사 간격
     public int projectilesPerFire; // 한번 클릭시 발사하는 투사체 수
     public float timeBetProjectiles; // 한번 클릭시 발사되는 투사체 간의 시간 간격
-    public float reloadTime; // 재장전 소요 시간
+    public float reloadInterval;
+
 
 
     private void OnEnable()

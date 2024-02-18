@@ -7,32 +7,36 @@ using UnityEngine.AI;
 public class Player_CruiseMissile : MonoBehaviour
 {
     private Rigidbody2D rb2; // 미사일의 리지드바디
+    [HideInInspector]
     public GameObject player; // 이 미사일을 발사하는 오브젝트
-    private bool dead; // 이 미사일의 활성화 여부를 확인해줄 변수
-    public float speed; // 미사일의 속도
+    private Transform missileTarget;
 
+    private bool dead; // 이 미사일의 활성화 여부를 확인해줄 변수
     private Vector3 moveDirection3; // 총알의 이동방향 (Vector3)
     private Vector2 moveDirection2; // 총알의 이동방향 (Vector2)
     private Vector2 bulletPosition; // 현재 총알의 위치
-    public float lifespan;
-    private float currtime;
-    private Transform missileTarget;
-
     private Vector2 Targetposition;
-    public RaycastHit2D[] Targets; // CircleCastAll로 가져오는 오브젝트들
-    public LayerMask Target_layer; // 검색을 시행할 레이어(Enemy 레이어)
-    public Transform Nearest_enemy; // 검색된 오브젝트중 가장 가까운 Enemy 오브젝트
-    public float Scan_range;
     private Vector2 rotateDirection; // 우주선이 회전해야하는 방향
+    private float currtime;
     private float actualRotate;
+
+    [HideInInspector]
+    public RaycastHit2D[] Targets; // CircleCastAll로 가져오는 오브젝트들
+    [HideInInspector]
+    public LayerMask Target_layer; // 검색을 시행할 레이어(Enemy 레이어)
+    [HideInInspector]
+    public Transform Nearest_enemy; // 검색된 오브젝트중 가장 가까운 Enemy 오브젝트
+
+    [Header("미사일 속성")]
+    public float speed; // 미사일의 속도
+    public float lifespan;
+    public float Scan_range;
     public float rotateSpeed; // 회전 속도
 
     private void Awake()
     {
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
-        // 속도 선언
-        //speed = 20f;
     }
 
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드

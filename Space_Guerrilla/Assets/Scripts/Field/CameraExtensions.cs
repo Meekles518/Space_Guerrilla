@@ -9,15 +9,21 @@ using UnityEngine;
 
 public class CameraExtensions : MonoBehaviour
 {
-
+    [HideInInspector]
     public Transform playerTransform;
-    public Vector3 cameraPosition;
-    public Vector2 center;
-    public Vector2 mapSize;
-
+   [HideInInspector]
     public float cameraMoveSpeed;
+    [HideInInspector]
     public float height;
+    [HideInInspector]
     public float width;
+    [HideInInspector]
+    public Vector3 cameraPosition;
+    [HideInInspector]
+    public Vector2 center;
+
+    [Header("¸ÊÅ©±â ÀÔ·Â")]
+    public Vector2 mapSize;
 
     void Start()
     {
