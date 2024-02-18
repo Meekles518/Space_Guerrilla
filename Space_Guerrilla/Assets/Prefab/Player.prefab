@@ -161,8 +161,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 7380872934689949309}
-  reloadInterval: 3
-  lastReloadTime: 0
 --- !u!114 &2142833834853444847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -176,8 +174,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 998214711779161475}
-  reloadInterval: 3
-  lastReloadTime: 0
 --- !u!70 &4341291868055680081
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -207,7 +203,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.1}
@@ -242,7 +238,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.1}
@@ -261,8 +257,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  damage: 0
   shield: 0
+  damage: 0
+  defensestat: 0
   collideRate: 0
 --- !u!1 &2977928248865939183
 GameObject:
@@ -363,14 +360,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireTransform: {fileID: 0}
   objectRigidbody: {fileID: 0}
+  bulletType: 4
   magCapacity: 5
   magAmmo: 0
   recoil: 1
-  bulletType: 4
+  reloadTime: 5
   timeBetFire: 1
   projectilesPerFire: 1
   timeBetProjectiles: 0.2
-  reloadTime: 5
+  reloadInterval: 0
 --- !u!1 &7444360912548527842
 GameObject:
   m_ObjectHideFlags: 0
@@ -470,11 +468,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireTransform: {fileID: 0}
   objectRigidbody: {fileID: 0}
+  bulletType: 4
   magCapacity: 5
   magAmmo: 0
   recoil: 1
-  bulletType: 4
+  reloadTime: 5
   timeBetFire: 1
   projectilesPerFire: 1
   timeBetProjectiles: 0.2
-  reloadTime: 5
+  reloadInterval: 0

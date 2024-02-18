@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
 {
     private PlayerInput playerInput; // PlayerInput을 가져옴
     private Rigidbody2D playerRigidbody; // 플레이어의 리지드바디
+    private ShipEntity shipEntity;
 
     private Vector2 moveDirection; // 우주선이 이동해야하는 방향
     private Vector2 rotateDirection; // 우주선이 회전해야하는 방향
@@ -24,6 +25,8 @@ public class PlayerMovement : MonoBehaviour
         // 사용할 컴포넌트들을 가져오기
         playerInput = GetComponent<PlayerInput>();
         playerRigidbody = GetComponent<Rigidbody2D>();
+        shipEntity = GetComponent<ShipEntity>();
+
     }
 
     // 특정 물리주기에 맞춰 Rotate와 Move 실행
@@ -47,6 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidbody.velocity = moveDirection.normalized * moveSpeed;
         }
+        shipEntity.moveDirection = moveDirection;
     }
 
     // 마우스 방향으로 우주선을 회전

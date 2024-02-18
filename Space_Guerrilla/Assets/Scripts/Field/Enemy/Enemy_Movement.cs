@@ -7,9 +7,12 @@ public class Enemy_Movement : MonoBehaviour
 {
     [HideInInspector]
     public GameObject player;    // 플레이어
+    [HideInInspector]
     private Rigidbody2D enemyRigidbody; // 적의 리지드바디
     [HideInInspector]
     public Enemy_Control control; // 적 제어 스크립트
+    [HideInInspector]
+    private ShipEntity shipEntity;
 
 
     private Vector2 Spawnposition; // Enemy 오브젝트의 스폰위치
@@ -43,6 +46,7 @@ public class Enemy_Movement : MonoBehaviour
         Spawnposition = transform.position; // 내 스폰위치
         Targetposition = Spawnposition; // 타겟위치를 스폰포인트(현재위치)로 초기화
         control = GetComponent<Enemy_Control>();
+        shipEntity = GetComponent<ShipEntity>();
 
     }
 
@@ -148,11 +152,17 @@ public class Enemy_Movement : MonoBehaviour
                 enemyRigidbody.velocity = moveDirection.normalized * moveSpeed;
             }
         }
+        else if(control.statename == Enemy_Control.STATE.WAIT)
+        {
+            moveDirection = new Vector2(-1, 0);
+        }
         else
         {
             // 적 오브젝트의 속도를 0으로 변경
             enemyRigidbody.velocity = new Vector2(0, 0);
         }
+
+        shipEntity.moveDirection = moveDirection;
         
     }
 

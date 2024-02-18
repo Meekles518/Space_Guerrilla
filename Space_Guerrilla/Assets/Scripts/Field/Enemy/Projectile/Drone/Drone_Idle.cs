@@ -39,7 +39,7 @@ public class Drone_Idle : Drone_State
 
 
         //산개 상태가 아니고, 자동 모드이고, 드론의 Target이 설정되어 있다면
-        else if (control.playerInput.isAuto && control.TargetPosition != null)
+        else if (control.playerInput.isAuto && control.droneTarget != null)
         {
             //다음 State를 Engage로 변경
             nextState = new Drone_Engage(enemy, player, control, currTime);

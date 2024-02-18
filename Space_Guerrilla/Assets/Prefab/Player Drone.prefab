@@ -37,7 +37,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &6109392040379587572
 SpriteRenderer:
@@ -147,7 +147,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.1}
@@ -160,7 +160,7 @@ CapsuleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7449352372080968768}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -182,7 +182,7 @@ CapsuleCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.1}
@@ -203,7 +203,6 @@ MonoBehaviour:
   player: {fileID: 0}
   control: {fileID: 0}
   currTime: 0
-  timer: 0
 --- !u!114 &6341330990329686079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,9 +218,12 @@ MonoBehaviour:
   player: {fileID: 0}
   control: {fileID: 0}
   Targetposition: {x: 0, y: 0}
-  moveSpeed: 0
-  rotateSpeed: 0
+  moveSpeed: 5
+  rotateSpeed: 100
   moveDirection: {x: 0, y: 0}
+  x_Random: 0
+  x_Range: 5
+  y_Range: 5
 --- !u!114 &-4031607501554778923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -236,7 +238,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   selfposition: {fileID: 0}
-  timer: 0
   playerInput: {fileID: 0}
   isSpread: 0
   isAuto: 0

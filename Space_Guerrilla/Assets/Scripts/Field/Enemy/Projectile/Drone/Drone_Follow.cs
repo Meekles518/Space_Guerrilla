@@ -14,12 +14,12 @@ public class Drone_Follow : Drone_State
     public override void Enter()
     {
         //Follow State 진입 시의 Player와 Drone의 position 정보 저장하기
-        control.Last_player = control.player.position;
+        control.Last_player = control.player.transform.position;
         control.Last_drone = control.selfposition.position;
 
         //Follow State 진입 시의 Player와 Drone의 상대 위치 저장
         control.relativePosition = control.Last_drone - control.Last_player;
-        control.FollowPosition = control.relativePosition + (Vector2)control.player.position;
+        control.FollowPosition = control.relativePosition + (Vector2)control.player.transform.position;
 
 
         base.Enter();
@@ -29,7 +29,7 @@ public class Drone_Follow : Drone_State
     public override void FixedUpdate()
     {
         //Player의 이동을 반영해 FollowPosition 을 저장
-        control.FollowPosition = control.relativePosition + (Vector2)control.player.position;
+        control.FollowPosition = control.relativePosition + (Vector2)control.player.transform.position;
 
         //산개 상태가 아닐 경우
         if(!control.isSpread)
