@@ -5,11 +5,11 @@ using UnityEngine.AI;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 // 어그로가 풀린 기회주의형 적이 플레이어를 경계하며 스폰위치로 복귀
-public class Opportunistic_Retreat : Opportunistic_State
+public class Opportunistic_Retreat : Ai_State
 {
 
-    public Opportunistic_Retreat(GameObject _enemy, Transform _player, Enemy_Control _control)
-        : base(_enemy, _player, _control)
+    public Opportunistic_Retreat(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
+        : base(_enemy, _player, _control, _currTime)
     {
 
         name = STATE.RETREAT;
@@ -21,8 +21,7 @@ public class Opportunistic_Retreat : Opportunistic_State
         {
             GameManager.OppControl = null;
         }
-        Debug.Log("Idle");
-        Debug.Log("Retreat");
+
         base.Enter();
     }
 
@@ -38,7 +37,7 @@ public class Opportunistic_Retreat : Opportunistic_State
                 GameManager.OppControl = control;
             }
             // 다음 스테이트를 Pursue로 변경
-            nextState = new Opportunistic_Pursue(enemy, player, control);
+            nextState = new Opportunistic_Pursue(enemy, player, control, currTime);
             stage = EVENT.EXIT;
         }
 
@@ -49,7 +48,7 @@ public class Opportunistic_Retreat : Opportunistic_State
             if (control.EnemytoSelfSpawn < 0.2f)
             {
                 // 다음 스테이트를 Idle로 변경
-                nextState = new Opportunistic_Idle(enemy, player, control);
+                nextState = new Opportunistic_Idle(enemy, player, control, currTime);
                 stage = EVENT.EXIT;
             }
         }

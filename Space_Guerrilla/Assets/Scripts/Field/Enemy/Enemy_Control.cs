@@ -48,16 +48,16 @@ public class Enemy_Control : MonoBehaviour
         smallAgrro = 15f;
         largeAgrro = 25f;
         // 에러가 나지않게 초기값들 설정
-        statename = STATE.IDLE;
+        //statename = STATE.IDLE;
         isShoot = false;
         isAggro = false;
-        timer = 100;
+        Escapepoint = new Vector2(80, 0);
+
         // 유일하게 Enemy_Control이 계산가능한 거리값, 나머지는 각 Ai 스크립트로 부터 가져옴
         PlayertoFleetSpawn = Vector2.Distance(player.position, FleetSpawnpoint);
-        EnemytoPlayer = 1000;
-        EnemytoSelfSpawn = 1000;
-        EnemytoFleetSpawn = 0;
-        Escapepoint = new Vector2(80, 0);
+        EnemytoPlayer = Vector2.Distance((Vector2)transform.position, player.position);
+        EnemytoFleetSpawn = Vector2.Distance((Vector2)transform.position, FleetSpawnpoint);
+        EnemytoSelfSpawn = Vector2.Distance((Vector2)transform.position, SelfSpawnposition);
     }
 
     
@@ -65,5 +65,8 @@ public class Enemy_Control : MonoBehaviour
     {
         // PlayertoSpawn을 지속적으로 갱신
         PlayertoFleetSpawn = Vector2.Distance(player.position, FleetSpawnpoint);
+        EnemytoPlayer = Vector2.Distance((Vector2)transform.position, player.position);
+        EnemytoFleetSpawn = Vector2.Distance((Vector2)transform.position, FleetSpawnpoint);
+        EnemytoSelfSpawn = Vector2.Distance((Vector2)transform.position, SelfSpawnposition);
     }
 }

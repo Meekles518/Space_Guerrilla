@@ -5,11 +5,11 @@ using UnityEngine.AI;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 // 어그로가 풀린 수비형 적이 본인 스폰위치로 복귀
-public class Defensive_GoBack : Defensive_State
+public class Defensive_GoBack : Ai_State
 {
 
-    public Defensive_GoBack(GameObject _enemy, Transform _player, Enemy_Control _control)
-        : base(_enemy, _player, _control)
+    public Defensive_GoBack(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
+        : base(_enemy, _player, _control, _currTime)
     {
 
         name = STATE.GOBACK;
@@ -32,7 +32,7 @@ public class Defensive_GoBack : Defensive_State
         if (Aggro())
         {
             // 다음 스테이트를 Pursue로 변경
-            nextState = new Defensive_Pursue(enemy, player, control);
+            nextState = new Defensive_Pursue(enemy, player, control, currTime);
             stage = EVENT.EXIT;
         }
 
@@ -43,7 +43,7 @@ public class Defensive_GoBack : Defensive_State
             if (control.EnemytoSelfSpawn < 0.2f)
             {
                 // 다음 스테이트를 Idle로 변경
-                nextState = new Defensive_Idle(enemy, player, control);
+                nextState = new Defensive_Idle(enemy, player, control, currTime);
                 stage = EVENT.EXIT;
             }
         }

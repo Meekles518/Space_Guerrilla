@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // 수비형 적이 초기 스폰위치에 있는 상태
-public class Defensive_Idle : Defensive_State
+public class Defensive_Idle : Ai_State
 {
     // Idle 스테이트 선언
-    public Defensive_Idle(GameObject _enemy, Transform _player, Enemy_Control _control)
-        : base(_enemy, _player, _control)
+    public Defensive_Idle(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
+        : base(_enemy, _player, _control, _currTime)
     {
 
         name = STATE.IDLE;
@@ -19,7 +19,6 @@ public class Defensive_Idle : Defensive_State
     {
         // 수비형적의 어그로 여부 = 거짓
         GameManager.instance.isDefensiveEngage = false;
-        Debug.Log("Idle"); // 로그에 뜨게함
         base.Enter();
     }
 
@@ -33,7 +32,7 @@ public class Defensive_Idle : Defensive_State
         if (Aggro())
         {
             // 다음 스테이트를 Pursue로 설정
-            nextState = new Defensive_Pursue(enemy, player, control);
+            nextState = new Defensive_Pursue(enemy, player, control, currTime);
             // 다음 이벤트를 Exit으로 설정
             stage = EVENT.EXIT;
         }

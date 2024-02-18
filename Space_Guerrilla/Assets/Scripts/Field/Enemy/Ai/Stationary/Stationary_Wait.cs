@@ -4,19 +4,18 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // 공격형 적이 초기 스폰위치에 있는 상태
-public class Offensive_Escape : Offensive_State
+public class Stationary_Wait : Ai_State
 {
-    public Offensive_Escape(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
+    public Stationary_Wait(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
         : base(_enemy, _player, _control, _currTime)
     {
         // 현재 State의 이름을 IDLE로 변경
-        name = STATE.ESCAPE;
+        name = STATE.WAIT;
     }
 
-    // Idle 진입시 
+    // Idle 진입시
     public override void Enter()
     {
-
         base.Enter();
     }
 
@@ -24,8 +23,7 @@ public class Offensive_Escape : Offensive_State
     public override void FixedUpdate()
     {
         // 사격 불가
-        control.isShoot = false;
-
+        control.isShoot = true;
 
     }
 

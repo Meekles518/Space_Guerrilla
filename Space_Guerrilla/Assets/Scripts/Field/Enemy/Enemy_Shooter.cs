@@ -27,7 +27,6 @@ public class Enemy_Shooter : MonoBehaviour
         isShoot = false; 
         // shooter의 여러 값들을 설정
         shooter.magCapacity = 10;
-        shooter.projectilesPerFire = control.projectilesPerFire;
         //shooter.bulletType = 1;
         shooter.recoil = 10;
         shooter.timeBetFire = 1.0f;
@@ -35,7 +34,7 @@ public class Enemy_Shooter : MonoBehaviour
         shooter.reloadTime = 1f;
         player = GameObject.Find("Player");    
         // 최대 공격 사거리를 Enemy_Control에서 받아옴
-        MaxAtkRange = control.MaxAtkRange;
+        
 
     }
 
@@ -53,12 +52,14 @@ public class Enemy_Shooter : MonoBehaviour
             {
                 // 발사
                 shooter.Fire();
+                Debug.Log("fire");
 
                 // 마지막 장전 시간으로 부터의 시간이 장전주기보다 길고 탄창의 탄수가 최대 탄수보다 적을 때
                 if (Time.time - lastReloadTime >= reloadInterval && shooter.magAmmo != shooter.magCapacity)
                 {
                     // 장전을 하는 Reload 매서드 실행
                     shooter.Reload();
+                    Debug.Log("reload");
                     // 마지막 장전 시간을 현재로 설정
                     lastReloadTime = Time.time;
                 }

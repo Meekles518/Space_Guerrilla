@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // 공격형적이 플레이어를 추적하는 상태
-public class Offensive_Pursue : Offensive_State
+public class Offensive_Pursue : Ai_State
 {
     public Offensive_Pursue(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
         : base(_enemy, _player, _control, _currTime)
@@ -16,7 +16,6 @@ public class Offensive_Pursue : Offensive_State
 
     public override void Enter()
     {
-        Debug.Log("Pursue");
         base.Enter();
     }
 
@@ -26,7 +25,7 @@ public class Offensive_Pursue : Offensive_State
         control.isShoot = true;
         // 현재 시간을 계속 동기화
         currTime += Time.fixedDeltaTime;
-        if (currTime > 5f)
+        if (currTime > 100f)
         {
             // 다음 스테이트를 Pursue로 설정
             nextState = new Offensive_Escape(enemy, player, control, currTime);

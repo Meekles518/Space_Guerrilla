@@ -5,7 +5,7 @@ using UnityEngine.AI;
 //using static UnityEngine.RuleTile.TilingRuleOutput;
 
 // 공격형 적의 State들의 부모 클래스
-public class Offensive_State
+public class Ai_State
 {
     // State의 종류를 enum으로 선언 (모든 종류의 적들이 공유)
     public enum STATE
@@ -30,14 +30,14 @@ public class Offensive_State
     protected EVENT stage; // 현재 진행되고 있는 이벤트
     protected GameObject enemy; // 적 오브젝트
     protected Transform player; // 플레이어 트랜스폼
-    protected Offensive_State nextState; // 다음으로 넘어갈 스테이트 설정
+    protected Ai_State nextState; // 다음으로 넘어갈 스테이트 설정
     protected Enemy_Control control; // 컨트롤 컴포넌트
     public float currTime; // 공격형 적의 타이머에 사용할 현재시간
 
     // Offensive_State 형식 선언
     // 앞으로 이 클래스를 부모로 하는 자식 클래스들은 enemy, player, control, currTime을 따로 선언 할 필요가 없음
     // State 진입시 자동으로 현재 매서드를 Enter로 설정
-    public Offensive_State(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
+    public Ai_State(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
     {
         enemy = _enemy;
         player = _player;
@@ -53,7 +53,7 @@ public class Offensive_State
     public virtual void Exit() { stage = EVENT.EXIT; }
 
     // 다음 매서드가 실행될 시기에 Ai 컴포넌트에서 다음 매서드를 결정
-    public Offensive_State Process()
+    public Ai_State Process()
     {
         if (stage == EVENT.ENTER) Enter();
         if (stage == EVENT.UPDATE) FixedUpdate();

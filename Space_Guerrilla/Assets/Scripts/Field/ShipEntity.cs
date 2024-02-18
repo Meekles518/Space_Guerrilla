@@ -24,7 +24,7 @@ public class ShipEntity : MonoBehaviour
         inCollision = false; // 충돌변수에 거짓 할당
         objectTag = gameObject.tag; // 자신의 태그를 태그 변수에 할당
         collideRate = 0.5f; // 주기에 값 할당
-        damage = 20f;
+        damage = 0f;
         defensestat = 10f;
         
 

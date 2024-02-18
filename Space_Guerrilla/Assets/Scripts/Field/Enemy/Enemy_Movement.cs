@@ -34,7 +34,7 @@ public class Enemy_Movement : MonoBehaviour
         enemyRigidbody = GetComponent<Rigidbody2D>();
         moveSpeed = 4f;
         rotateSpeed = 100f;
-        OptimalAtkRange = 5f;
+        OptimalAtkRange = 10f;
         player = GameObject.Find("Player");
         Spawnposition = transform.position; // 내 스폰위치
         Targetposition = Spawnposition; // 타겟위치를 스폰포인트(현재위치)로 초기화

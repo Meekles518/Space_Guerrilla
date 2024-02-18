@@ -640,6 +640,10 @@ PrefabInstance:
       propertyPath: health
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 7510653429565846693, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
+      propertyPath: defensestat
+      value: 500
+      objectReference: {fileID: 0}
     - target: {fileID: 9110481042538490623, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: m_SortingLayer
       value: 3

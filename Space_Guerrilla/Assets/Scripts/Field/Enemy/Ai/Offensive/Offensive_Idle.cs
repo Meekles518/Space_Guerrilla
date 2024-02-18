@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 // 공격형 적이 초기 스폰위치에 있는 상태
-public class Offensive_Idle : Offensive_State
+public class Offensive_Idle : Ai_State
 {
     public Offensive_Idle(GameObject _enemy, Transform _player, Enemy_Control _control, float _currTime)
         : base(_enemy, _player, _control, _currTime)
