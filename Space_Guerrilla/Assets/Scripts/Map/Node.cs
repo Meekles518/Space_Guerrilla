@@ -119,24 +119,45 @@ namespace Map
             transform.localScale = new Vector3(1f, 1f, 1f);//Scale 1배로 되돌리기
         }//OnMouseExit
 
+
         public void OnMouseUpAsButton() //한 오브젝트 위에서 마우스 다운과 업이 일어났을 때
         {
-
-            //playerNode의 connected 리스트에, 클릭한 Node가 존재한다면
-            if (MapManager.instance.playerNode.connected.Contains(this))
+            //이동 가능 수가 존재한다면, 그리고 Player 턴이라면
+            if (MapManager.instance.turn == Turn.Player && MapManager.instance.moveChance != 0)
             {
-                MapManager.instance.playerNode.nodeType = NodeType.Empty; //원래 있던 Node를 Empty로 변경
-                MapManager.instance.playerNode.lockedState(); //원래 있던 Node의 주변 Node의 State를 locked로
-                MapManager.instance.playerNode.setColor(); //색 변경
+                //playerNode의 connected 리스트에, 클릭한 Node가 존재한다면
+                if (MapManager.instance.playerNode.connected.Contains(this))
+                {
+                    MapManager.instance.playerNode.nodeType = NodeType.Empty; //원래 있던 Node를 Empty로 변경
+                    MapManager.instance.playerNode.lockedState(); //원래 있던 Node의 주변 Node의 State를 locked로
+                    MapManager.instance.playerNode.setColor(); //색 변경
 
-                nodeType = NodeType.Player; //클릭한 Node의 Type을 Player로 변경
-                attainableState(); //클릭한 Node의 주변 Node의 state를 attainable로
-                setColor(); //색 변경
+                    nodeType = NodeType.Player; //클릭한 Node의 Type을 Player로 변경
+                    attainableState(); //클릭한 Node의 주변 Node의 state를 attainable로
+                    setColor(); //색 변경
 
-                MapManager.instance.playerNode.cloakEnemy(); //현재 Node와 주변 Node의 적 지우기
-                this.checkEnemy(); //이동할 Node와 주변 Node의 적 표시하기
+                    MapManager.instance.playerNode.cloakEnemy(); //현재 Node와 주변 Node의 적 지우기
+                    this.checkEnemy(); //이동할 Node와 주변 Node의 적 표시하기
 
-                MapManager.instance.playerNode = this;
+                    MapManager.instance.playerNode = this;
+
+                    //턴 당 1번만 움직일 수 있다고 가정하고 코드 작성, 이후에 우주선의 설정에
+                    //따라 그 값을 받아서 적용할 수 있도록 코드를 수정해야 함.
+                    MapManager.instance.moveChance -= 1; //이동 횟수를 1 감소
+
+
+                    //만약 이동 후 그 Node에 적이 있다면, 이동 기회를 0으로 강제 설정
+                    if (MapManager.instance.playerNode.enemyObjects.Count > 0)
+                    {
+                        MapManager.instance.moveChance = 0;
+                    }
+
+                }
+
+                else
+                {
+                    Debug.LogWarning("U cant move to that node");
+                }
             }
 
             else

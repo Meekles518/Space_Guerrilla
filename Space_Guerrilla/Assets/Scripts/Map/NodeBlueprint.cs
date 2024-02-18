@@ -24,7 +24,13 @@ namespace Map
 
     }
 
-
+    //Turn 상태를 열거 enum
+    public enum Turn
+    {
+        Player,
+        Enemy,
+        Engage,    
+    }
 
 
 
