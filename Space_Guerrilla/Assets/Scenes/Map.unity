@@ -1207,6 +1207,7 @@ GameObject:
   - component: {fileID: 252859153}
   - component: {fileID: 252859155}
   - component: {fileID: 252859154}
+  - component: {fileID: 252859156}
   m_Layer: 0
   m_Name: PlayerInfo
   m_TagString: Untagged
@@ -1243,6 +1244,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0
   spreadRange: 0
+  lifespan: 0
+  Scan_range: 0
+  rotateSpeed: 0
   maxhealth: 0
   shield: 0
   damage: 0
@@ -1277,6 +1281,23 @@ MonoBehaviour:
   health: 0
   moveSpeed: 0
   rotateSpeed: 0
+--- !u!114 &252859156
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252859152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f0cd99a82cf0ce40bae3da235884605, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillNames: []
+  skillMaxCooltime: []
+  skillCurrentColltime: []
+  skillVerticalDistance: 0
+  skillHorizontalDinstance: 0
 --- !u!1 &372454081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2332,6 +2353,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5e30d33c378dec4a9ffa011f0557a77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  turnCount: 0
   turn: 0
   moveChance: 0
   defaultMoveChance: 0
@@ -2342,6 +2364,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3584721335691465119, guid: 0cb58dbd0584629469fc6aab9d28fa28, type: 3}
   playerInfo: {fileID: 252859152}
+  pSkill: {fileID: 0}
   Img: {fileID: 557674844}
   ButtonText: {fileID: 1998594211}
 --- !u!4 &790224637

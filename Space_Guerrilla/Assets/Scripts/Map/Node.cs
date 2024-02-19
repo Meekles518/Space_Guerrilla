@@ -120,7 +120,7 @@ namespace Map
 
 
                     //만약 이동 후 그 Node에 적이 있다면, 이동 기회를 0으로 강제 설정
-                    if (MapManager.instance.playerNode.enemyObjects.Count > 0)
+                    if (MapManager.instance.meetEnemy())
                     {
                         MapManager.instance.moveChance = 0;
                         MapManager.instance.abilityChance = false;
