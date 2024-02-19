@@ -81,7 +81,7 @@ public class ShipEntity : MonoBehaviour
                 else
                 {
                     // 상대의 피격 매서드를 실행
-                    shipEntity.TakeDamage(damage + (defensestat / 6));
+                    shipEntity.TakeDamage(health * (damage + (defensestat / 6)));
                 }
                 }           
         }
@@ -113,12 +113,11 @@ public class ShipEntity : MonoBehaviour
     public virtual void ShipCollide(Vector2 moveDirection, float rebound)
     {
         faceDirection = new Vector2(this.transform.position.x - collideEnemy.transform.position.x, this.transform.position.y - collideEnemy.transform.position.y).normalized;
-        Degree = Quaternion.FromToRotation((Vector2)faceDirection, (Vector2)moveDirection).eulerAngles.z;
-        if (Degree < 10 || Degree > 350)
-        {
-            rb2.AddForce(moveDirection.normalized * rebound);
-            health = health - 10;
-        }
+        //Degree = Quaternion.FromToRotation((Vector2)faceDirection, (Vector2)moveDirection).eulerAngles.z;
+
+        rb2.AddForce(faceDirection.normalized * rebound);
+        health = health - 10;
+        
         if (health <= 0 && !dead)
         {
             Die();
