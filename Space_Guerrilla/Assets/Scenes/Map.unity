@@ -157,7 +157,6 @@ MonoBehaviour:
   connected:
   - {fileID: 673277940}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -223,7 +222,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 11687700}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -11.62, y: 0, z: 0}
+  m_LocalPosition: {x: -11.07, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -427,7 +426,6 @@ MonoBehaviour:
   - {fileID: 1302716646}
   - {fileID: 372454082}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -571,7 +569,6 @@ MonoBehaviour:
   - {fileID: 1116694352}
   - {fileID: 655764590}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -813,7 +810,6 @@ MonoBehaviour:
   - {fileID: 398147673}
   - {fileID: 1302716646}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -1093,7 +1089,6 @@ MonoBehaviour:
   - {fileID: 130736928}
   - {fileID: 673277940}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -1201,6 +1196,87 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!1 &252859152
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 252859153}
+  - component: {fileID: 252859155}
+  - component: {fileID: 252859154}
+  m_Layer: 0
+  m_Name: PlayerInfo
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &252859153
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252859152}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1084044104}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &252859154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252859152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 92b6d91d01143c94c9871e1ca6189c41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  spreadRange: 0
+  maxhealth: 0
+  shield: 0
+  damage: 0
+  defensestat: 0
+  collideRate: 0
+  health: 0
+--- !u!114 &252859155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 252859152}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5250822d612ea243840cc2723061bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletType: 0
+  magCapacity: 0
+  magAmmo: 0
+  recoil: 0
+  reloadTime: 0
+  timeBetFire: 0
+  projectilesPerFire: 0
+  timeBetProjectiles: 0
+  reloadInterval: 0
+  maxhealth: 0
+  shield: 0
+  damage: 0
+  defensestat: 0
+  health: 0
+  moveSpeed: 0
+  rotateSpeed: 0
 --- !u!1 &372454081
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,7 +1313,6 @@ MonoBehaviour:
   - {fileID: 2015603700}
   - {fileID: 69979621}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -1380,7 +1455,6 @@ MonoBehaviour:
   - {fileID: 1116694352}
   - {fileID: 174345196}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -1637,8 +1711,8 @@ GameObject:
   m_Component:
   - component: {fileID: 557674842}
   - component: {fileID: 557674845}
-  - component: {fileID: 557674844}
   - component: {fileID: 557674843}
+  - component: {fileID: 557674844}
   m_Layer: 5
   m_Name: Turn end  btn
   m_TagString: Untagged
@@ -1723,6 +1797,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Map.MapManager, Assembly-CSharp
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &557674844
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,7 +1822,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.990566, g: 0.990566, b: 0.990566, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1882,7 +1968,6 @@ MonoBehaviour:
   - {fileID: 1302716646}
   - {fileID: 372454082}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -2027,7 +2112,6 @@ MonoBehaviour:
   - {fileID: 655764590}
   - {fileID: 2015603700}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -2251,11 +2335,15 @@ MonoBehaviour:
   turn: 0
   moveChance: 0
   defaultMoveChance: 0
+  abilityChance: 0
   enemyNodeList: []
   playerNode: {fileID: 0}
   Nodes: {fileID: 0}
   enemyPrefabs:
   - {fileID: 3584721335691465119, guid: 0cb58dbd0584629469fc6aab9d28fa28, type: 3}
+  playerInfo: {fileID: 252859152}
+  Img: {fileID: 557674844}
+  ButtonText: {fileID: 1998594211}
 --- !u!4 &790224637
 Transform:
   m_ObjectHideFlags: 0
@@ -2573,6 +2661,7 @@ Transform:
   - {fileID: 22573959}
   - {fileID: 481445460}
   - {fileID: 857288443}
+  - {fileID: 252859153}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2612,7 +2701,6 @@ MonoBehaviour:
   - {fileID: 398147673}
   - {fileID: 1302716646}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -2925,7 +3013,6 @@ MonoBehaviour:
   - {fileID: 69979621}
   - {fileID: 174345196}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []
@@ -3690,8 +3777,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278190080
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -3793,7 +3880,6 @@ MonoBehaviour:
   - {fileID: 673277940}
   - {fileID: 372454082}
   nodeType: 0
-  state: 0
   mouseOnScale: 0
   sR: {fileID: 0}
   enemyObjects: []

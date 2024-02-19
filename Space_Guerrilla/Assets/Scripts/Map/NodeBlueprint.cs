@@ -16,13 +16,7 @@ namespace Map
 
     }
 
-    //NodeState를 열거형 enum
-    public enum NodeStates
-    {
-        Locked, //잠긴, 즉 갈 수 없는 Node
-        Attainable, //이동할 수 있는 Node
-
-    }
+     
 
     //Turn 상태를 열거 enum
     public enum Turn

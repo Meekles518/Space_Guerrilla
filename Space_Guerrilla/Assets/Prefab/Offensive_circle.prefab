@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 268487114828119007}
   - component: {fileID: 2820127486374422131}
   - component: {fileID: 2973177885374849558}
+  - component: {fileID: 4786452052277101085}
+  - component: {fileID: -4279947290331871107}
   m_Layer: 0
   m_Name: Offensive_circle
   m_TagString: Untagged
@@ -98,3 +100,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   behavior: 1
+--- !u!114 &4786452052277101085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584721335691465119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5464e4baf2d3d8e4f9e23544d992270f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bulletType: 0
+  magCapacity: 0
+  magAmmo: 0
+  recoil: 0
+  reloadTime: 0
+  timeBetFire: 0
+  projectilesPerFire: 0
+  timeBetProjectiles: 0
+  reloadInterval: 0
+  MaxAtkRange: 0
+  moveSpeed: 0
+  rotateSpeed: 0
+  OptimalAtkRange: 0
+  smallAgrro: 0
+  largeAgrro: 0
+  TimeTillAtk: 0
+--- !u!114 &-4279947290331871107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584721335691465119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c143f8d716a5dcc49a1253ac59823aa8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 0
+  spreadRange: 0
+  maxhealth: 0
+  shield: 0
+  damage: 0
+  defensestat: 0
+  collideRate: 0
+  health: 0
