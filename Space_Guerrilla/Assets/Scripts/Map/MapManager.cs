@@ -21,6 +21,14 @@ namespace Map
 
     public class MapManager : MonoBehaviour
     {
+        //임시로 MapManager에서 우주선의 이름 설정
+        public enum ShipName
+        {
+            Ship1,
+
+        }
+
+
 
          
         //MapManager Class 생성
@@ -32,6 +40,7 @@ namespace Map
         public bool abilityChance; //Player의 기술 사용 여부를 확인하는 bool 변수
 
         public static MapManager instance;
+
         public List<Node> enemyNodeList; //Enemy가 위치한 Node를 저장할 List
         public Node playerNode; //PlayerNode의 정보를 저장할 변수 
 
@@ -49,7 +58,7 @@ namespace Map
         public Image Img; //Image를 저장할 변수
         public TMP_Text ButtonText; //Button의 Text 를 저장할 변수
 
-        
+        public ShipName shipName; //ShipName 저장 변수
 
         //싱글턴 패턴 구현
         //Awakw 함수는 첫 생성 시 단 한번만 실행됨, 씬 이동을 해도 반복실행되지 않음
@@ -88,8 +97,10 @@ namespace Map
 
 
             //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
-
-
+            //임시로 우주선을 Ship1으로 지정
+            shipName = ShipName.Ship1;
+            pSkill.getSkill(); //Skill 정보 가져와서 저장하기
+            pSkill.SetSkillBtn(); //Skill들을 버튼에 추가 후 생성 및 배치
         }
 
 
@@ -128,7 +139,15 @@ namespace Map
 
                 //Player Turn이라면
                 case Turn.Player:
-                    turnCount++;
+                    turnCount++; //턴 카운트 증가
+
+                    //Player의 맵 스킬 쿨타임을 1턴 감소시키는 작업 필요
+                    for (int i = 0; i < pSkill.skillCurrentColltime.Count; i++)
+                    {
+                        pSkill.skillCurrentColltime[i] -= 1.0f;
+
+                    }
+
                     Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
 
                    

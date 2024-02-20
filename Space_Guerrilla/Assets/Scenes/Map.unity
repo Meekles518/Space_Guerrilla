@@ -2367,6 +2367,7 @@ MonoBehaviour:
   pSkill: {fileID: 0}
   Img: {fileID: 557674844}
   ButtonText: {fileID: 1998594211}
+  shipName: 0
 --- !u!4 &790224637
 Transform:
   m_ObjectHideFlags: 0
