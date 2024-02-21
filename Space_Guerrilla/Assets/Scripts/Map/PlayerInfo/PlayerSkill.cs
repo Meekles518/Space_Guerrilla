@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using Map;
 
+
 namespace Skill
 {
 
@@ -63,14 +64,14 @@ namespace Skill
             switch (MapManager.instance.shipName)
             {
                 //Ship1 이라면
-                case MapManager.ShipName.Ship1:
+                case ShipName.Ship1:
 
-                    //Ship_1 컴포넌트 가져와서, 정보 옮기기
-                    Ship_1 ship_1 = GetComponent<Ship_1>();
+                    Ship_1 ship_1 = ScriptableObject.CreateInstance<Ship_1>();
+                    skillNames = ship_1.skillNames;
+                    skillMaxCooltime = ship_1.skillMaxCooltime;
+                    skillCurrentColltime = ship_1.skillMaxCooltime;
 
-                    skillNames = ship_1.skillNames; //스킬 이름
-                    skillMaxCooltime = ship_1.skillMaxCooltime; //스킬 쿨타임
-                    skillCurrentColltime = ship_1.skillMaxCooltime; //스킬 현재 쿨타임
+
 
                     break;
 

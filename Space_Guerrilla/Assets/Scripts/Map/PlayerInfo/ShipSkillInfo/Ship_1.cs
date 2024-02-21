@@ -4,7 +4,8 @@ using UnityEngine;
 
 namespace Skill
 {
-    public class Ship_1 
+    [CreateAssetMenu]
+    public class Ship_1 : ScriptableObject
     {
        
 

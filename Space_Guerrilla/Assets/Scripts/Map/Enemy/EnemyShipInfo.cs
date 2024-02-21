@@ -18,7 +18,7 @@ public class EnemyInfo : MonoBehaviour
     public float timeBetFire; // 투사체 발사 간격
     public int projectilesPerFire; // 한번 클릭시 발사하는 투사체 수
     public float timeBetProjectiles; // 한번 클릭시 발사되는 투사체 간의 시간 간격
-    public float reloadInterval; //
+    public float reloadInterval; 
 
 
     //Enemy Shooter 스크립트에 들어가야 하는 변수들,
@@ -41,6 +41,16 @@ public class EnemyInfo : MonoBehaviour
     public float largeAgrro; // 큰 어그로 범위
     public float TimeTillAtk; // 공격형적 추적 타이머
     //MaxAtkRange 변수 값도 Enemy Control 스크립트에 넣어야 함
+
+    //ShipEntity 스크립트에 들어가야 하는 변수값들
+    [Header("오브젝트 스탯, Player의 ShipEntity 스크립트로 넘어가야 할 변수들")]
+    public float maxhealth; //우주선의 현재체력
+    public float shield; // 우주선의 방어도
+    public float damage; //우주선의 공격력(방어력)
+    public float defensestat; // 우주선의 방호력(우주선의 damage와 총 health+shield에 영향을줌)
+    [Header("현재 체력")]
+    public float health;
+
 
 
 }

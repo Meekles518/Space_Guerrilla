@@ -26,8 +26,20 @@ namespace Map
         Engage,    
     }
 
+    public enum Phase
+    {
+        Default,
+        Assemble,
+        Hunt,
 
+    }
 
+    //임시로   우주선의 이름 설정
+    public enum ShipName
+    {
+        Ship1,
+
+    }
 
 }
 

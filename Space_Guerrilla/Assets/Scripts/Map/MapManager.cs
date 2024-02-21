@@ -21,12 +21,7 @@ namespace Map
 
     public class MapManager : MonoBehaviour
     {
-        //임시로 MapManager에서 우주선의 이름 설정
-        public enum ShipName
-        {
-            Ship1,
-
-        }
+         
 
 
 
@@ -35,9 +30,11 @@ namespace Map
 
         public int turnCount; //현재 Turn 수를 저장하는 변수
         public Turn turn; //현재 Turn 상태를 저장할 변수
+        public Phase phase; //현재 Phase를 저장할 변수
         public int moveChance; //Player의 움직임 여부를 확인하는 bool 변수
         public int defaultMoveChance; // Player의 기본 이동 횟수
         public bool abilityChance; //Player의 기술 사용 여부를 확인하는 bool 변수
+        public bool playerDetected; //Player의 탐지됨 여부를 확인하는 bool 변수
 
         public static MapManager instance;
 
@@ -71,9 +68,13 @@ namespace Map
             Nodes = GameObject.Find("Nodes");
 
             turn = Turn.Player; //시작 시 Player turn으로 설정
+            phase = Phase.Default; //시작 시 Default Phase로 설정
+
             defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
             moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정,  
+
             abilityChance = true; //기술 사용 가능을 true로 설정.
+            playerDetected = false;
 
             //최초에만 첫 번째 Node를 Player이 위치한 Node로 설정함.
             playerNode = Nodes.transform.GetChild(0).GetComponent<Node>();
@@ -199,7 +200,19 @@ namespace Map
         {
             //1초 후에 코드 실행하기
             yield return new WaitForSecondsRealtime(1f);
+            playerDetected = false; //우선 탐지 안됨 상태로 변경.
 
+            //적이 있는 Node들에 접근
+            foreach(Node node in enemyNodeList)
+            {
+                //Node의 적들에게 접근
+                for(int i = 0; i < node.enemyObjects.Count; i++)
+                {
+                    //이동명령 실시
+                    node.enemyObjects[i].GetComponent<Enemy_Circle>().enemyAi();
+                }
+
+            }
 
             //적 AI 로직 실행을 위한 코드를 작성해야 함.
 
