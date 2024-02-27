@@ -70,8 +70,7 @@ namespace Map
             turn = Turn.Player; //시작 시 Player turn으로 설정
             phase = Phase.Default; //시작 시 Default Phase로 설정
 
-            defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
-            moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정,  
+              
 
             abilityChance = true; //기술 사용 가능을 true로 설정.
             playerDetected = false;
@@ -84,8 +83,12 @@ namespace Map
             DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
             DontDestroyOnLoad(GameObject.Find("Map")); //Map이 씬 변경에도 유지되게 함.
 
+            //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
+            defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
+            moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정, 
 
 
+            //이 아래의 모든 코드들은, 실행되는 Map이 무슨 종류인지에 따라 switch문으로 구분해야 함
             //임의로 적이 11번 노드에 있다고 가정
             enemyNodeList.Add(Nodes.transform.GetChild(10).GetComponent<Node>()); //11번 Node 저장
             var enemy = Instantiate(enemyPrefabs[0], enemyNodeList[0].transform); //11번 Node를 부모로 해서 생성
@@ -200,7 +203,7 @@ namespace Map
         {
             //1초 후에 코드 실행하기
             yield return new WaitForSecondsRealtime(1f);
-            playerDetected = false; //우선 탐지 안됨 상태로 변경.
+            playerDetected = meetEnemy(); //적의 탐지 여부 확인.
 
             //적이 있는 Node들에 접근
             foreach(Node node in enemyNodeList)

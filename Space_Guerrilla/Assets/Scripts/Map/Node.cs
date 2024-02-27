@@ -101,18 +101,8 @@ namespace Map
                 //playerNode의 connected 리스트에, 클릭한 Node가 존재한다면
                 if (MapManager.instance.playerNode.connected.Contains(this))
                 {
-                    MapManager.instance.playerNode.nodeType = NodeType.Empty; //원래 있던 Node를 Empty로 변경
-                     
-                    MapManager.instance.playerNode.setColor(); //색 변경
 
-                    nodeType = NodeType.Player; //클릭한 Node의 Type을 Player로 변경
-                    
-                    setColor(); //색 변경
-
-                    MapManager.instance.playerNode.cloakEnemy(); //현재 Node와 주변 Node의 적 지우기
-                    this.checkEnemy(); //이동할 Node와 주변 Node의 적 표시하기
-
-                    MapManager.instance.playerNode = this;
+                    playerMovement(this);
 
                     //턴 당 1번만 움직일 수 있다고 가정하고 코드 작성, 이후에 우주선의 설정에
                     //따라 그 값을 받아서 적용할 수 있도록 코드를 수정해야 함.
@@ -216,7 +206,22 @@ namespace Map
         }//cloakEnemy
 
 
+        public void playerMovement(Node node)
+        {
+            MapManager.instance.playerNode.nodeType = NodeType.Empty; //원래 있던 Node를 Empty로 변경
 
+            MapManager.instance.playerNode.setColor(); //색 변경
+
+            node.nodeType = NodeType.Player; //클릭한 Node의 Type을 Player로 변경
+
+            setColor(); //색 변경
+
+            MapManager.instance.playerNode.cloakEnemy(); //현재 Node와 주변 Node의 적 지우기
+            node.checkEnemy(); //이동할 Node와 주변 Node의 적 표시하기
+
+            MapManager.instance.playerNode = node;
+
+        }//playerMovement
 
 
 

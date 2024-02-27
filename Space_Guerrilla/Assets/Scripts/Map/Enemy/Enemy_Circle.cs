@@ -50,27 +50,73 @@ public class Enemy_Circle : MonoBehaviour
         {
             switch (status)
             {
+
                 case Status.RoamingHuntRun:
-                    Run();   
-                    Hunt();
-                    Roaming();
+
+                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
+                    {
+                        Run();
+                    }
+                         
+                    
+                    else if (MapManager.instance.playerDetected)
+                    {
+                        Hunt();
+                    }
+                        
+
+                    else
+                    {
+                        Roaming();
+                    }
+                         
                     break;
+
 
                 case Status.HouseHuntRun:
-                    Run();
-                    Hunt();
-                    House();
+                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
+                    {
+                        Run();
+                    }
+
+                    else if (MapManager.instance.playerDetected)
+                    {
+                        Hunt();
+                    }
+
+                    else
+                    {
+                        House();
+                    }
+                     
                     break;
 
+
                 case Status.RomingRun:
-                    Run();
-                    Roaming();
+                    if (currentNode == MapManager.instance.playerNode)
+                    {
+                        Run();
+                    }
+                         
+                    else
+                    {
+                        Roaming();
+                    }
+                     
                     break;
+
 
                 case Status.HuntRun:
 
-                    Run();
-                    Hunt();
+                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
+                    {
+                        Run();
+                    }
+                    else
+                    {
+                        Hunt();
+                    }
+                     
                     break;
 
 
@@ -88,9 +134,7 @@ public class Enemy_Circle : MonoBehaviour
 
     public void Run()
     {
-        //체력이 30% 이하일 경우
-        if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-        {
+        
             //현재 Node가 Player이 위치한 Node일 경우
             if (currentNode == MapManager.instance.playerNode)
             {
@@ -98,17 +142,13 @@ public class Enemy_Circle : MonoBehaviour
                 int ran = Random.Range(0, currentNode.connected.Count);
                 movement(currentNode.connected[ran]);
             }
-        }
+        
 
     }//Run
 
     public void Hunt()
     {
-        //만약 Player이 탐지된 상태라면
-        if (MapManager.instance.playerDetected)
-        {
-
-        }
+        movement(BFS(MapManager.instance.playerNode));
 
 
     }//Hunt
@@ -125,16 +165,95 @@ public class Enemy_Circle : MonoBehaviour
 
     }//House
 
-    //목표 node까지 최단거리로 이동하는 
-    public void BFS(Node node)
+    //목표 node까지 최단거리로 이동하는 함수
+    //역으로, 목표 Node에서 현재 적이 위치한 Node로 가는 최단 경로를 얻어내고,
+    //connected 리스트에 현재 적이 위치한 Node를 찾아낸다면, 역추적으로 구성
+    public Node BFS(Node node)
     {
+        //목적지가 현재 Node일 경우
+        if (node == currentNode)
+        {
+            return node;
+        }
 
+
+        List<Node> visitedNodes = new List<Node>(); //방문했던 Node들
+        List<Node> queue = new List<Node>(); //queue 사용 위한 List
+
+        visitedNodes.Add(node); //방문했던 Node에 목표 Node 추가
+        //목표 Node와 연결된 Node들에 대해
+        foreach(Node nd in node.connected)
+        {
+            //목표 Node가 현재 Node와 연결되어 있다면
+            if (nd == currentNode)
+            {
+                return node; //바로 목표 Node return
+            }
+
+            visitedNodes.Add(nd); //연결된 Node들도 미리 방문 처리
+            queue.Add(nd); //아니라면, queue에 연결된 Node들 추가
+        }
+
+        //queue의 길이가 0보다 클 경우
+        while (true)
+        {
+            List<Node> subList = new List<Node>(); 
+
+            while(queue.Count > 0)
+            {
+                Node nextNode = queue[0]; //queue의 첫 번째 원소 가져오기
+                queue.Remove(queue[0]); //queue의 첫 번째 원소를 리스트에서 제거
+                
+
+                foreach(Node nd in nextNode.connected)
+                {
+                    //nextNode와 연결된 Node 중에 현재 적이 위치한 Node가 존재한다면
+                    if (nd == currentNode)
+                    {
+                        //nextNode를 return하기
+                        return nextNode;
+                    }
+
+                    //nextNode와 연결된 nd들 중 방문한 적 없는 Node들이 있다면
+                    if (!visitedNodes.Contains(nd))
+                    {
+                        visitedNodes.Add(nd); //nextNode와 연결된 Node들도 미리 방문처리
+                        subList.Add(nd); //subList에 nd 추가
+                    }
+
+                }//foreach
+
+
+            }//while queue.Count > 0
+              
+
+            foreach (Node nd in subList)
+            {
+                queue.Add(nd);
+            }
+
+            //만약 queue의 길이가 0이라면, Node 연결리스트에 문제가 있다는 것.
+            if (queue.Count == 0)
+            {
+                Debug.LogWarning("Node 연결 리스트에 오류 있음");
+                break;
+            }
+
+
+        }//while true
+
+        return null; //null이 반환되면 함수나 Node 연결리스트에 문제가 있다는 의미
 
     }//BFS
 
     //실제로 적을 이동시키는 함수
     public void movement(Node node)
     {
+        //목적지가 현재 Node일 경우
+        if (node == currentNode)
+        {
+            return;
+        }
         
         currentNode.enemyObjects.Remove(gameObject); //Node에서 적 정보 제거
         //만약 이 Node에 적이 더 이상 없다면
