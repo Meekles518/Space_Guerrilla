@@ -16,7 +16,7 @@ namespace Map
 
         public List<Node> connected; //이 Node와 연결된 다른 Node의 좌표를 저장할 List
         public NodeType nodeType; //NodeType을 저장할 변수
-          
+        public NodeStates state = NodeStates.Locked; //NodeStates를 저장할 변수, 초기는 Locked로 고정.     
         public float mouseOnScale = 1.3f; //마우스가 올라갔을 때 노드가 커질 비율을 저장할 변수
         public SpriteRenderer sR;
         public List<GameObject> enemyObjects; //Enemy Object의 정보를 저장할 List
@@ -77,7 +77,34 @@ namespace Map
 
         }//setColor
 
- 
+
+        //이 Node 주변 Node의 State를 Attainable로 변경하는 함수
+        public void attainableState()
+        {
+            //foreach문으로 connected 리스트에 접근
+            foreach (var node in connected)
+            {
+                node.state = NodeStates.Attainable; //접근 가능 State로 변경
+
+                //노드의 크기 변환? 코드
+
+            }
+
+
+        }//attainableState
+
+        //이 Node 주변 Node의 State를 Locked로 변경하는 함수
+        public void lockedState()
+        {
+            //foreach문으로 connected 리스트에 접근
+            foreach (var node in connected)
+            {
+                node.state = NodeStates.Locked;
+
+            }
+
+
+        }//lockedState
 
 
         public void OnMouseEnter() //마우스가 올라갔을 때 
@@ -102,11 +129,11 @@ namespace Map
                 if (MapManager.instance.playerNode.connected.Contains(this))
                 {
                     MapManager.instance.playerNode.nodeType = NodeType.Empty; //원래 있던 Node를 Empty로 변경
-                     
+                    MapManager.instance.playerNode.lockedState(); //원래 있던 Node의 주변 Node의 State를 locked로
                     MapManager.instance.playerNode.setColor(); //색 변경
 
                     nodeType = NodeType.Player; //클릭한 Node의 Type을 Player로 변경
-                    
+                    attainableState(); //클릭한 Node의 주변 Node의 state를 attainable로
                     setColor(); //색 변경
 
                     MapManager.instance.playerNode.cloakEnemy(); //현재 Node와 주변 Node의 적 지우기
@@ -123,7 +150,6 @@ namespace Map
                     if (MapManager.instance.playerNode.enemyObjects.Count > 0)
                     {
                         MapManager.instance.moveChance = 0;
-                        MapManager.instance.abilityChance = false;
                     }
 
                 }

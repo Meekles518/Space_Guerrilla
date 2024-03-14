@@ -5,28 +5,23 @@ using UnityEngine;
 // State에 따른 적의 움직임(이동, 회전)을 담당하는 스크립트
 public class Drone_Movement : MonoBehaviour
 {
-    [HideInInspector]
     public GameObject player;    // 플레이어
     private Rigidbody2D droneRigidbody; // 드론의 리지드바디
-    [HideInInspector]
     public Drone_Control control; // 적 제어 스크립트
 
     private Vector2 Playerposition; // 현재 플레이어의 위치
-    [HideInInspector]
     public Vector2 Targetposition; // 드론이 이동, 바라볼 목표 위치
 
-    [Header("드론 수치 조정")]
     public float moveSpeed; // 이동 속도
     public float rotateSpeed; // 회전 속도
 
-    [HideInInspector]
     public Vector2 moveDirection; // 우주선이 이동해야하는 방향
     private Vector2 rotateDirection; // 우주선이 회전해야하는 방향
     private float actualRotate; // 현재 각도에서 rotateDirection을 만족하기 위해 회전해야하는 각도(도)
-    public float x_Random;
-    private float y_Random;
-    public float x_Range;
-    public float y_Range;
+    private float x_Random; // x좌표 랜덤변수
+    private float y_Random; // y좌표 랜덤변수
+    private float xrandomRange = 2f; // x좌표 랜덤변수 범위
+    private float yrandomRange = 2f; // y좌표 랜덤변수 범위
     private float currTime; // 현재시간
     
 
@@ -35,9 +30,12 @@ public class Drone_Movement : MonoBehaviour
     {
         // 초기값들 할당
         droneRigidbody = GetComponent<Rigidbody2D>();
+        moveSpeed = 4f;
+        rotateSpeed = 100f;
         player = GameObject.Find("Player");
         control = GetComponent<Drone_Control>();
         Targetposition = transform.position;
+
     }
 
 
@@ -45,16 +43,19 @@ public class Drone_Movement : MonoBehaviour
     {
         // 플레이어의 위치를 지속적으로 갱신
         Playerposition = player.transform.position;
-        
+         
+
         // 이동시 적들이 뭉치는 현상을 방지하기 위해 플레이어 주위의 랜덤한 지점으로 이동
         // 코루틴을 사용하지 않는 이유는 Random.Range가 코루틴에서 지속적으로 갱신되지 않음, x_Random과 y_Random이 하나의 값으로 고정 (코루틴으로 하는 방법이 있으면 수정요함)
         // 현재 시간을 계속 동기화
         currTime += Time.deltaTime;
         // 시간이 마지막 초기화로부터 3초 지났다면
-        if (currTime > 2)
+        if (currTime > 3)
         {
-            x_Random = Random.Range(-x_Range, x_Range);
-            y_Random = Random.Range(-y_Range, y_Range);
+            // x_Random과 y_Random을 무작위로 설정
+            x_Random = Random.Range(-xrandomRange, xrandomRange);
+            y_Random = Random.Range(-yrandomRange, yrandomRange);
+            // 현재 시간 초기화
             currTime = 0;
         }
 
@@ -100,6 +101,7 @@ public class Drone_Movement : MonoBehaviour
         Move();
         // 회전 실행
         Rotate();
+
 
     }//FIxedUpdate
 

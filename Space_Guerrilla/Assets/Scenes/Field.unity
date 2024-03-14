@@ -1346,7 +1346,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 998214711779161475, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: bulletType
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 998214711779161475, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: reloadTime
@@ -1360,29 +1360,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4341291868055680081, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_Size.x
-      value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4341291868055680081, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_Size.y
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4341291868055680081, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4341291868055680081, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_IsTrigger
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4341291868055680081, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_UsedByEffector
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5660565311840691075, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: moveSpeed
-      value: 5
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5660565311840691075, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: rotateSpeed
@@ -1434,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7380872934689949309, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: bulletType
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7380872934689949309, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: reloadTime
@@ -1443,38 +1423,6 @@ PrefabInstance:
     - target: {fileID: 7380872934689949309, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
       propertyPath: reloadInterval
       value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 7510653429565846693, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: damage
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7510653429565846693, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: rebound
-      value: 10000
-      objectReference: {fileID: 0}
-    - target: {fileID: 7510653429565846693, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: maxhealth
-      value: 100
-      objectReference: {fileID: 0}
-    - target: {fileID: 7510653429565846693, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: collideRate
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659124094205496354, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_Size.x
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659124094205496354, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_Size.y
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659124094205496354, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7659124094205496354, guid: 5db683ce4f18e7d43b590b9c0ea2dc67, type: 3}
-      propertyPath: m_IsTrigger
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -8,44 +8,35 @@ using UnityEngine.UIElements;
 public class Drone_Control : MonoBehaviour
 {
  
-    public GameObject player; // 플레이어 트랜스폼
+    public Transform player; // 플레이어 트랜스폼
     public Transform selfposition; // 드론 트랜스폼
+    //public float smallAgrro; // 작은 어그로 범위
+    //public float largeAgrro; // 큰 어그로 범위
+    public float timer; // 타이머 변수
     public PlayerInput playerInput; // PlayerInput을 가져옴
     public bool isSpread; //산개 여부를 확인하는 bool 변수
     public bool isAuto; //Auto 여부를 확인하는 bool 변수
 
     //이 아래의 변수들은 Drone의 Target 설정에 사용되는 변수
-    [HideInInspector]
     public Transform droneTarget; //  드론의 Target의 Transform을 저장할 변수
     public Vector2 TargetPosition; //  Target의 Position을 나타낼 vector2 변수
-    [HideInInspector]
     public RaycastHit2D[] Targets;  // CirclecastAll로 가져오는 모든 오브젝트들을 저장할 배열
-    [HideInInspector]
     public LayerMask Target_layer;  // 검색을 시행할 layer(Enemy, 기체에만 해당)
-    [HideInInspector]
     public Transform Nearest_enemy; // 캐스트한 오브젝트 중 가장 가까운 Enemy 오브젝트
     public float Scan_range;    //검색 범위를 저장할 float 변수
 
 
     //이 아래의 변수들은 Follow State 관리에 사용되는 변수
-    [HideInInspector]
     public float Player_drone_Distance; //Player와 Drone의 현재 거리를 저장할 변수
-    [HideInInspector]
     public float P_d_maxDistance;   // Drone이 Player로부터 멀어질 수 있는 최대 거리
-    [HideInInspector]
     public Vector2 Last_player; //Follow State 진입 시의 Player Vector2
-    [HideInInspector]
     public Vector2 Last_drone;  //Follow State 진입 시의 Drone Vector2
-    [HideInInspector]
     public Vector2 relativePosition;    // Follow State 진입 시의 Player와 Drone의 상대 위치
-    [HideInInspector]
     public Vector2 FollowPosition;  //Follow State시 Drone이 이동해야 할 목표 위치
 
-    [HideInInspector]
+
     public Vector2 mousePosition;   //월드맵 상에서의 현재 마우스 위치 
-    [HideInInspector]
     public Vector2 Player_vec;  //Player의 Vector2
-    [HideInInspector]
     public Vector2 Drone_vec;   //Drone의 Vector2
 
     public enum STATE
@@ -62,7 +53,7 @@ public class Drone_Control : MonoBehaviour
     {
     
         // 플레이어 오브젝트를 찾아 트랜스폼 할당
-        player = GameObject.Find("Player");
+        player = GameObject.Find("Player").transform;
         // PlayerInput을 가져옴
         //playerInput = GetComponent<PlayerInput>();
         playerInput = player.GetComponent<PlayerInput>();
@@ -73,27 +64,27 @@ public class Drone_Control : MonoBehaviour
 
         // 에러가 나지않게 초기값들 설정
         statename = STATE.IDLE;
+        timer = 100;
         isAuto = playerInput.isAuto;
         droneTarget = null;
         Nearest_enemy = null;
         isAuto = playerInput.isAuto;
+        Debug.Log(playerInput.isAuto);
         Player_drone_Distance = 0f;
         P_d_maxDistance = 20f;  //임의로 최대 거리 20f로 설정
-
-        Physics2D.IgnoreCollision(player.GetComponent<Collider2D>(), GetComponent<Collider2D>());
-        Debug.Log(player.GetComponent<Collider2D>().isTrigger);
  
     }//OnEnable
 
     
     public void FixedUpdate()
     {
+
         mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         // 자기 위치 갱신
         selfposition = GetComponent<Transform>();
         Drone_vec = selfposition.position;
-        Player_vec = player.transform.position;
+        Player_vec = player.position;
         //Player와 Drone의 거리 계산
         Player_drone_Distance = Vector2.Distance(Drone_vec, Player_vec);
 

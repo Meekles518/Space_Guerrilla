@@ -13,6 +13,7 @@ public class Drone_AI : MonoBehaviour
     public Drone_Control control; // Enemy_Control 컴포넌트
 
     public float currTime; // 타이머에 사용할 현재시간
+    public float timer; // 타이머에 사용할 타이머가 끝나는 시간
 
     // 값들 초기화
     void OnEnable()
@@ -21,7 +22,7 @@ public class Drone_AI : MonoBehaviour
         player = GameObject.Find("Player").transform; // 플레이어 오브젝트를 찾아 트랜스폼 할당
         currentState = new Drone_Idle(gameObject, player, control, currTime); // 초기 스테이트를 Idle로 설정
 
-
+        control.timer = timer;
 
     }//OnEnable
 
@@ -29,6 +30,7 @@ public class Drone_AI : MonoBehaviour
     // 값들을 지속적으로 갱신
     void FixedUpdate()
     {
+        control.timer = timer;
 
         // 현재 State를 지속적으로 갱신
         currentState = currentState.Process();

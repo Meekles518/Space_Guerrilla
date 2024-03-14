@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using UnityEngine.SceneManagement;
+
+
 
 namespace Map
 {
@@ -16,21 +15,16 @@ namespace Map
         public Turn turn; //현재 Turn 상태를 저장할 변수
         public int moveChance; //Player의 움직임 여부를 확인하는 bool 변수
         public int defaultMoveChance; // Player의 기본 이동 횟수
-        public bool abilityChance; //Player의 기술 사용 여부를 확인하는 bool 변수
 
         public static MapManager instance;
         public List<Node> enemyNodeList; //Enemy가 위치한 Node를 저장할 List
         public Node playerNode; //PlayerNode의 정보를 저장할 변수 
 
-        [HideInInspector]
         public GameObject Nodes; //Nodes GameObject를 저장할 변수
 
-        
+        [Tooltip("Enemy circle Prefabs, will appear at Map")]
         public List<GameObject> enemyPrefabs; //Enemy를 Map에 표시하는 
 
-        public GameObject playerInfo; //PlayerInfo를 저장할 변수
-        public Image Img; //Image를 저장할 변수
-        public TMP_Text ButtonText; //Button의 Text 를 저장할 변수
 
         //싱글턴 패턴 구현
         //Awakw 함수는 첫 생성 시 단 한번만 실행됨, 씬 이동을 해도 반복실행되지 않음
@@ -43,13 +37,12 @@ namespace Map
             turn = Turn.Player; //시작 시 Player turn으로 설정
             defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정.
             moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정, 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
-            abilityChance = true;
 
             //최초에만 첫 번째 Node를 Player이 위치한 Node로 설정함.
             playerNode = Nodes.transform.GetChild(0).GetComponent<Node>();
             playerNode.nodeType = NodeType.Player;
             playerNode.setColor();
-             
+            playerNode.attainableState();
             DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
             DontDestroyOnLoad(GameObject.Find("Map")); //Map이 씬 변경에도 유지되게 함.
 
@@ -93,8 +86,6 @@ namespace Map
         //현재 Turn의 상태에 따른 행동을 서술한 함수
         public void checkTurn()
         {
-           
-
             //현재 Turn이 무엇인지 확인
             switch ( turn)
             {
@@ -102,11 +93,6 @@ namespace Map
                 //Player Turn이라면
                 case Turn.Player:
 
-                    Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
-
-                   
-                    ButtonText.text = ("Turn End");
-                  
                     Debug.Log("Player Turn");
 
                     break;
@@ -114,10 +100,6 @@ namespace Map
                 //Enemy Turn 이라면
                 case Turn.Enemy:
 
-                    Img.color = Color.gray;
-                    
-                    ButtonText.text = ("Turn End");
-                   
                     Debug.Log("Enemy Turn");
                     StartCoroutine(EnemyTurn());
 
@@ -126,10 +108,7 @@ namespace Map
                 //Engage Turn이라면
                 case Turn.Engage:
 
-                    Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
-                  
-                    ButtonText.text = ("Engage!"); //Button의 Text 변경
-                 
+                    changeScene();
 
                     break;
 
@@ -143,7 +122,6 @@ namespace Map
         //Scene을 변경하는 함수가 필요
         public void changeScene()
         {
-            SceneManager.LoadScene("Field");
 
         }//fieldScene
 
@@ -203,13 +181,6 @@ namespace Map
                 }
 
             }
-
-            //Engage 턴이라면
-            else if (turn == Turn.Engage)
-            {
-                changeScene(); //Scene 변경
-            }
-
 
         }//turnEnd
 
