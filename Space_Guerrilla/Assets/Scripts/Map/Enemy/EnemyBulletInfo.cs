@@ -14,16 +14,17 @@ public class EnemyBulletInfo : MonoBehaviour
 
 
     //Enemy Bullet의 ShipEntity 스크립트에 넣어야 할 변수값들
-    [Header("오브젝트 스탯")]
+    //ShipEntity 스크립트에 들어가야 하는 변수값들
+    [Header("오브젝트 스탯, Player의 ShipEntity 스크립트로 넘어가야 할 변수들")]
     public float maxhealth; //우주선의 현재체력
     public float shield; // 우주선의 방어도
     public float damage; //우주선의 공격력(방어력)
     public float defensestat; // 우주선의 방호력(우주선의 damage와 총 health+shield에 영향을줌)
-    [Header("충돌 관련 수치")]
-    public float collideRate; // 충돌판정을 시행하는 주기
-    private bool inCollision; // 현재 충돌 여부를 판단하는 논리 변수
     [Header("현재 체력")]
     public float health;
+    public float rebound;
+    [Header("충돌 관련 수치")]
+    public float collideRate; // 충돌판정을 시행하는 주기
 
 
 
