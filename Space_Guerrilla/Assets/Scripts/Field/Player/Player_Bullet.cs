@@ -1,3 +1,4 @@
+using Map;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,6 +22,17 @@ public class Player_Bullet : MonoBehaviour
 
     private void Awake()
     {
+        //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
+        PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
+
+        
+        this.speed = playerBulletInfo.speed; //Speed 저장
+        this.spreadRange = playerBulletInfo.spreadRange; //spreadRange 저장
+
+        var shipEntity = GetComponent<ShipEntity>();
+        shipEntity.getShipEntity(playerBulletInfo); //ShipEntity에 필요한 값들 저장
+
+
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
         // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정

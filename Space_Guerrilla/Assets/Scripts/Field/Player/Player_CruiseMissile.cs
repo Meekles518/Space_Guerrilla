@@ -1,3 +1,4 @@
+using Map;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,6 +36,19 @@ public class Player_CruiseMissile : MonoBehaviour
 
     private void Awake()
     {
+        //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
+        PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
+
+        this.speed = playerBulletInfo.speed; //Speed 저장
+        this.lifespan = playerBulletInfo.lifespan; //lifespan 저장
+        this.Scan_range = playerBulletInfo.Scan_range; //Scan_range 저장
+        this.rotateSpeed = playerBulletInfo.rotateSpeed; //rotateSpeed 저장
+
+
+        var shipEntity = GetComponent<ShipEntity>();
+        shipEntity.getShipEntity(playerBulletInfo); //ShipEntity에 필요한 값들 저장
+
+
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
     }

@@ -43,7 +43,8 @@ namespace Map
 
         [HideInInspector]
         public GameObject Nodes; //Nodes GameObject를 저장할 변수
-
+        [HideInInspector]
+        public GameObject Map;
         
         public List<GameObject> enemyPrefabs; //Enemy를 Map에 표시하는 
 
@@ -57,60 +58,72 @@ namespace Map
 
         public ShipName shipName; //ShipName 저장 변수
 
+        private bool awakeCheck = false;
+
         //싱글턴 패턴 구현
-        //Awakw 함수는 첫 생성 시 단 한번만 실행됨, 씬 이동을 해도 반복실행되지 않음
+        //Awake 함수와 Start 함수의 원리에 대한 고찰이 필요?
+        //Awake 함수가 Start 함수보다 먼저 시작되는 것은 맞으나, DontDestroyAndLoad 함수로 생성한 오브젝트는
+        //씬을 여러 번 이동 시, Awake 함수만 실행되고, Start 함수는 실행되지 않는다.
         private void Awake()
         {
-            
+            if (!awakeCheck)
+            {
 
-            instance = this;
+                instance = this;
 
-            Nodes = GameObject.Find("Nodes");
+                Nodes = GameObject.Find("Nodes");
 
-            turn = Turn.Player; //시작 시 Player turn으로 설정
-            phase = Phase.Default; //시작 시 Default Phase로 설정
+                turn = Turn.Player; //시작 시 Player turn으로 설정
+                phase = Phase.Default; //시작 시 Default Phase로 설정
 
-              
 
-            abilityChance = true; //기술 사용 가능을 true로 설정.
-            playerDetected = false;
 
-            //최초에만 첫 번째 Node를 Player이 위치한 Node로 설정함.
-            playerNode = Nodes.transform.GetChild(0).GetComponent<Node>();
-            playerNode.nodeType = NodeType.Player;
-            playerNode.setColor();
+                abilityChance = true; //기술 사용 가능을 true로 설정.
+                playerDetected = false;
+
+                //최초에만 첫 번째 Node를 Player이 위치한 Node로 설정함.
+                playerNode = Nodes.transform.GetChild(0).GetComponent<Node>();
+                playerNode.nodeType = NodeType.Player;
+                playerNode.setColor();
+
+                DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
+                Map = GameObject.Find("Map");
+                DontDestroyOnLoad(Map); //Map이 씬 변경에도 유지되게 함.
+
+                //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
+                defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
+                moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정, 
+
+
+                //이 아래의 모든 코드들은, 실행되는 Map이 무슨 종류인지에 따라 switch문으로 구분해야 함
+                //임의로 적이 11번 노드에 있다고 가정
+                enemyNodeList.Add(Nodes.transform.GetChild(10).GetComponent<Node>()); //11번 Node 저장
+                var enemy = Instantiate(enemyPrefabs[0], enemyNodeList[0].transform); //11번 Node를 부모로 해서 생성
+
+                //적의 초기 위치의 z좌표를 1f로 해, Node에 가려져서 안보이게 함, Node들의 z좌표는 0
+                enemy.transform.localPosition = new Vector3(0f, 0f, 1f);
+                enemyNodeList[0].enemyObjects.Add(enemy); //Node의 적 List에 enemy 추가 
+
+                pSkill = playerInfo.GetComponent<PlayerSkill>(); //PlayerInfo에서 PlayerSkill 가져오기
+
+
+                //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
+                //임시로 우주선을 Ship1으로 지정
+                shipName = ShipName.Ship1;
+                pSkill.getSkill(); //Skill 정보 가져와서 저장하기
+                pSkill.SetSkillBtn(); //Skill들을 버튼에 추가 후 생성 및 배치
+
+
+                awakeCheck = true;
+            }
+
              
-            DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
-            DontDestroyOnLoad(GameObject.Find("Map")); //Map이 씬 변경에도 유지되게 함.
-
-            //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
-            defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
-            moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정, 
-
-
-            //이 아래의 모든 코드들은, 실행되는 Map이 무슨 종류인지에 따라 switch문으로 구분해야 함
-            //임의로 적이 11번 노드에 있다고 가정
-            enemyNodeList.Add(Nodes.transform.GetChild(10).GetComponent<Node>()); //11번 Node 저장
-            var enemy = Instantiate(enemyPrefabs[0], enemyNodeList[0].transform); //11번 Node를 부모로 해서 생성
-
-            //적의 초기 위치의 z좌표를 1f로 해, Node에 가려져서 안보이게 함, Node들의 z좌표는 0
-            enemy.transform.localPosition = new Vector3(0f, 0f, 1f);
-            enemyNodeList[0].enemyObjects.Add(enemy); //Node의 적 List에 enemy 추가 
-
-            pSkill = playerInfo.GetComponent<PlayerSkill>(); //PlayerInfo에서 PlayerSkill 가져오기
-
-
-            //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
-            //임시로 우주선을 Ship1으로 지정
-            shipName = ShipName.Ship1;
-            pSkill.getSkill(); //Skill 정보 가져와서 저장하기
-            pSkill.SetSkillBtn(); //Skill들을 버튼에 추가 후 생성 및 배치
         }
 
 
          
-        //Start 함수는 씬 이동 시 반복 실행되는 함수.
-        private void Start()
+        //
+        private void OnEnable()
         {
             if (turn == Turn.Engage)
             {

@@ -41,6 +41,34 @@ public class ShipEntity : MonoBehaviour
         Degree = 180;
     }
 
+    //ShipEntity 스크립트의 변수 값들을 외부에서 불러오는 함수. 사용 빈도가 높을 것으로 예상되고,
+    //대부분의 오브젝트들인 ShipEntity 스크립트를 가지고 있을 것이기에, 여기에 함수 정의
+
+    public void getShipEntity(PlayerInfo playerInfo)
+    {
+        this.maxhealth = playerInfo.maxhealth;
+        this.shield = playerInfo.shield;
+        this.damage = playerInfo.damage;
+        this.defensestat = playerInfo.defensestat;
+        this.health = playerInfo.health;
+        this.rebound = playerInfo.rebound;
+        this.collideRate = playerInfo.collideRate;
+    }
+
+    public void getShipEntity(PlayerBulletInfo playerBulletInfo)
+    {
+        this.maxhealth = playerBulletInfo.maxhealth;
+        this.shield = playerBulletInfo.shield;
+        this.damage = playerBulletInfo.damage;
+        this.defensestat = playerBulletInfo.defensestat;
+        this.health = playerBulletInfo.health;
+        this.rebound = playerBulletInfo.rebound;
+        this.collideRate = playerBulletInfo.collideRate;
+    }
+
+
+
+
     // 충돌중일때 실행
     private void OnTriggerStay2D(Collider2D other)
     {
