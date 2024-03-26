@@ -25,17 +25,32 @@ public class CameraExtensions : MonoBehaviour
     [Header("¸ÊÅ©±â ÀÔ·Â")]
     public Vector2 mapSize;
 
+    private bool startCheck = false;
+
     void OnEnable()
     {
-        playerTransform = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-        height = Camera.main.orthographicSize;
-        width = height * Screen.width / Screen.height;
-        cameraMoveSpeed = GameObject.Find("Player").GetComponent<PlayerMovement>().moveSpeed;
+        
+
+         
     }
 
     void FixedUpdate()
     {
-        LimitCameraArea();
+        if (!startCheck)
+        {
+            GameObject player = GameManager.instance.player;
+            playerTransform = player.GetComponent<Transform>();
+            height = Camera.main.orthographicSize;
+            width = height * Screen.width / Screen.height;
+            cameraMoveSpeed = player.GetComponent<PlayerMovement>().moveSpeed;
+            startCheck = true;
+        }
+
+        else
+        {
+            LimitCameraArea();
+        }
+         
     }
 
     void LimitCameraArea()

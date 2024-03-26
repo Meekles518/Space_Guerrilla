@@ -14,11 +14,12 @@ public class GameManager : MonoBehaviour
     public PlayerInput playerInput;
     [HideInInspector]
     public static Enemy_Control OppControl;
-    [HideInInspector]
+    //[HideInInspector]
     public GameObject player;
     [Header("기회주의자 적 어그로 확인용 변수")]
     public bool isDefensiveEngage;
 
+    public bool errorCheck = false;
 
     //이 아래의 변수들은 Map의 정보를 불러오거나 활용하는데에 필요한 변수들
 
@@ -26,8 +27,11 @@ public class GameManager : MonoBehaviour
 
     void Awake()
     {
-
-        instance = this;
+        if (instance == null)
+        {
+            instance = this;
+        }
+         
         isDefensiveEngage = false;
 
 
@@ -93,6 +97,8 @@ public class GameManager : MonoBehaviour
 
 
         MapManager.instance.Map.SetActive(false); //Map 비활성화 해서 실제 화면에 안보이게 하기
+
+        errorCheck = true;
 
     }
 

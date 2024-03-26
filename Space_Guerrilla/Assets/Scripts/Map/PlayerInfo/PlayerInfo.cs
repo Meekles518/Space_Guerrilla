@@ -49,8 +49,8 @@ public class PlayerInfo : MonoBehaviour
 
     //PlayerMovement 스크립트에 들어가야 하는 변수값들
     [Header("이동, 회전 속도, PlayerMovement 스크립르토 넘어가야 할 변수들")]
-    public float moveSpeed; // 이동 속도
-    public float rotateSpeed; // 회전 속도
+    public float moveSpeed = 5f; // 이동 속도
+    public float rotateSpeed = 10f; // 회전 속도
 
 
 
