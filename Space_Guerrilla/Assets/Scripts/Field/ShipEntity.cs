@@ -12,7 +12,7 @@ public class ShipEntity : MonoBehaviour
     private bool GD;
 
     [Header("오브젝트 스탯")]
-    public float maxhealth; //우주선의 현재체력
+    public float maxhealth; //우주선의 최대체력
     public float shield; // 우주선의 방어도
     public float damage; //우주선의 공격력(방어력)
     public float defensestat; // 우주선의 방호력(우주선의 damage와 총 health+shield에 영향을줌)
