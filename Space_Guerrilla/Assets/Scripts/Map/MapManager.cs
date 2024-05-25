@@ -58,7 +58,7 @@ namespace Map
 
         public ShipName shipName; //ShipName 저장 변수
 
-        private bool awakeCheck = false;
+        private bool awakeCheck = false; //Map의 초기 설정이 한 번만 이루어지도록 관리하는 변수
 
         //싱글턴 패턴 구현
         //Awake 함수와 Start 함수의 원리에 대한 고찰이 필요?
@@ -89,6 +89,8 @@ namespace Map
                 DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
                 Map = GameObject.Find("Map");
                 DontDestroyOnLoad(Map); //Map이 씬 변경에도 유지되게 함.
+
+
 
                 //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
                 defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함

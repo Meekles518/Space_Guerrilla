@@ -1,4 +1,5 @@
 using Map;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -45,6 +46,9 @@ public class GameManager : MonoBehaviour
             //Ship1일 때,
             case ShipName.Ship1:
 
+                //여기 부분이 제대로 작동하나?
+                
+
                 //playerPrefab에 저장되어 있는 Ship1 생성 후 player 변수에 저장, (0, 0, 0) 위치에 생성
                 player = Instantiate(playerPrefabs[0], new Vector3(0, 0, 0), Quaternion.identity);
 
@@ -68,15 +72,15 @@ public class GameManager : MonoBehaviour
         //차후 코드 개선을 통해 확장성 증가 필요
         
         //왼쪽의 주 무기 정보 설정
-            playerShooters[0].bulletType = playerInfo.bulletType1;
-            playerShooters[0].magCapacity = playerInfo.magCapacity1;
-            playerShooters[0].magAmmo = playerInfo.magAmmo1;
-            playerShooters[0].recoil = playerInfo.recoil1;
-            playerShooters[0].reloadTime = playerInfo.reloadTime1;
-            playerShooters[0].timeBetFire = playerInfo.timeBetFire1;
-            playerShooters[0].projectilesPerFire = playerInfo.projectilesPerFire1; 
-            playerShooters[0].timeBetProjectiles = playerInfo.timeBetProjectiles1; 
-            playerShooters[0].reloadInterval = playerInfo.reloadInterval1;
+        playerShooters[0].bulletType = playerInfo.bulletType1;
+        playerShooters[0].magCapacity = playerInfo.magCapacity1;
+        playerShooters[0].magAmmo = playerInfo.magAmmo1;
+        playerShooters[0].recoil = playerInfo.recoil1;
+        playerShooters[0].reloadTime = playerInfo.reloadTime1;
+        playerShooters[0].timeBetFire = playerInfo.timeBetFire1;
+        playerShooters[0].projectilesPerFire = playerInfo.projectilesPerFire1; 
+        playerShooters[0].timeBetProjectiles = playerInfo.timeBetProjectiles1; 
+        playerShooters[0].reloadInterval = playerInfo.reloadInterval1;
 
         //오른쪽의 보조 무기 정보 설정
         playerShooters[1].bulletType = playerInfo.bulletType2;

@@ -43,7 +43,7 @@ public class Shooter : MonoBehaviour
         // 마지막으로 투사체를 쏜 시점을 초기화
         lastFireTime = 0;
         // 발사기의 리지드바디 컴포넌트를 가져옴
-        objectRigidbody = GetComponent<Rigidbody2D>();
+        objectRigidbody = GetComponentInParent<Rigidbody2D>();
     }
 
     private void FixedUpdate()

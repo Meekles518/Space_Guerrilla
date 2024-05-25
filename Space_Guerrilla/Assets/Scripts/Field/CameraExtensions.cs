@@ -9,23 +9,29 @@ using UnityEngine;
 
 public class CameraExtensions : MonoBehaviour
 {
-    [HideInInspector]
+    //[HideInInspector]
     public Transform playerTransform;
-   [HideInInspector]
+    //[HideInInspector]
     public float cameraMoveSpeed;
-    [HideInInspector]
+    //[HideInInspector]
     public float height;
-    [HideInInspector]
+    //[HideInInspector]
     public float width;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector3 cameraPosition;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector2 center;
 
     [Header("맵크기 입력")]
     public Vector2 mapSize;
 
-    private bool startCheck = false;
+    //필드 진입 시 생성된 Player을 저장할 변수
+    public GameObject player; 
+
+
+
+    //카메라의 Player 추적을 GameManager의 Player 생성 후에 동작하게끔 하기 위한 변수
+    private bool startCheck = false; 
 
     void OnEnable()
     {
@@ -38,7 +44,7 @@ public class CameraExtensions : MonoBehaviour
     {
         if (!startCheck)
         {
-            GameObject player = GameManager.instance.player;
+            player = GameManager.instance.player;
             playerTransform = player.GetComponent<Transform>();
             height = Camera.main.orthographicSize;
             width = height * Screen.width / Screen.height;
@@ -48,6 +54,7 @@ public class CameraExtensions : MonoBehaviour
 
         else
         {
+            cameraMoveSpeed = player.GetComponent<PlayerMovement>().moveSpeed;
             LimitCameraArea();
         }
          

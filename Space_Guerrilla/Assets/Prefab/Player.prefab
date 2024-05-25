@@ -41,7 +41,7 @@ Transform:
   - {fileID: 1238792138094515024}
   - {fileID: 3260446171362951021}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9110481042538490623
 SpriteRenderer:
@@ -366,7 +366,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireTransform: {fileID: 0}
   objectRigidbody: {fileID: 0}
-  bulletType: 4
+  bulletType: 0
   magCapacity: 5
   magAmmo: 0
   recoil: 1
@@ -385,7 +385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3260446171362951021}
   - component: {fileID: 8545084944649534590}
-  m_Layer: 6
+  m_Layer: 11
   m_Name: Minimap Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireTransform: {fileID: 0}
   objectRigidbody: {fileID: 0}
-  bulletType: 4
+  bulletType: 0
   magCapacity: 5
   magAmmo: 0
   recoil: 1

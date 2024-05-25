@@ -7,8 +7,8 @@ using UnityEngine.AI;
 // 생성된 플레이어의 총알의 행동을 제어하는 스크립트
 public class Player_Bullet : MonoBehaviour
 {
-    private Rigidbody2D rb2; // 총알의 리지드바디
-    [HideInInspector]
+    public Rigidbody2D rb2; // 총알의 리지드바디
+    //[HideInInspector]
     public GameObject player; // 이 총알을 발사하는 오브젝트
 
     private bool dead; // 이 총알의 활성화 여부를 확인해줄 변수
@@ -20,9 +20,11 @@ public class Player_Bullet : MonoBehaviour
     public float speed; // 총알의 속도
     public float spreadRange; // 탄퍼짐 정도
 
+
+    //Player_Bullet 스크립트의 Awake, OnEnable 함수를 재조정해야 한다.
     private void Awake()
     {
-        //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
+       /* //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
         PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
 
         
@@ -36,12 +38,34 @@ public class Player_Bullet : MonoBehaviour
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
         // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
-        spread = Random.Range(-spreadRange, spreadRange);
+        spread = Random.Range(-spreadRange, spreadRange);*/
     }
 
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드
     private void OnEnable()
     {
+
+        //본래 Awake 함수에서 진행하던 것을 OnEnable에서 진행. 
+        //Awake 함수끼리는 실행 순서가 무작위이기에, player을 찾지 못하는 현상이 발생한다
+        //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
+        PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
+
+
+        this.speed = playerBulletInfo.speed; //Speed 저장
+        this.spreadRange = playerBulletInfo.spreadRange; //spreadRange 저장
+
+        var shipEntity = GetComponent<ShipEntity>();
+        shipEntity.getShipEntity(playerBulletInfo); //ShipEntity에 필요한 값들 저장
+
+
+        // 현재 오브젝트의 리지드바디를 가져옴
+        rb2 = gameObject.GetComponent<Rigidbody2D>();
+        // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
+        spread = Random.Range(-spreadRange, spreadRange);
+
+
+
+
         // 총알의 비활성화 여부를 거짓으로 바꿈
         dead = false;
         // 총알을 발사 할 주체인 플레이어를 찾음
