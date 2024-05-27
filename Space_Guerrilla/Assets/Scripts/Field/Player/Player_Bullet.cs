@@ -69,7 +69,7 @@ public class Player_Bullet : MonoBehaviour
         // 총알의 비활성화 여부를 거짓으로 바꿈
         dead = false;
         // 총알을 발사 할 주체인 플레이어를 찾음
-        player = GameObject.Find("Player");
+        player = GameObject.FindGameObjectWithTag("Player");
         // 총알의 이동방향을 플레이어가 향하는 방향으로 설정
         moveDirection3 = Quaternion.AngleAxis(spread, new Vector3(0, 0, 1)) * player.transform.up;
         // 계산에 필요한 Vector2 값으로 위의 방향을 변경해줌
