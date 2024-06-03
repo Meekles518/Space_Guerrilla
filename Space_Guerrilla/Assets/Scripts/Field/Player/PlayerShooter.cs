@@ -10,7 +10,8 @@ public class PlayerShooter : MonoBehaviour
     [Header("Shooter 수동할당 필요")]
     public Shooter shooter; // 필요한 Player 오브젝트의 Shooter (수동으로 프리팹에서 할당해 놓음)
     private float reloadInterval; // 재장전 시기간의 시간 간격
-    private float lastReloadTime; // 마지막 장전 시점
+    public float lastReloadTime; // 마지막 장전 시점
+    public float reloadTime; // 재장전에 필요한 소요 시간
 
     private void Awake()
     {
@@ -18,6 +19,8 @@ public class PlayerShooter : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         // 재장전 시기간의 시간 간격 초기화
         reloadInterval = shooter.reloadInterval;
+        // 재장전에 필요한 시간 가져오기
+        reloadTime = shooter.reloadTime;
         // 마지막 장전 시점 초기화
         lastReloadTime = 0;
         shooter.objectRigidbody = GetComponent<Rigidbody2D>();
@@ -38,10 +41,12 @@ public class PlayerShooter : MonoBehaviour
         //탄창의 탄수가 최대 탄수보다 적을 때 혹은 탄창이 비어있다면
         else if (reloadCheck())
         {
-                // 장전을 하는 Reload 매서드 실행
-                shooter.Reload();
-                // 마지막 장전 시간을 현재로 설정
-                lastReloadTime = Time.time;           
+            // 마지막 장전 시간을 현재로 설정 **이 부분이 문제를 일으킨다!
+            lastReloadTime = shooter.lastReloadTime;
+
+            // 장전을 하는 Reload 매서드 실행
+            shooter.Reload();
+                          
         }
        
     }

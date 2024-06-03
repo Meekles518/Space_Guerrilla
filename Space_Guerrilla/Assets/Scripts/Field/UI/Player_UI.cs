@@ -26,7 +26,7 @@ public class Player_UI : MonoBehaviour
 
     public float lastreloadtime; //마지막 장전 시점
     public float reloadtime; //재장전에 필요한 시간을 저장
-
+    
 
     public void Awake()
     {
@@ -79,7 +79,7 @@ public class Player_UI : MonoBehaviour
         {
             txt.text = "0/0";
         }
-         
+        
 
     }
 
@@ -92,15 +92,16 @@ public class Player_UI : MonoBehaviour
             if (pShooter.shooter.magCapacity > 0 && pShooter.reloadCheck())
             {
 
-                lastreloadtime = Time.time; //현재 시간 저장
-
+                lastreloadtime = pShooter.lastReloadTime; //현재 시간 저장
+                //Shooter의 재장전 소요 시간 저장(모든 주무기 Shooter의 재장전 소요 시간이 동일하다고 가정)
+                reloadtime = pShooter.reloadTime;  
 
                 break;
             }
         }
 
-
-        circle.fillAmount = 0;
+        //Circle의 fillAmount를 재장전 시간 비율에 맞게 조정.(재장전 중이지 않을 때는 꽉 차잇는 원으로 표시)
+        circle.fillAmount = (Time.time - lastreloadtime)/reloadtime;
 
     }
 

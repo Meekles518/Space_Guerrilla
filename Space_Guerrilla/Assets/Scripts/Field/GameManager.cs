@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
     }
 
-
+    
     public void FixedUpdate()
     {
 

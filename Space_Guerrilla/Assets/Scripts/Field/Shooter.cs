@@ -32,6 +32,7 @@ public class Shooter : MonoBehaviour
     public float timeBetProjectiles; // 한번 클릭시 발사되는 투사체 간의 시간 간격
     public float reloadInterval;
 
+    public float lastReloadTime; // 마지막으로 재장전에 진입한 시간을 저장할 변수
 
 
     private void OnEnable()
@@ -127,11 +128,13 @@ public class Shooter : MonoBehaviour
         // 현재 상태를 재장전 중 상태로 전환
         state = State.Reloading;
 
+        lastReloadTime = Time.time;
+
         // 재장전 소요 시간 만큼 처리를 쉬기
         yield return new WaitForSeconds(reloadTime);
 
         //탄창에 탄약을 채운다.
-        magAmmo = magCapacity;
+        magAmmo++;
 
         // 현재 상태를 발사 준비된 상태로 변경
         state = State.Ready;
