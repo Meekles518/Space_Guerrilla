@@ -1524,6 +1524,10 @@ MonoBehaviour:
   circle: {fileID: 0}
   magCpapcity: 0
   magAmmo: 0
+  activeShooter: 0
+  shooters: []
+  lastreloadtime: 0
+  reloadtime: 0
 --- !u!1 &1805543527
 GameObject:
   m_ObjectHideFlags: 0

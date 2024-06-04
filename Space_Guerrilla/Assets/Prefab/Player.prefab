@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4341291868055680081}
   - component: {fileID: 7659124094205496354}
   - component: {fileID: 7510653429565846693}
+  - component: {fileID: -4202298375005341491}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -41,7 +42,7 @@ Transform:
   - {fileID: 1238792138094515024}
   - {fileID: 3260446171362951021}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &9110481042538490623
 SpriteRenderer:
@@ -162,6 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 7380872934689949309}
+  lastReloadTime: 0
+  reloadTime: 0
 --- !u!114 &2142833834853444847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,6 +178,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shooter: {fileID: 998214711779161475}
+  lastReloadTime: 0
+  reloadTime: 0
 --- !u!70 &4341291868055680081
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -267,6 +272,24 @@ MonoBehaviour:
   faceDirection: {x: 0, y: 0}
   rebound: 0
   Degree: 0
+--- !u!114 &-4202298375005341491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455692199383189734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ab8dbddfa400c46ac8dfd6de024b3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ship: {fileID: 0}
+  tF: {fileID: 0}
+  cvs: {fileID: 0}
+  img: {fileID: 2404351562474821153, guid: f7d1b49341b640348b1122d3300a5929, type: 3}
+  rect: {fileID: 0}
+  height: 3
 --- !u!1 &2977928248865939183
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,6 +398,7 @@ MonoBehaviour:
   projectilesPerFire: 1
   timeBetProjectiles: 0.2
   reloadInterval: 0
+  lastReloadTime: 0
 --- !u!1 &6588779970987318618
 GameObject:
   m_ObjectHideFlags: 0
@@ -567,3 +591,4 @@ MonoBehaviour:
   projectilesPerFire: 1
   timeBetProjectiles: 0.2
   reloadInterval: 0
+  lastReloadTime: 0

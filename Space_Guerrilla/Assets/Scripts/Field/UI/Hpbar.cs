@@ -9,7 +9,7 @@ public class Hpbar : MonoBehaviour
     public ShipEntity ship; //우주선의 ShipEntity를 저장
     public Transform tF; //우주선의 Transform 저장
 
-    public Canvas cvs; //Hpbar를 가지고 있을 Canvas를 저장할 변수. Canvas 없이 Ui를 Instantiate 시 화면에 나타나지 않음
+    public GameObject cvs; //Hpbar를 가지고 있을 Canvas를 저장할 변수. Canvas 없이 Ui를 Instantiate 시 화면에 나타나지 않음
 
     //단순 구현을 위해 Hpbar를 HpbarBg > Hpbar > Hp의 구조로 만들었음
     public Image img; //HpbarBg Prefab을 저장할 변수.
@@ -26,7 +26,8 @@ public class Hpbar : MonoBehaviour
         //각 Component 가져오기
         ship = GetComponent<ShipEntity>();
         tF = GetComponent<Transform>();
-        
+        cvs = GameObject.Find("Canvas");
+
         //이전에 Hpbar 생성된 적이 없다면
         if (imageInstance == null)
         {
