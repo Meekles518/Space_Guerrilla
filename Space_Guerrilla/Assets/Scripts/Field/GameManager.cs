@@ -51,47 +51,21 @@ public class GameManager : MonoBehaviour
 
                 //playerPrefab에 저장되어 있는 Ship1 생성 후 player 변수에 저장, (0, 0, 0) 위치에 생성
                 player = Instantiate(playerPrefabs[0], new Vector3(0, 0, 0), Quaternion.identity);
+                getInfo();
+
+                break;
+
+            case ShipName.Aegis:
+
+                //playerPrefab에 저장되어 있는 Aegis 생성 후 player 변수에 저장, (0, 0, 0) 위치에 생성
+                player = Instantiate(playerPrefabs[1], new Vector3(0, 0, 0), Quaternion.identity);
+                getInfo();
+
 
                 break;
 
 
         }
-
-        //PlayerInfo에서 값들을 가져와 Player의 현재 우주선에 저장하는 코드들
-
-        var playerInfo = MapManager.instance.playerInfo.GetComponent<PlayerInfo>(); //MapManger에서 PlayerInfo 가져오기
-        var playerMovement = player.GetComponent<PlayerMovement>(); //Player의 PlayerMovement 가져오기
-        var playerShipEntity = player.GetComponent<ShipEntity>(); //Player의 ShipEntity 가져오기
-        var playerShooters = player.GetComponentsInChildren<Shooter>();
-        
-        playerMovement.moveSpeed = playerInfo.moveSpeed; //이동속도 설정
-        playerMovement.rotateSpeed = playerInfo.rotateSpeed; //회전속도 설정 
-        playerShipEntity.getShipEntity(playerInfo); //ShipEntity 설정
-
-        //Player의 Shooter 스크립트에 값을 부여하는 코드. 현재는 하드코딩으로 왼쪽의 주 무기, 오른쪽의 보조무기에 값 부여
-        //차후 코드 개선을 통해 확장성 증가 필요
-        
-        //왼쪽의 주 무기 정보 설정
-        playerShooters[0].bulletType = playerInfo.bulletType1;
-        playerShooters[0].magCapacity = playerInfo.magCapacity1;
-        playerShooters[0].magAmmo = playerInfo.magAmmo1;
-        playerShooters[0].recoil = playerInfo.recoil1;
-        playerShooters[0].reloadTime = playerInfo.reloadTime1;
-        playerShooters[0].timeBetFire = playerInfo.timeBetFire1;
-        playerShooters[0].projectilesPerFire = playerInfo.projectilesPerFire1; 
-        playerShooters[0].timeBetProjectiles = playerInfo.timeBetProjectiles1; 
-        playerShooters[0].reloadInterval = playerInfo.reloadInterval1;
-
-        //오른쪽의 보조 무기 정보 설정
-        playerShooters[1].bulletType = playerInfo.bulletType2;
-        playerShooters[1].magCapacity = playerInfo.magCapacity2;
-        playerShooters[1].magAmmo = playerInfo.magAmmo2;
-        playerShooters[1].recoil = playerInfo.recoil2;
-        playerShooters[1].reloadTime = playerInfo.reloadTime2;
-        playerShooters[1].timeBetFire = playerInfo.timeBetFire2;
-        playerShooters[1].projectilesPerFire = playerInfo.projectilesPerFire2;
-        playerShooters[1].timeBetProjectiles = playerInfo.timeBetProjectiles2;
-        playerShooters[1].reloadInterval = playerInfo.reloadInterval2;
 
         playerInput = player.GetComponent<PlayerInput>();
 
@@ -112,7 +86,35 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void getInfo()
+    {
+        //PlayerInfo에서 값들을 가져와 Player의 현재 우주선에 저장하는 코드들
 
+        var playerInfo = MapManager.instance.playerInfo.GetComponent<PlayerInfo>(); //MapManger에서 PlayerInfo 가져오기
+        var playerMovement = player.GetComponent<PlayerMovement>(); //Player의 PlayerMovement 가져오기
+        var playerShipEntity = player.GetComponent<ShipEntity>(); //Player의 ShipEntity 가져오기
+        var playerShooters = player.GetComponentsInChildren<Shooter>();
+
+        playerMovement.moveSpeed = playerInfo.moveSpeed; //이동속도 설정
+        playerMovement.rotateSpeed = playerInfo.rotateSpeed; //회전속도 설정 
+        playerShipEntity.getShipEntity(playerInfo); //ShipEntity 설정
+
+        //주 무기 설정
+        for (int i = 0; i < playerShooters.Length; i++)
+        {
+            playerShooters[i].bulletType = playerInfo.bulletType1;
+            playerShooters[i].magCapacity = playerInfo.magCapacity1;
+            playerShooters[i].magAmmo = playerInfo.magAmmo1;
+            playerShooters[i].recoil = playerInfo.recoil1;
+            playerShooters[i].reloadTime = playerInfo.reloadTime1;
+            playerShooters[i].timeBetFire = playerInfo.timeBetFire1;
+            playerShooters[i].projectilesPerFire = playerInfo.projectilesPerFire1;
+            playerShooters[i].timeBetProjectiles = playerInfo.timeBetProjectiles1;
+            playerShooters[i].reloadInterval = playerInfo.reloadInterval1;
+        }
+
+
+    }
 
 
 

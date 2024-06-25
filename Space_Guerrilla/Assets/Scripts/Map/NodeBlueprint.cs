@@ -38,6 +38,7 @@ namespace Map
     public enum ShipName
     {
         Ship1,
+        Aegis,
 
     }
 

@@ -110,8 +110,10 @@ namespace Map
 
 
                 //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
-                //임시로 우주선을 Ship1으로 지정
-                shipName = ShipName.Ship1;
+                //임시로 우주선 이름 지정, 시작 화면에서 우주선 가져오는 코드로 대체해야 함.
+                shipName = ShipName.Aegis;
+
+
                 pSkill.getSkill(); //Skill 정보 가져와서 저장하기
                 pSkill.SetSkillBtn(); //Skill들을 버튼에 추가 후 생성 및 배치
 
@@ -161,9 +163,14 @@ namespace Map
                     turnCount++; //턴 카운트 증가
 
                     //Player의 맵 스킬 쿨타임을 1턴 감소시키는 작업 필요
-                    for (int i = 0; i < pSkill.skillCurrentColltime.Count; i++)
+                    for (int i = 0; i < pSkill.skillCurrentCooltime.Count; i++)
                     {
-                        pSkill.skillCurrentColltime[i] -= 1.0f;
+                        if (pSkill.skillCurrentCooltime[i] < pSkill.skillMaxCooltime[i])
+                        {
+                            pSkill.skillCurrentCooltime[i] += 1.0f;
+                        }
+                     
+
 
                     }
 

@@ -7,8 +7,8 @@ using UnityEngine;
 //Player의 우주선에 관한 변수를 저장할 스크립트
 public class PlayerInfo : MonoBehaviour
 {
-    //Shooter 스크립트에 들어가야 하는 변수값들, 왼쪽 주 무기의 값들
-    [Header("총 성능 조정, Player이 가지고 있는 Shooter 스크립트로 넘어가야 할 변수들")]
+    //Shooter 스크립트에 들어가야 하는 변수값들, 주 무기의 값들
+    [Header("기본 총 성능 조정, Player이 가지고 있는 Shooter 스크립트로 넘어가야 할 변수들")]
     public int bulletType1; // 발사하는 총알의 타입 예) 플레이어 총알, 적 총알 등
     public int magCapacity1; // 탄창 용량
     public int magAmmo1; // 현재 탄창에 남아있는 탄약
@@ -20,8 +20,8 @@ public class PlayerInfo : MonoBehaviour
     public float reloadInterval1;
 
 
-    //Shooter 스크립트에 들어가야 하는 변수값들, 오른쪽 보조 무기의 값들
-    [Header("총 성능 조정, Player이 가지고 있는 Shooter 스크립트로 넘어가야 할 변수들")]
+    //Shooter 스크립트에 들어가야 하는 변수값들, 보조 무기(혹은 특수 무기)의 값들
+    [Header("보조, 특수 총 성능 조정, Player이 가지고 있는 Shooter 스크립트로 넘어가야 할 변수들")]
     public int bulletType2; // 발사하는 총알의 타입 예) 플레이어 총알, 적 총알 등
     public int magCapacity2; // 탄창 용량
     public int magAmmo2; // 현재 탄창에 남아있는 탄약

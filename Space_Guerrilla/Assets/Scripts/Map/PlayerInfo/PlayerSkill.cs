@@ -25,7 +25,7 @@ namespace Skill
         public List<float> skillMaxCooltime = new List<float>();
 
         //skill의 현재 쿨타임을 저장할 리스트
-        public List<float> skillCurrentColltime = new List<float>();
+        public List<float> skillCurrentCooltime = new List<float>();
 
 
         public float skillVerticalDistance; //Skill UI들의 가로 거리 
@@ -69,7 +69,7 @@ namespace Skill
                     Ship_1 ship_1 = ScriptableObject.CreateInstance<Ship_1>();
                     skillNames = ship_1.skillNames;
                     skillMaxCooltime = ship_1.skillMaxCooltime;
-                    skillCurrentColltime = ship_1.skillMaxCooltime;
+                    skillCurrentCooltime = ship_1.skillMaxCooltime;
 
 
 
@@ -77,6 +77,15 @@ namespace Skill
 
                 //아래에 계속해서 각 우주선 별 스킬을 가져오는 코드를 작성해야 함.
 
+                case ShipName.Aegis:
+
+                    Aegis aegis = ScriptableObject.CreateInstance<Aegis>();
+                    skillNames = aegis.skillNames;
+                    skillMaxCooltime = aegis.skillMaxCooltime;
+                    skillCurrentCooltime = aegis.skillMaxCooltime;
+
+
+                    break;
 
             }
 
