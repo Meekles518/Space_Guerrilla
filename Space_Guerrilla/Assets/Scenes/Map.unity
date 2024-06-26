@@ -1302,14 +1302,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 252859152}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f0cd99a82cf0ce40bae3da235884605, type: 3}
+  m_Script: {fileID: 11500000, guid: cad6e0b2500710b4ebceb701c2a463a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   skillNames: []
   skillMaxCooltime: []
-  skillCurrentColltime: []
-  skillVerticalDistance: 0
-  skillHorizontalDinstance: 0
+  skillCurCooltime: []
 --- !u!1 &372454081
 GameObject:
   m_ObjectHideFlags: 0
@@ -2379,7 +2377,9 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 3584721335691465119, guid: 0cb58dbd0584629469fc6aab9d28fa28, type: 3}
   playerInfo: {fileID: 252859152}
-  pSkill: {fileID: 0}
+  playerShipInfo: {fileID: 0}
+  playerBulletInfo: {fileID: 0}
+  playerShip: {fileID: 1455692199383189734, guid: e2e90c86fde6fd64e9c350a69a990068, type: 3}
   Img: {fileID: 557674844}
   ButtonText: {fileID: 1998594211}
   shipName: 0

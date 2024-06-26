@@ -10,6 +10,8 @@ public class Player_Bullet : MonoBehaviour
     public Rigidbody2D rb2; // 총알의 리지드바디
     //[HideInInspector]
     public GameObject player; // 이 총알을 발사하는 오브젝트
+    public ShipEntity shipEntity;
+
 
     private bool dead; // 이 총알의 활성화 여부를 확인해줄 변수
     private Vector3 moveDirection3; // 총알의 이동방향 (Vector3)
@@ -44,18 +46,9 @@ public class Player_Bullet : MonoBehaviour
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드
     private void OnEnable()
     {
+        //GameManager에 저장되어 있는 총알에 대한 정보들 깊은 복사로 가져오기
+        getBulletInfo();
 
-        //본래 Awake 함수에서 진행하던 것을 OnEnable에서 진행. 
-        //Awake 함수끼리는 실행 순서가 무작위이기에, player을 찾지 못하는 현상이 발생한다
-        //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
-        PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
-
-
-        this.speed = playerBulletInfo.speed; //Speed 저장
-        this.spreadRange = playerBulletInfo.spreadRange; //spreadRange 저장
-
-        var shipEntity = GetComponent<ShipEntity>();
-        shipEntity.getShipEntity(playerBulletInfo); //ShipEntity에 필요한 값들 저장
 
 
         // 현재 오브젝트의 리지드바디를 가져옴
@@ -108,4 +101,30 @@ public class Player_Bullet : MonoBehaviour
             }          
         }
     }
+
+    //PlayerBulletInfo 에 저장되어 있는 탄환의 정보를 가져오는 코드. 오직 GameManager에서만 사용하는 버전
+    public void getBulletInfo(PlayerBulletInfo playerBulletInfo)
+    {
+        this.speed = playerBulletInfo.speed;
+        this.spreadRange = playerBulletInfo.spreadRange;
+
+
+    }
+
+    //GameManager에 저장되어 있는 탄환 정보를 가져오는 코드. 매 탄환 OnEnable시 마다 사용함
+    public void getBulletInfo()
+    {
+        var playerBullet = GameManager.instance.playerBullet;
+        var bulletShipEntity = GameManager.instance.bulletShipEntity;
+        shipEntity = GetComponent<ShipEntity>();
+
+        this.speed = playerBullet.speed;
+        this.spreadRange = playerBullet.spreadRange;
+        shipEntity.getShipEntity(bulletShipEntity);
+
+
+    }
+
+
+
 }
