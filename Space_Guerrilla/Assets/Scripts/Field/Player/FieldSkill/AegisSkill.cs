@@ -39,7 +39,7 @@ namespace Skill
 
         //각각 스킬 가능 횟수, 스킬 사용한 횟수, 스킬 지속 시간, 이동속도 증가 수치
         public int afterBurnerCnt = 2;
-        public int afterBurnerUse;
+        public int afterBurnerUse = 0;
         public float afterBurnerTime = 2.5f;
         public float afterBurnerSpeed = 50f;
         public bool afterBurnerUsing = false;
@@ -47,7 +47,7 @@ namespace Skill
 
         //각각 스킬 가능 횟수, 스킬 사용한 횟수, 스킬 지속 시간, 주 무기 과열 시간 수치
         public float streamLinerCnt = 1;
-        public int streamLinerUse;
+        public int streamLinerUse = 0;
         public float streamLinerTime = 3f;
         public float streamLinerCool = 2f;
 
@@ -80,7 +80,7 @@ namespace Skill
         //이아래에 스킬 함수들 구현 시작
 
 
-        IEnumerator Aegis_afterBurner(float time)
+        public IEnumerator Aegis_afterBurner(float time)
         {
             //사용 횟수가 남아있다면
             if (afterBurnerCnt > afterBurnerUse)
@@ -94,7 +94,7 @@ namespace Skill
                     playerMovement.moveSpeed += afterBurnerSpeed; //이동속도 증가
 
                     //모든 shooter의 최대 탄환과 현재 탄환 수를 0으로 만들기
-                    for (int i = 0; i < shooters.Length(); i++)
+                    for (int i = 0; i < shooters.Length; i++)
                     {
                         shooters[i].magCapacity = 0;
                         shooters[i].magAmmo = 0;
@@ -108,13 +108,13 @@ namespace Skill
                         playerMovement.moveSpeed -= afterBurnerSpeed;
 
                         //모든 shooter의 최대 탄환과 현재 탄환 수를 최대로 만들기
-                        for (int i = 0; i < shooters.Length(); i++)
+                        for (int i = 0; i < shooters.Length; i++)
                         {
                             shooters[i].magCapacity = magCapacity;
                             shooters[i].magAmmo = magCapacity;
                         }
 
-                        afterBurnerUse = false; //사용 안함 표시
+                        afterBurnerUsing = false; //사용 안함 표시
                         afterBurnerUse++; //사용한 횟수 증가
                     }
 
@@ -131,13 +131,13 @@ namespace Skill
                         playerMovement.moveSpeed -= afterBurnerSpeed;
 
                         //모든 shooter의 최대 탄환과 현재 탄환 수를 최대로 만들기
-                        for (int i = 0; i < shooters.Length(); i++)
+                        for (int i = 0; i < shooters.Length; i++)
                         {
                             shooters[i].magCapacity = magCapacity;
                             shooters[i].magAmmo = magCapacity;
                         }
 
-                        afterBurnerUse = false; //사용 안함 표시
+                        afterBurnerUsing = false; //사용 안함 표시
                         afterBurnerUse++; //사용한 횟수 증가
                     }
                 }
