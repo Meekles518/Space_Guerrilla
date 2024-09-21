@@ -21,6 +21,7 @@ GameObject:
   - component: {fileID: -4202298375005341491}
   - component: {fileID: 5817394920045659040}
   - component: {fileID: -5234475883960339219}
+  - component: {fileID: 331730541438130383}
   m_Layer: 6
   m_Name: Aegis
   m_TagString: Player
@@ -328,13 +329,35 @@ MonoBehaviour:
   - Aegis_missile
   - Aegis_afterBurner
   - Aegis_streamLiner
+  skillMaxCooltime:
+  - -1
+  - 3
+  - 1
+  - 4
+  - 4
+  - 0
+  - 0
   remoteRepairVal: 120
   afterBurnerCnt: 2
+  afterBurnerUse: 0
   afterBurnerTime: 2.5
   afterBurnerSpeed: 50
   streamLinerCnt: 1
+  streamLinerUse: 0
   streamLinerTime: 3
   streamLinerCool: 2
+--- !u!114 &331730541438130383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1455692199383189734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6cd3c8b416805a4897ae64b2435bab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2384219006288656097
 GameObject:
   m_ObjectHideFlags: 0

@@ -66,6 +66,16 @@ public class ShipEntity : MonoBehaviour
         this.collideRate = playerBulletInfo.collideRate;
     }
 
+    public void getShipEntity(ShipEntity shipEntity)
+    {
+        this.maxhealth = shipEntity.maxhealth;
+        this.shield = shipEntity.shield;
+        this.damage = shipEntity.damage;
+        this.defensestat = shipEntity.defensestat;
+        this.health = shipEntity.health;
+        this.rebound = shipEntity.rebound;
+        this.collideRate = shipEntity.collideRate;
+    }
 
 
 

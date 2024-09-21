@@ -36,6 +36,10 @@ public class Player_CruiseMissile : MonoBehaviour
 
     private void Awake()
     {
+        //여기 아래 값들 싹 다 삭제 및 조정 필요. OnEnable로 옮겨야 함
+
+
+        /*
         //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
         PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
 
@@ -51,6 +55,8 @@ public class Player_CruiseMissile : MonoBehaviour
 
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
+        */
+
     }
 
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드

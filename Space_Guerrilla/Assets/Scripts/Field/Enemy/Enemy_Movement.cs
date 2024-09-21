@@ -30,8 +30,8 @@ public class Enemy_Movement : MonoBehaviour
     private float actualRotate; // 현재 각도에서 rotateDirection을 만족하기 위해 회전해야하는 각도(도)
     private float x_Random; // x좌표 랜덤변수
     private float y_Random; // y좌표 랜덤변수
-    private float xrandomRange = 1f; // x좌표 랜덤변수 범위
-    private float yrandomRange = 1f; // y좌표 랜덤변수 범위
+    private readonly float xrandomRange = 1f; // x좌표 랜덤변수 범위
+    private readonly float yrandomRange = 1f; // y좌표 랜덤변수 범위
     private float currTime; // 현재시간
 
     // 오브젝트 활성화 시 실행

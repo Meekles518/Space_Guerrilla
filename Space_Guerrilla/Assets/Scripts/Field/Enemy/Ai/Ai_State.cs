@@ -94,4 +94,28 @@ public class Ai_State
         }
         return false;
     }
+
+
+    //어그로 대상이 startShootRange(포격 거리) 이내에 있는지 여부를 검사하는 메서드
+    public bool isStartShoot()
+    {
+        float startShooRange = control.startShootRange; //Enemy Control에 저장되어 있는 포격 거리
+
+
+        return false;
+    }
+
+
+    //어그로 대상이 properRange(적정 거리) 이내에 있는지 여부를 검사하는 메서드
+    public bool isProperRange()
+    {
+        float properRange = control.properRange; //Enemy Control에 저장되어 있는 적정 거리
+
+
+
+        return false;
+    }
+
+
+
 }
