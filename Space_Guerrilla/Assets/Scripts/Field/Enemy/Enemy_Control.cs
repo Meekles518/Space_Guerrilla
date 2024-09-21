@@ -28,6 +28,8 @@ public class Enemy_Control : MonoBehaviour
     public float largeAgrro; // 큰 어그로 범위
     public float MaxAtkRange; // 최대 공격 사거리
     public float TimeTillAtk; // 공격형적 추적 타이머
+    public float startShootRange; // 사격 시작 거리
+    public float properRange; // 적정 거리
 
     [Header("기회주의자형 적 어그로 여부")]
     public bool isAggro;
