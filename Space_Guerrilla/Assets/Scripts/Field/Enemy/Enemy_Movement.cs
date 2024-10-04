@@ -17,7 +17,8 @@ public class Enemy_Movement : MonoBehaviour
 
     private Vector2 Spawnposition; // Enemy 오브젝트의 스폰위치
     private Vector2 Playerposition; // 현재 플레이어의 위치
-    private Vector2 Targetposition; // 이 Enemy 오브젝트가 이동, 바라볼 목표 위치
+    private Vector2 MoveTargetPosition; // 이 Enemy 오브젝트가 이동할 목표 위치
+    private Vector2 ShootTargetPosition; // 이 Enemy 오브젝트가 사격할 목표 위치
     private float EnemytoPlayer; // 플레이어와 이 적 사이의 거리
 
     [Header("적 이동 수치")]
@@ -42,9 +43,10 @@ public class Enemy_Movement : MonoBehaviour
         moveSpeed = 4f;
         rotateSpeed = 100f;
         OptimalAtkRange = 10f;
-        player = GameObject.Find("Player");
+        player = GameManager.instance.player;
         Spawnposition = transform.position; // 내 스폰위치
-        Targetposition = Spawnposition; // 타겟위치를 스폰포인트(현재위치)로 초기화
+        MoveTargetPosition = Spawnposition; // 타겟위치를 스폰포인트(현재위치)로 초기화
+        ShootTargetPosition = Spawnposition; // 사격타겟을 스폰포인트(현재위치)로 초기화
         control = GetComponent<Enemy_Control>();
         shipEntity = GetComponent<ShipEntity>();
 
@@ -76,34 +78,41 @@ public class Enemy_Movement : MonoBehaviour
             // 현재 시간 초기화
             currTime = 0;
         }
-        // Idle State일 때 목표위치를 현재위치(자신의 스폰위치) + y축방향으로 설정
-        if (control.statename == Enemy_Control.STATE.IDLE)
+
+        // 상태에 따른 목표 위치 설정
+        switch (control.statename)
         {
-            Targetposition = new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 1);
-        }
-        // Pursue State일 때 목표위치를 플레이어 위치로 설정
-        else if (control.statename == Enemy_Control.STATE.PURSUE)
-        {
-            Targetposition = Playerposition;
-        }
-        // Wait State일 때 목표위치를 플레이어 위치로 설정
-        else if (control.statename == Enemy_Control.STATE.WAIT)
-        {
-            Targetposition = Playerposition;
-        }
-        // GoBack State일 때 목표위치를 스폰위치로 설정
-        else if (control.statename == Enemy_Control.STATE.GOBACK)
-        {
-            Targetposition = Spawnposition;
-        }
-        // Retreat State일 때 목표위치를 플레이어 위치로 설정
-        else if (control.statename == Enemy_Control.STATE.RETREAT)
-        {
-            Targetposition = Playerposition;
-        }
-        else if (control.statename == Enemy_Control.STATE.ESCAPE)
-        {
-            Targetposition = control.Escapepoint;
+            //IDLE STATE
+            case Enemy_Control.STATE.IDLE:
+                MoveTargetPosition = new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 1);
+                ShootTargetPosition = new Vector2(transform.position.x, transform.position.y) + new Vector2(0, 1);
+                break;
+            //PURSUE STATE
+            case Enemy_Control.STATE.PURSUE:
+                MoveTargetPosition = Playerposition;
+                ShootTargetPosition = Playerposition;
+                break;
+            //WAIT STATE
+            case Enemy_Control.STATE.WAIT:
+                MoveTargetPosition = new Vector2(transform.position.x, transform.position.y);
+                ShootTargetPosition = Playerposition;
+                break;
+            //GOBACK STATE
+            case Enemy_Control.STATE.GOBACK:
+                MoveTargetPosition = Spawnposition;
+                break;
+            //RETREAT STATE
+            case Enemy_Control.STATE.RETREAT:
+                MoveTargetPosition = Spawnposition;
+                ShootTargetPosition = Playerposition;
+                break;
+            //ESCAPE STATE
+            case Enemy_Control.STATE.ESCAPE:
+                MoveTargetPosition = control.Escapepoint;
+                ShootTargetPosition = control.Escapepoint;
+                break;
+            default:
+                break;
         }
     }
 
@@ -115,7 +124,7 @@ public class Enemy_Movement : MonoBehaviour
         if (EnemytoPlayer > OptimalAtkRange && control.statename == Enemy_Control.STATE.PURSUE)
         {                
              // 이동방향 = 목표위치 - 현재위치 + 랜덤위치
-             moveDirection = Targetposition - new Vector2(transform.position.x, transform.position.y) + new Vector2(x_Random, y_Random);
+             moveDirection = MoveTargetPosition - new Vector2(transform.position.x, transform.position.y) + new Vector2(x_Random, y_Random);
              // 이동방향으로 AddForce를 해줌 (관성 부여)
              enemyRigidbody.AddForce(moveDirection.normalized * moveSpeed);
              // 만약 적의 속도가 목표 속도에 도달했다면 속도를 고정시킴
@@ -124,11 +133,11 @@ public class Enemy_Movement : MonoBehaviour
                 enemyRigidbody.velocity = moveDirection.normalized * moveSpeed;
              }
         }
-        // GoBack 상태일때
+        // (GoBack 상태일때) ESCAPE STATE 일 때에
         else if(control.statename == Enemy_Control.STATE.GOBACK || control.statename == Enemy_Control.STATE.ESCAPE)
         {
             // 이동방향 = 목표위치 - 현재위치
-            moveDirection = Targetposition - new Vector2(transform.position.x, transform.position.y);
+            moveDirection = MoveTargetPosition - new Vector2(transform.position.x, transform.position.y);
             // 이동방향으로 AddForce를 해줌 (관성 부여)
             enemyRigidbody.AddForce(moveDirection.normalized * moveSpeed);
             // 만약 적의 속도가 목표 속도에 도달했다면 속도를 고정시킴
@@ -170,8 +179,8 @@ public class Enemy_Movement : MonoBehaviour
     private void Rotate()
     {
         
-         // 회전 방향 = 목표위치 - 현재위치
-         rotateDirection = Targetposition - new Vector2(transform.position.x, transform.position.y);
+         // 회전 방향 = 사격 목표위치 - 현재위치
+         rotateDirection = ShootTargetPosition - new Vector2(transform.position.x, transform.position.y);
          // 회전해야 하는 각도를 '도'로 구현
          actualRotate = Quaternion.FromToRotation((Vector2)transform.up, rotateDirection).eulerAngles.z;
 

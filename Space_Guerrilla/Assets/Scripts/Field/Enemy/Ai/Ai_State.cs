@@ -15,7 +15,8 @@ public class Ai_State
         WAIT, // 대기 상태
         GOBACK, // 복귀 상태
         RETREAT, // 후퇴 상태
-        ESCAPE
+        ESCAPE,
+        JOIN    //합류 대기 상태
     };
 
     // 각 State의 진입, 진행중, 나올때 실행할 매서드들을 enum으로 선언
@@ -100,6 +101,12 @@ public class Ai_State
     public bool isStartShoot()
     {
         float startShooRange = control.startShootRange; //Enemy Control에 저장되어 있는 포격 거리
+        float EnemyToPlayer = control.EnemytoPlayer; //Enemy Control에 저장되어 있는 적과 플레이어 사이의 거리
+
+        if (EnemyToPlayer <= startShooRange)
+        {
+            return true;
+        }
 
 
         return false;
@@ -110,7 +117,12 @@ public class Ai_State
     public bool isProperRange()
     {
         float properRange = control.properRange; //Enemy Control에 저장되어 있는 적정 거리
+        float EnemyToPlayer = control.EnemytoPlayer; //Enemy Control에 저장되어 있는 적과 플레이어 사이의 거리
 
+        if (EnemyToPlayer <= properRange)
+        {
+            return true;
+        }
 
 
         return false;

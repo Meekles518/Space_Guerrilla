@@ -12,7 +12,7 @@ public class Enemy_Control : MonoBehaviour
     public Transform player; // 플레이어 트랜스폼
     [Header("좌표설정")]    
     public Vector2 FleetSpawnpoint; // 전대 스폰위치
-    public Vector2 Escapepoint; // 맵 탈출위치
+    public Vector2 Escapepoint; // 맵 탈출위치, 탈출 지점을 계산하는 로직이 필요.
 
     [Header("본인 스폰위치(자동설정됨)")]
     public Vector2 SelfSpawnposition; // 참조가능한 스폰위치
@@ -42,7 +42,8 @@ public class Enemy_Control : MonoBehaviour
         WAIT, // 대기 상태
         GOBACK, // 복귀 상태
         RETREAT, // 후퇴 상태
-        ESCAPE // 탈출 상태
+        ESCAPE, // 탈출 상태
+        JOIN    //합류 대기 상태
     };
 
     public STATE statename; // STATE 변수 (Enemy_Movement 제어)
@@ -51,7 +52,7 @@ public class Enemy_Control : MonoBehaviour
     public void OnEnable()
     {
         // 플레이어 오브젝트를 찾아 트랜스폼 할당
-        player = GameObject.Find("Player").transform;
+        player = GameManager.instance.player.transform;
         // 자신의 스폰위치를 현재 위치로 설정
         SelfSpawnposition = transform.position;
 

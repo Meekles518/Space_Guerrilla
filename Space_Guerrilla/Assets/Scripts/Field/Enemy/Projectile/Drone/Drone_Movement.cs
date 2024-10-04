@@ -76,14 +76,14 @@ public class Drone_Movement : MonoBehaviour
         else if (control.statename == Drone_Control.STATE.SPREAD)
         {
             //마우스 커서의 반대 위치로 가게 함
-            //Targetposition = new Vector2(control.selfposition.position.x, control.selfposition.position.y) + new Vector2(control.selfposition.position.x - Input.mousePosition.x, control.selfposition.position.y - Input.mousePosition.y);
+            //MoveTargetPosition = new Vector2(control.selfposition.position.x, control.selfposition.position.y) + new Vector2(control.selfposition.position.x - Input.mousePosition.x, control.selfposition.position.y - Input.mousePosition.y);
             Targetposition = ((Vector2)transform.position - control.mousePosition) +(Vector2)transform.position;
         }
 
         // Engage State일 때 목표위치를 
         else if (control.statename == Drone_Control.STATE.ENGAGE)
         {
-            // Targetposition = 적위치, 스캐너 써서 인접 거리 내의 적 중 가장 가까운 적 추적
+            // MoveTargetPosition = 적위치, 스캐너 써서 인접 거리 내의 적 중 가장 가까운 적 추적
             //Drone_Control에서 찾은 Target을 향해 이동
             Targetposition = control.TargetPosition;
            
