@@ -63,34 +63,6 @@ public class GameManager : MonoBehaviour
         //이 아래 전부 수정 개선 필요/
         //MapManager에 저장되어 있는 ShipName을 통해 Player 우주선의 Prefab을 불러오는 switch문
 
-        /*
-        switch (MapManager.instance.shipName)
-        {
-            //Ship1일 때,
-            case ShipName.Ship1:
-
-                //여기 부분이 제대로 작동하나?
-                
-
-                //playerPrefab에 저장되어 있는 Ship1 생성 후 player 변수에 저장, (0, 0, 0) 위치에 생성
-                player = Instantiate(playerPrefabs[0], new Vector3(0, 0, 0), Quaternion.identity);
-                getInfo();
-
-                break;
-
-            case ShipName.Aegis:
-
-                //playerPrefab에 저장되어 있는 Aegis 생성 후 player 변수에 저장, (0, 0, 0) 위치에 생성
-                player = Instantiate(playerPrefabs[1], new Vector3(0, 0, 0), Quaternion.identity);
-                getInfo();
-
-
-                break;
-
-
-        }
-        */
-
         playerInput = player.GetComponent<PlayerInput>();
 
 

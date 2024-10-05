@@ -24,6 +24,7 @@ namespace Map
         Player,
         Enemy,
         Engage,    
+        DimensionJump,
     }
 
     public enum Phase

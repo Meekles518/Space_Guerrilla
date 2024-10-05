@@ -25,12 +25,14 @@ namespace Map
         //MapManager Class 생성
 
         public int turnCount; //현재 Turn 수를 저장하는 변수
-        public Turn turn; //현재 Turn 상태를 저장할 변수
+        public Turn turn; //현재 Turn 상태를 저장할 변수, 차원 도약 전투 종료 시 GameManager에서 이 값을 DimensionJump로 변경?
+        public Turn lastTurn; //이전 Turn 상태(Player, enemy)를 저장할 변수
         public Phase phase; //현재 Phase를 저장할 변수
         public int moveChance; //Player의 움직임 여부를 확인하는 bool 변수
         public int defaultMoveChance; // Player의 기본 이동 횟수
         public bool abilityChance; //Player의 기술 사용 여부를 확인하는 bool 변수
         public bool playerDetected; //Player의 탐지됨 여부를 확인하는 bool 변수
+        
 
         public static MapManager instance;
 
@@ -86,9 +88,8 @@ namespace Map
                 Nodes = GameObject.Find("Nodes");
 
                 turn = Turn.Player; //시작 시 Player turn으로 설정
+                lastTurn = Turn.Player; //시작 시 이전 턴은 Player로 설정
                 phase = Phase.Default; //시작 시 Default Phase로 설정
-
-
 
                 abilityChance = true; //기술 사용 가능을 true로 설정.
                 playerDetected = false;
@@ -101,8 +102,6 @@ namespace Map
                 DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
                 Map = GameObject.Find("Map");
                 DontDestroyOnLoad(Map); //Map이 씬 변경에도 유지되게 함.
-
-
 
                 //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
                 defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
@@ -117,9 +116,6 @@ namespace Map
                 //적의 초기 위치의 z좌표를 1f로 해, Node에 가려져서 안보이게 함, Node들의 z좌표는 0
                 enemy.transform.localPosition = new Vector3(0f, 0f, 1f);
                 enemyNodeList[0].enemyObjects.Add(enemy); //Node의 적 List에 enemy 추가 
-
-
- 
 
                 //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
                 //임시로 우주선 이름 지정, 시작 화면에서 우주선 가져오는 코드로 대체해야 함.
@@ -139,47 +135,57 @@ namespace Map
                 //각종 액티브 스킬 사용 시 우주선의 순간적 정보만 개변시켜서 필드에서만 적용되게 하자.
 
 
-
-
-
-
                 //혹시 몰라 일단 switch 구문 설정
                 switch (shipName)
                 {
                     case ShipName.Aegis:
 
-
-
-
                         break;
-
-
 
                 }
 
- 
-
-
                 awakeCheck = true;
-            }
-
-             
-        }
-
-
+            }         
+        }//Awake
          
-        //
+        //MapManager OnEnable시, 대부분의 상황에서는 Field에서 Map으로 넘어올 때 활용
         private void OnEnable()
         {
-            if (turn == Turn.Engage)
+            //
+            switch(turn)
             {
-                turn = Turn.Enemy;
-                checkTurn();
+                //정상 전투 종료 시
+                case Turn.Engage:
+
+                    //이전 턴이 Player였다면, 이번 턴은 Enemy의 턴으로 설정
+                    if (lastTurn == Turn.Player)
+                    {
+                        changeTurn(Turn.Enemy);
+                    }
+
+                    //이전 턴이 Enemy 였다면, 이번 턴은 Player 턴으로 설정
+                    else if (lastTurn == Turn.Enemy)
+                    {
+                        changeTurn(Turn.Player);
+                    }
+                    
+                    checkTurn(); //턴 검사
+
+                    break;
+
+
+                case Turn.DimensionJump:
+
+
+
+
+                    break;
+
 
             }
 
 
-        }
+        }//OnEnable
 
         //종료 시 실행될 함수
         private void OnApplicationQuit()
@@ -187,36 +193,19 @@ namespace Map
 
         }
 
-
-
         //이 아래는 Turn과 관련된 함수들 
 
-        //현재 Turn의 상태에 따른 행동을 서술한 함수
+        //현재 Turn의 상태에 따른 UI 변경 메서드
         public void checkTurn()
         {
-           
-
             //현재 Turn이 무엇인지 확인
-            switch ( turn)
+            switch (turn)
             {
-
                 //Player Turn이라면
                 case Turn.Player:
                     turnCount++; //턴 카운트 증가
 
-                    //Player의 맵 스킬 쿨타임을 1턴 감소시키는 작업 필요
-                    for (int i = 0; i < 3; i++)
-                    {
-                       
-
-                     
-
-
-                    }
-
-                    Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
-
-                   
+                    Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);                  
                     ButtonText.text = ("Turn End");
                   
                     Debug.Log("Player Turn");
@@ -241,14 +230,65 @@ namespace Map
                     Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
                   
                     ButtonText.text = ("Engage!"); //Button의 Text 변경
-                 
+ 
+                    break;
+
+                //차원 도약 Turn이라면
+                case Turn.DimensionJump:
+
 
                     break;
 
             }
 
-
         }//checkTurn
+
+        
+        //실질적으로 turn 변수의 값 변경을 통해 turn을 바꾸고 필요한 값들을 재설정하는 메서드
+        public void changeTurn(Turn nextTurn)
+        {
+            switch(nextTurn)
+            {
+                //Player 턴으로 변경
+                case Turn.Player:
+
+                    //Player 턴으로 변경
+                    turn = Turn.Player;
+                    lastTurn = Turn.Player; //이전 턴을 Player로 설정
+                    repairAll(); //Player와 모든 Enemy 체력 복구
+                    moveChance = defaultMoveChance; //임시로 이동 가능 횟수 초기화
+
+                    //이 아래에 Player의 정비 가능, 이동 가능 여부 등의 로직을 추가해야 함
+
+                    break;
+
+                //Enemy 턴으로 변경
+                case Turn.Enemy:
+
+                    //Enemy의 턴으로 변경
+                    turn = Turn.Enemy;
+                    lastTurn = Turn.Enemy; //이전 턴을 Enemy로 설정
+                    repairAll(); //Player와 모든 Enemy 체력 복구
+
+                    break;
+
+                //Engage 턴으로 변경
+                case Turn.Engage:
+
+                    turn = Turn.Engage;
+
+                    break;
+
+                //차원 도약 턴으로 변경
+                case Turn.DimensionJump:
+
+                    turn = Turn.DimensionJump;
+
+                    //무조건 이동하게끔 설정 및 정비 불가 등의 설정?
+
+                    break;
+            }
+        }//changeTurn
 
 
 
@@ -290,17 +330,16 @@ namespace Map
             if (meetEnemy())
             {
                 //바로 Engage 턴으로 변경
-                 turn = Turn.Engage;
-                checkTurn();
+                changeTurn(Turn.Engage);
             }
 
             else
             {
                 //Player 턴으로 변경
-                 turn = Turn.Player;
-                moveChance = defaultMoveChance;
-                checkTurn();
+                changeTurn(Turn.Player);
             }
+
+            checkTurn(); //턴 검사
 
         }//EnemyTurn 코루틴
 
@@ -308,31 +347,75 @@ namespace Map
         //턴 종료 버튼을 눌렀을 때 턴이 변경되는 설정
         public void turnEnd()
         {
-            //Player 의 턴이라면
-            if ( turn == Turn.Player)
-            {
-                //Player 노드에 적이 존재한다면
-                if (meetEnemy())
-                {
-                    //바로 Engage 턴으로 변경
-                    turn = Turn.Engage;
-                    checkTurn(); //Scene 변경
-                }
 
-                else
-                {
-                    //Enemy의 턴으로 변경
-                    turn = Turn.Enemy;
-                    checkTurn();
-                }
+            switch(turn)
+            {
+                //Player Turn에서 턴 종료 버튼 누를 때
+                case Turn.Player:
+
+                    //Player 노드에 적이 존재한다면
+                    if (meetEnemy())
+                    {
+                        //바로 Engage 턴으로 변경
+                        changeTurn(Turn.Engage);
+                    }
+
+                    else
+                    {
+                        //Enemy 턴으로 변경
+                        changeTurn(Turn.Enemy);
+                    }
+
+                    checkTurn(); //턴 검사
+
+                    break;
+
+                //Engage Turn에서 턴 종료 버튼 누를 때
+                case Turn.Engage:
+
+                    changeScene(); //Scene 변경
+
+                    break;
+
+                //차원 도약 Turn에서 턴 종료 버튼 누를 때
+                case Turn.DimensionJump:
+
+                    //차원 도약 후에는 무조건 이동해야 하므로, 이동했는지 여부를 검증할 로직 필요
+
+
+                    //이 아래 코드들은 이동 후에 버튼을 눌렀을 때의 수행 동작
+
+                    //Player 노드에 적이 존재한다면
+                    if (meetEnemy())
+                    {
+                        //바로 Engage 턴으로 변경
+                        changeTurn(Turn.Engage);
+                    }
+
+                    else
+                    {
+                        //이전 턴이 Player였다면, 이번 턴은 Enemy의 턴으로 설정
+                        if (lastTurn == Turn.Player)
+                        {
+                            changeTurn(Turn.Enemy);
+                        }
+
+                        //이전 턴이 Enemy 였다면, 이번 턴은 Player 턴으로 설정
+                        else if (lastTurn == Turn.Enemy)
+                        {
+                            changeTurn(Turn.Player);
+                        }
+
+                       
+                    }
+
+                    checkTurn(); //턴 검사
+
+                    break;
+
 
             }
 
-            //Engage 턴이라면
-            else if (turn == Turn.Engage)
-            {
-                changeScene(); //Scene 변경
-            }
 
 
         }//turnEnd
@@ -345,10 +428,17 @@ namespace Map
                 return true;
             }
 
-            else return false;
+            return false;
 
 
         }//checkEnemy
+
+
+        //Player와 모든 Enemy의 체력을 복구시키는 메서드
+        public void repairAll()
+        {
+
+        }
 
 
     }
