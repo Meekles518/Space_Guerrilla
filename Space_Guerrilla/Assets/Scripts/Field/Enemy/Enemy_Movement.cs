@@ -121,17 +121,33 @@ public class Enemy_Movement : MonoBehaviour
     private void Move()
     {
         // Pursue 상태에서 적이 적정사거리로 밖에 있을 때
-        if (EnemytoPlayer > OptimalAtkRange && control.statename == Enemy_Control.STATE.PURSUE)
-        {                
-             // 이동방향 = 목표위치 - 현재위치 + 랜덤위치
-             moveDirection = MoveTargetPosition - new Vector2(transform.position.x, transform.position.y) + new Vector2(x_Random, y_Random);
-             // 이동방향으로 AddForce를 해줌 (관성 부여)
-             enemyRigidbody.AddForce(moveDirection.normalized * moveSpeed);
-             // 만약 적의 속도가 목표 속도에 도달했다면 속도를 고정시킴
-             if(enemyRigidbody.velocity.sqrMagnitude > moveSpeed)
-             {
-                enemyRigidbody.velocity = moveDirection.normalized * moveSpeed;
-             }
+        if (control.statename == Enemy_Control.STATE.PURSUE)
+        {
+            if (EnemytoPlayer > OptimalAtkRange)
+            {
+                // 이동방향 = 목표위치 - 현재위치 + 랜덤위치
+                moveDirection = MoveTargetPosition - new Vector2(transform.position.x, transform.position.y) + new Vector2(x_Random, y_Random);
+                // 이동방향으로 AddForce를 해줌 (관성 부여)
+                enemyRigidbody.AddForce(moveDirection.normalized * moveSpeed);
+                // 만약 적의 속도가 목표 속도에 도달했다면 속도를 고정시킴
+                if (enemyRigidbody.velocity.sqrMagnitude > moveSpeed)
+                {
+                    enemyRigidbody.velocity = moveDirection.normalized * moveSpeed;
+                }
+            }
+            else if (EnemytoPlayer < OptimalAtkRange)
+            {
+                // 이동방향 = -목표위치 + 현재위치 + 랜덤위치
+                moveDirection = -MoveTargetPosition + new Vector2(transform.position.x, transform.position.y) + new Vector2(x_Random, y_Random);
+                // 이동방향으로 AddForce를 해줌 (관성 부여)
+                enemyRigidbody.AddForce(moveDirection.normalized * moveSpeed);
+                // 만약 적의 속도가 목표 속도에 도달했다면 속도를 고정시킴
+                if (enemyRigidbody.velocity.sqrMagnitude > moveSpeed)
+                {
+                    enemyRigidbody.velocity = moveDirection.normalized * moveSpeed;
+                }
+            }
+
         }
         // (GoBack 상태일때) ESCAPE STATE 일 때에
         else if(control.statename == Enemy_Control.STATE.GOBACK || control.statename == Enemy_Control.STATE.ESCAPE)
