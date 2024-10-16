@@ -26,6 +26,7 @@ namespace Map
 
         public int turnCount; //현재 Turn 수를 저장하는 변수
         public Turn turn; //현재 Turn 상태를 저장할 변수
+        public Turn lastTurn; //마지막 Turn 상태를 저장할 변수
         public Phase phase; //현재 Phase를 저장할 변수
         public int moveChance; //Player의 움직임 여부를 확인하는 bool 변수
         public int defaultMoveChance; // Player의 기본 이동 횟수
@@ -89,7 +90,6 @@ namespace Map
                 phase = Phase.Default; //시작 시 Default Phase로 설정
 
 
-
                 abilityChance = true; //기술 사용 가능을 true로 설정.
                 playerDetected = false;
 
@@ -101,7 +101,6 @@ namespace Map
                 DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
                 Map = GameObject.Find("Map");
                 DontDestroyOnLoad(Map); //Map이 씬 변경에도 유지되게 함.
-
 
 
                 //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
@@ -118,8 +117,6 @@ namespace Map
                 enemy.transform.localPosition = new Vector3(0f, 0f, 1f);
                 enemyNodeList[0].enemyObjects.Add(enemy); //Node의 적 List에 enemy 추가 
 
-
- 
 
                 //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
                 //임시로 우주선 이름 지정, 시작 화면에서 우주선 가져오는 코드로 대체해야 함.
@@ -139,21 +136,13 @@ namespace Map
                 //각종 액티브 스킬 사용 시 우주선의 순간적 정보만 개변시켜서 필드에서만 적용되게 하자.
 
 
-
-
-
-
                 //혹시 몰라 일단 switch 구문 설정
                 switch (shipName)
                 {
                     case ShipName.Aegis:
 
 
-
-
                         break;
-
-
 
                 }
 
@@ -168,18 +157,32 @@ namespace Map
 
 
          
-        //
+        //MapManager OnEnable시, 일반적으로 필드에서 맵으로 이동 시 실행
         private void OnEnable()
         {
-            if (turn == Turn.Engage)
+            switch (turn)
             {
-                turn = Turn.Enemy;
-                checkTurn();
+                case Turn.Engage:
+
+                    if (lastTurn == Turn.Player)
+                    {
+
+                    }
+
+                    else if (lastTurn == Turn.Enemy)
+                    {
+
+                    }
+
+
+                    break;
+
+
 
             }
 
 
-        }
+        }//OnEnable
 
         //종료 시 실행될 함수
         private void OnApplicationQuit()
@@ -197,22 +200,14 @@ namespace Map
            
 
             //현재 Turn이 무엇인지 확인
-            switch ( turn)
+            switch (turn)
             {
 
                 //Player Turn이라면
                 case Turn.Player:
                     turnCount++; //턴 카운트 증가
 
-                    //Player의 맵 스킬 쿨타임을 1턴 감소시키는 작업 필요
-                    for (int i = 0; i < 3; i++)
-                    {
-                       
-
-                     
-
-
-                    }
+                    
 
                     Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
 
@@ -260,6 +255,47 @@ namespace Map
         }//fieldScene
 
 
+        public void changeTurn(Turn nextTurn)
+        {
+            switch (nextTurn)
+            {
+                //Player Turn으로 Turn 변경
+                case Turn.Player:
+
+                    //Player
+                    turn = Turn.Player; //Turn 변수 초기화
+                    lastTurn = Turn.Player; //lastTurn 변수 초기화
+                    repairAll(); //전체 수리
+                    moveChance = defaultMoveChance; //이동 횟수 초기화
+                    //이 아래에 추가로 Player Turn이 시작될 때 초기화될 것들 추가?
+
+                    //
+
+                    break;
+
+                //Enemy Turn으로 Turn 변경
+                case Turn.Enemy:
+
+                    //
+                    turn = Turn.Enemy;  //turn 변수 초기화
+                    lastTurn = Turn.Enemy; //lastTurn 변수 초기화
+                    repairAll(); //전체 수리
+
+                    break;
+
+                //
+                case Turn.Engage:
+
+                    turn = Turn.Engage;//turn 변수만 초기화
+
+                    break;
+
+               
+            }
+        }//changeTurn
+
+
+
         //Enemy Turn 동안 실행할 로직을 담은 코루틴
         public IEnumerator EnemyTurn()
         {
@@ -290,17 +326,16 @@ namespace Map
             if (meetEnemy())
             {
                 //바로 Engage 턴으로 변경
-                 turn = Turn.Engage;
-                checkTurn();
+                changeTurn(Turn.Engage);
             }
 
             else
             {
                 //Player 턴으로 변경
-                 turn = Turn.Player;
-                moveChance = defaultMoveChance;
-                checkTurn();
+                changeTurn(Turn.Player);
             }
+
+            checkTurn(); //Turn 확인
 
         }//EnemyTurn 코루틴
 
@@ -308,34 +343,36 @@ namespace Map
         //턴 종료 버튼을 눌렀을 때 턴이 변경되는 설정
         public void turnEnd()
         {
-            //Player 의 턴이라면
-            if ( turn == Turn.Player)
+            switch(turn)
             {
-                //Player 노드에 적이 존재한다면
-                if (meetEnemy())
-                {
-                    //바로 Engage 턴으로 변경
-                    turn = Turn.Engage;
-                    checkTurn(); //Scene 변경
-                }
+                //Player Turn일 때에 Turn End 버튼 누르면
+                case Turn.Player:
 
-                else
-                {
-                    //Enemy의 턴으로 변경
-                    turn = Turn.Enemy;
+                    if (meetEnemy())
+                    {
+                        changeTurn(Turn.Engage);
+                    }
+
+                    else
+                    {
+                        changeTurn(Turn.Enemy);
+                    }
+
                     checkTurn();
-                }
+                    break;
+
+                //Engage Turn일 때에 Turn End 버튼 누르면
+                case Turn.Engage:
+
+                    changeScene();
+
+                    break;
+
 
             }
-
-            //Engage 턴이라면
-            else if (turn == Turn.Engage)
-            {
-                changeScene(); //Scene 변경
-            }
-
 
         }//turnEnd
+
 
         //현 Node에 적 여부를 확인하는 함수. 자주 사용하는 코드라 함수로 만듦
         public bool meetEnemy()
@@ -351,8 +388,13 @@ namespace Map
         }//checkEnemy
 
 
+        //모든 우주선 체력 최대로 회복시키는 메서드?
+        public void repairAll()
+        {
+
+        }
+
+
     }
-
-
 }
 
