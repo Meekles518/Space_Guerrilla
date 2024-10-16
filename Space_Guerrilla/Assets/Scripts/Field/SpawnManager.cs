@@ -12,6 +12,8 @@ public class SpawnManager : MonoBehaviour
 
     //따라서 일반적인 맵에서 필드로의 이동 시에는 MapManager의 lastTurn 변수를 통해 우주선의 생성위치를 결정하고,
     //연속 전투 시에만 isAtk 값을 활용하게끔 하면 어떨까?
+    //아직 이동 전의 Node를 저장하는 로직은 MapManager에 존재하지 않음. TurnManager로 쪼갤 때 사용해야 할듯
+
 
     public Vector3 playerSpawn; // 플레이어 스폰 위치
     public Vector3 reinforceSpawn; // 적 증원 스폰위치
@@ -65,8 +67,9 @@ public class SpawnManager : MonoBehaviour
 
         //Instantiate(MapManager.instance.playerShip, playerSpawn, Quaternion.identity);
 
+        createGate(); //Gate 생성
 
-
+        spawnShip(); //우주선 생성
 
 
 
@@ -86,6 +89,13 @@ public class SpawnManager : MonoBehaviour
     //현재 Node의 주변 Node의 위치를 통해 필드에 Gate를 만드는 메서드
     public void createGate()
     {
+        //현재 Player 위치한 Node와 연결된 Node들이 저장된 배열 가져오기
+        //(이 connected 배열은 Map 구현 시 임시로 inspector 창에서 일일이 설정함, 수공 맵생성)
+        var connectedNodes = MapManager.instance.playerNode.connected; 
+
+        //이 아래에 connectedNodes 배열을 통해 연결된 Node들의 각도에 따라서 필드에 Gate 생성 코드 작성
+
+
 
     }//createGate
 
@@ -93,6 +103,12 @@ public class SpawnManager : MonoBehaviour
     //Player와 현재 Node에 있는 Enemy들을 실질적으로 생성하는 메서드
     public void spawnShip()
     {
+        //직전 턴이 누구의 턴이였나, 어느 노드에서 공격해왔나에 따라 생성 위치 결정해야 함
+        //MapManager.instance.turnManager.lastTurn을 통해서 직전 누구의 턴이였는지 확인 가능
+        //우선 적은 가만히 있고, Player의 이동으로만 교전이 발생하는 것만 코드로 구현 해봐야 할듯
+        //Player 및 적들이 이동 직전 위치했던 노드를 저장 및 관리하는 로직을 TurnManager에서 추가 필요
+
+
 
     }//spawnShip
 

@@ -34,14 +34,14 @@ public class Enemy_Circle : MonoBehaviour
         currentNode = GetComponentInParent<Node>(); //부모의 Node 정보 가져오기
 
         //추적 Phase일 때
-        if (MapManager.instance.phase == Phase.Hunt)
+        if (MapManager.instance.turnManager.phase == Phase.Hunt)
         {
 
 
         }
 
         //집결 Phase 일 때
-        else if (MapManager.instance.phase == Phase.Assemble)
+        else if (MapManager.instance.turnManager.phase == Phase.Assemble)
         {
 
         }
@@ -59,7 +59,7 @@ public class Enemy_Circle : MonoBehaviour
                     }
                          
                     
-                    else if (MapManager.instance.playerDetected)
+                    else if (MapManager.instance.turnManager.playerDetected)
                     {
                         Hunt();
                     }
@@ -79,7 +79,7 @@ public class Enemy_Circle : MonoBehaviour
                         Run();
                     }
 
-                    else if (MapManager.instance.playerDetected)
+                    else if (MapManager.instance.turnManager.playerDetected)
                     {
                         Hunt();
                     }
