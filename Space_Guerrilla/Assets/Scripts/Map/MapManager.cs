@@ -33,7 +33,6 @@ namespace Map
         public Node playerNode; //PlayerNode의 정보를 저장할 변수 
 
 
-        
         [HideInInspector]
         public GameObject Nodes; //Nodes GameObject를 저장할 변수
         [HideInInspector]
@@ -43,12 +42,8 @@ namespace Map
 
 
         //우주선에 사용되는 수치들을 관리하기 위해 컴포넌트들을 저장할 변수들
-        public GameObject playerInfo; //PlayerInfo를 저장할 변수
-   
-        public PlayerInfo playerShipInfo; //PlayerInfo의 값들을 깊은 복사해 저장할 변수
-        public PlayerBulletInfo playerBulletInfo; //PlaterBulletInfo의 값들을 깊은 복사해 저장할 변수
-        public List<float> skillMaxCooltime = new List<float>(); //스킬들의 최대 쿨타임을 저장할 변수
-        public List<float> skillCurCooltime = new List<float>(); //스킬들의 현재 쿨타임 상태 저장 변수
+        public ShipInfo playerShipInfo; //PlayerInfo의 값들을 깊은 복사해 저장할 변수
+        public BulletInfo playerBulletInfo; //PlaterBulletInfo의 값들을 깊은 복사해 저장할 변수
 
 
         //게임 시작 화면에서 Player의 우주선을 가져와 저장할 변수
@@ -68,13 +63,17 @@ namespace Map
             if (!awakeCheck)
             {
 
-                instance = this;
+                instance = this; //싱글턴 패턴 구현
 
                 //TurnManager 가져오기
                 turnManager = this.gameObject.GetComponent<TurnManager>();
 
-                Nodes = GameObject.Find("Nodes");
+                Nodes = GameObject.Find("Nodes"); //Nodes GameObject를 찾아서 저장
 
+
+
+                //이 아래는 최초 Map 진입 시 플레이어 및 적을 Node에 위치하는 코드.
+                //이후에 다른 모듈 혹은 매니저에서 관리하게끔 코드 분리 필요.
 
                 //최초에만 첫 번째 Node를 Player이 위치한 Node로 설정함.
                 playerNode = Nodes.transform.GetChild(0).GetComponent<Node>();
@@ -95,32 +94,25 @@ namespace Map
                 enemy.transform.localPosition = new Vector3(0f, 0f, 1f);
                 enemyNodeList[0].enemyObjects.Add(enemy); //Node의 적 List에 enemy 추가 
 
+                //여기까지
+
 
                 //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
                 //임시로 우주선 이름 지정, 시작 화면에서 우주선 가져오는 코드로 대체해야 함.
                 shipName = ShipName.Aegis;
 
-                //맨 처음 Map 에 들어왔을 때, 초기 스탯 설정 코드 구문
-                //스탯 설정에 필요한 컴포넌트들 가져오기
-                
-                playerShipInfo = playerInfo.GetComponent<PlayerInfo>();
-                playerBulletInfo = playerInfo.GetComponent<PlayerBulletInfo>();
 
-
-                //스탯 부여가 여기서 필요한 과정인건가?
-                //스탯을 우주선 오브젝트에 직접 부여하는 것이 아니라, PlayerInfo 상에 수치로 적어두고,
-                //패시브나 연구 주문 등의 효과는 PlayerInfo 상의 수치를 개변하는 것으로 구현.
-                //Field 불러올 때 우주선을 생성하고 그 우주선에 PlayerInfo의 정보를 저장한 다음,
-                //각종 액티브 스킬 사용 시 우주선의 순간적 정보만 개변시켜서 필드에서만 적용되게 하자.
-
-
-                //혹시 몰라 일단 switch 구문 설정
+                //PlayerInfo의 데이터를 우주선 및 초기 설정 등에 따라 차등으로 부여 필요
                 switch (shipName)
                 {
+                    //Aegis 우주선 일 때에
                     case ShipName.Aegis:
 
-
+                        //PlayerInfo 및 PlayerBulletInfo를 AegisInfo 및 AegisBulletInfo로 형변환하여 저장
+                        playerShipInfo = DataFactory.CreatePlayerInfo(shipName) as AegisInfo;
+                        playerBulletInfo = DataFactory.CreatePlayerBulletInfo(shipName) as AegisBulletInfo;
                         break;
+
 
                 }
 
@@ -128,7 +120,7 @@ namespace Map
 
 
                 awakeCheck = true;
-            }
+            }//if
 
 
         }//Awake

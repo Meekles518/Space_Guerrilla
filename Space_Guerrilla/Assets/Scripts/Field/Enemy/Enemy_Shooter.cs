@@ -27,16 +27,19 @@ public class Enemy_Shooter : MonoBehaviour
         // 마지막 장전 시점 초기화
         lastReloadTime = 0;       
         // 불 변수 초기화
-        isShoot = false; 
-        player = GameObject.Find("Player");    
+        isShoot = false;
+        player = GameManager.instance.player;
+      
 
-        
+
 
     }
 
     // 현재 State에 따라 총을 발사 또는 발사하지 않음
     private void FixedUpdate()
     {
+        MaxAtkRange = control.MaxAtkRange; // 최대 공격 사거리를 Enemy_Control로부터 가져옴
+
         // isShoot를 지속적으로 동기화
         isShoot = control.isShoot;
 

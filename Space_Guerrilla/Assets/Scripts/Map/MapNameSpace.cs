@@ -42,6 +42,13 @@ namespace Map
 
     }
 
+    //임시로 적의 이름 설정
+    public enum EnemyName
+    {
+        EnemyOne,
+
+    }
+
 }
 
 

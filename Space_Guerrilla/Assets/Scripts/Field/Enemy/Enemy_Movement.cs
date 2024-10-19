@@ -40,9 +40,11 @@ public class Enemy_Movement : MonoBehaviour
     {
         // 초기값들 할당
         enemyRigidbody = GetComponent<Rigidbody2D>();
-        moveSpeed = 4f;
-        rotateSpeed = 100f;
-        OptimalAtkRange = 10f;
+
+        //OnEnable에서 값부여가 아닌 스폰 후 따로 Info의 데이터를 통해 값 부여 과정 필요
+        //moveSpeed = 4f;
+        //rotateSpeed = 100f;
+        //OptimalAtkRange = 10f;
         player = GameManager.instance.player;
         Spawnposition = transform.position; // 내 스폰위치
         MoveTargetPosition = Spawnposition; // 타겟위치를 스폰포인트(현재위치)로 초기화

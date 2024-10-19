@@ -22,133 +22,25 @@ public class Enemy_Circle : MonoBehaviour
     public Status status; //적의 행동성향을 저장할 변수
     public bool telescopeHunt; //망원경 추적 모드를 구별할 bool 변수
     public Node targetNode; //목표 Node를 저장할 변수
-    public EnemyInfo enemyInfo;
-
     public Node currentNode; //현재 위치한 Node를 저장할 변수
 
     //virtual, 가상 함수로 적의 Ai 로직을 구현. 이 Class를 상속받는 서로 다른 종류의 적이
     //함수를 마저 완성시키기.
     public virtual void enemyAi()
     {
-        enemyInfo = GetComponent<EnemyInfo>(); //EnemyInfo 컴포넌트 가져오기
-        currentNode = GetComponentInParent<Node>(); //부모의 Node 정보 가져오기
-
-        //추적 Phase일 때
-        if (MapManager.instance.turnManager.phase == Phase.Hunt)
-        {
-
-
-        }
-
-        //집결 Phase 일 때
-        else if (MapManager.instance.turnManager.phase == Phase.Assemble)
-        {
-
-        }
-
-        else
-        {
-            switch (status)
-            {
-
-                case Status.RoamingHuntRun:
-
-                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-                    {
-                        Run();
-                    }
-                         
-                    
-                    else if (MapManager.instance.turnManager.playerDetected)
-                    {
-                        Hunt();
-                    }
-                        
-
-                    else
-                    {
-                        Roaming();
-                    }
-                         
-                    break;
-
-
-                case Status.HouseHuntRun:
-                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-                    {
-                        Run();
-                    }
-
-                    else if (MapManager.instance.turnManager.playerDetected)
-                    {
-                        Hunt();
-                    }
-
-                    else
-                    {
-                        House();
-                    }
-                     
-                    break;
-
-
-                case Status.RomingRun:
-                    if (currentNode == MapManager.instance.playerNode)
-                    {
-                        Run();
-                    }
-                         
-                    else
-                    {
-                        Roaming();
-                    }
-                     
-                    break;
-
-
-                case Status.HuntRun:
-
-                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-                    {
-                        Run();
-                    }
-                    else
-                    {
-                        Hunt();
-                    }
-                     
-                    break;
-
-
-
-                default:
-                    break;
-            }
-
-        }
-         
-
-        
+       
 
     }//movement
 
     public void Run()
     {
-        
-            //현재 Node가 Player이 위치한 Node일 경우
-            if (currentNode == MapManager.instance.playerNode)
-            {
-                //인근의 무작위 Node로 이동
-                int ran = Random.Range(0, currentNode.connected.Count);
-                movement(currentNode.connected[ran]);
-            }
-        
+              
 
     }//Run
 
     public void Hunt()
     {
-        movement(BFS(MapManager.instance.playerNode));
+
 
 
     }//Hunt
