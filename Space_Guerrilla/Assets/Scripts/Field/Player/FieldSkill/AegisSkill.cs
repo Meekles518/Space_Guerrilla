@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Skill
-{
-    public class AegisSkill : FieldSkill
+
+    public class AegisSkill : MonoBehaviour
     {
 
         private PlayerInput playerInput; // PlayerInput을 불러옴
@@ -12,37 +11,15 @@ namespace Skill
         private Shooter[] shooters; //PlayerShooter들을 저장할 배열
 
 
-        //skill의 이름들을 담을 리스트
-        public List<string> skillNames = new List<string>() { 
-            "Aegis_fieldRepair", 
-            "Aegis_dimensionJump", 
-            "Aegis_ward",
-            "Aegis_remoteRepair", 
-            "Aegis_missile", 
-            "Aegis_afterBurner", 
-            "Aegis_streamLiner" };
-        //
-
-        //skill의 최대 쿨타임을 저장할 리스트
-        //-1은 패시브, 0은 라이트 스킬, 그 이외는 헤비 스킬 의미
-        public List<float> skillMaxCooltime = new List<float>() { 
-            -1f,
-            3f, 
-            1f, 
-            4f, 
-            4f, 
-            0f, 
-            0f };
-
-        //원격 수리 회복량
-        public float remoteRepairVal = 120;
-
         //각각 스킬 가능 횟수, 스킬 사용한 횟수, 스킬 지속 시간, 이동속도 증가 수치
         public int afterBurnerCnt = 2;
         public int afterBurnerUse = 0;
         public float afterBurnerTime = 2.5f;
         public float afterBurnerSpeed = 50f;
+
         public bool afterBurnerUsing = false; // 스킬 효과(속도 증가) 작동중 여부
+
+        //총알 수 관련 변수
         public int magCapacity;
 
         //각각 스킬 가능 횟수, 스킬 사용한 횟수, 스킬 지속 시간, 주 무기 과열 시간 수치
@@ -50,10 +27,12 @@ namespace Skill
         public int streamLinerUse = 0;
         public float streamLinerTime = 3f;
         public float streamLinerCool = 2f;
-        public bool streamLinerUsing = false; // 무한 탄환 작동중 여부
         public int streamLinerMax = 999;
         public float streamLinerRotateTime = 1.5f;
 
+
+        public bool streamLinerUsing = false; // 무한 탄환 작동중 여부
+         
 
         //각각 스킬 가능 횟수, 스킬을 사용한 횟수
         public float cruiseMissileCnt = 1;
@@ -62,11 +41,6 @@ namespace Skill
         public bool isSkillActive = false; //현재 동작중인 스킬이 있는지 여부
 
 
-        //미사일 발사 스킬에 관한 변수들
-        public override void SetSkillBtn()
-        {
-            
-        }
 
 
         private void OnEnable()
@@ -149,10 +123,13 @@ namespace Skill
                 isSkillActive = true; //스킬 사용중 표시
                 afterBurnerUsing = true; //사용중 표시
                 streamLinerCancel(); // 스트림라이너 스킬 기능 중단(기능 작동중일 때에만 실행되는 함수)
-                playerMovement.moveSpeed += afterBurnerSpeed; //이동속도 증가
 
-                //모든 shooter의 최대 탄환과 현재 탄환 수를 0으로 만들기
-                magnumZero();
+                //이 스킬의 실 기능
+                playerMovement.moveSpeed += afterBurnerSpeed; //이동속도 증가 
+
+                magnumZero(); //모든 shooter의 최대 탄환과 현재 탄환 수를 0으로 만들기
+
+              
 
                 //이후에 스킬 아이콘을 캔슬 이미지로 변경하는 코드 필요
 
@@ -168,12 +145,15 @@ namespace Skill
                 Debug.Log("afterBurnerCancel");
 
                 afterBurnerUsing = false; //사용 안함 표시
+
+
+                //스킬 취소의 실 기능
                 playerMovement.moveSpeed -= afterBurnerSpeed;
-
-                //모든 shooter의 최대 탄환과 현재 탄환 수를 최대로 만들기
-                magnumSet();
-
                 
+
+                magnumSet(); //모든 shooter의 최대 탄환과 현재 탄환 수를 최대로 만들기
+
+
                 afterBurnerUse++; //사용한 횟수 증가
 
                 isSkillActive = false; //스킬 사용중이 아님 표시
@@ -240,7 +220,7 @@ namespace Skill
 
                 magnumZero(); // 회전 하는 동안 발사 못하게 탄환 제거
 
-                //shooter 회전시키기
+                //shooter 회전시키기, 실 기능
                 StartCoroutine(rotateShooter(true));
  
 
@@ -317,6 +297,8 @@ namespace Skill
                 streamLinerUse++; // 사용한 횟수 추가
                 streamLinerUsing = false; //사용 중 아님 표시
                 magnumZero(); // 탄환 0으로 만들기
+
+                //실기능
                 StartCoroutine(rotateShooter(false)); // shooter 원래 방향으로 회전
             }
         }
@@ -336,6 +318,8 @@ namespace Skill
 
             Debug.Log("launchCruiseMissile");
 
+
+            //실 기능
             const int poolManagerPrefabIdx = 2; // Player_CruiseMissile이 저장된 idx, 이후 Pool Manager의 Prefabs 배열 변경 시 수정 필요
 
             for (int i = 0; i < shooters.Length; i++)
@@ -355,5 +339,5 @@ namespace Skill
 
 
     }
-}
+
  
