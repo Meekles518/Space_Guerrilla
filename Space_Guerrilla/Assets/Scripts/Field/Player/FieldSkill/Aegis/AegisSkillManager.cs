@@ -22,7 +22,7 @@ public class AegisSkillManager : MonoBehaviour
 {
     //Aegis가 사용 가능한 스킬들을 가지고 있는 Dict
     public Dictionary<AegisSkillName, AegisSkillBase> activeSkill = new Dictionary<AegisSkillName, AegisSkillBase>();
-    public AegisSkillFactory skillFactory;
+    public SkillFactory<AegisSkillBase, AegisSkillName, AegisSkillManager> skillFactory;
 
     //Player 우주선과 관련된 컴포넌트 저장 변수
     private GameObject player;
@@ -31,7 +31,7 @@ public class AegisSkillManager : MonoBehaviour
     public AegisSkillName curStatus; //현재 사용 중인 스킬의 상태 표시
 
 
-    private void OnEnable()
+    public void OnEnable()
     {
         skillFactory = new AegisSkillFactory(); //스킬 팩토리 인스턴스 생성
         player = this.gameObject; //이 컴포넌트를 가지고 있는 GameObject(우주선 자체)
@@ -43,7 +43,7 @@ public class AegisSkillManager : MonoBehaviour
     public void AddSkill(AegisSkillName skillName, int level)
     {
         //스킬 팩토리에서 특정 스킬의 특정 레벨 인스턴스 생성해서 가져오기
-        AegisSkillBase skillBase = skillFactory.createSkill(skillName, player, level);
+        AegisSkillBase skillBase = skillFactory.createSkill(skillName, player, level, this);
         activeSkill.Add(skillName, skillBase); //Dict에 추가
 
 

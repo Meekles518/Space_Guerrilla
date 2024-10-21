@@ -12,10 +12,11 @@ using UnityEngine;
         //실제 스킬을 사용하는 메서드
         public abstract void UseSkill();
 
+        public abstract void CancelSkill();
 
-        //이외에도 필요한게 있다면..
+    //이외에도 필요한게 있다면..
 
 
-    }
+}
 
 

@@ -19,12 +19,15 @@ public abstract class AegisSkillBase
 
     protected ISkillBehavior skillBehavior; //스킬 행동 인터페이스
 
+    public AegisSkillManager skillManager { get; set; } //스킬 매니저
+
     public GameObject player { get; set; } //플레이어 오브젝트
 
     //AegisSkillBase 생성자
-    public AegisSkillBase(int level)
+    public AegisSkillBase(int level, AegisSkillManager skillManager)
     {
         this.Level = level; //스킬의 레벨 설정
+        this.skillManager = skillManager;   
     }//AegisSkillBase 생성자 끝
 
 

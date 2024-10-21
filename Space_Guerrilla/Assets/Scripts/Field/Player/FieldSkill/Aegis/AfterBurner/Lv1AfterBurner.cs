@@ -14,8 +14,10 @@ public class Lv1AfterBurner : ISkillBehavior
     public float afterBurnerSpeed { get; set; } //afterBurner 속도
     private int magCapacity { get; set; } //탄창 최대 탄환 수
 
+    private AegisSkillManager AegisSkillManager; //AegisSkillManager 클래스
+
     //지속시간 및 속도는 생성자에서 초기화
-    public Lv1AfterBurner(GameObject p)
+    public Lv1AfterBurner(GameObject p, AegisSkillManager skillManager)
     {
         this.playerMovement = p.GetComponent<PlayerMovement>(); //PlayerMovement 클래스를 받아옴
         this.afterBurnerCnt = 2; //사용 가능 횟수 2
@@ -23,6 +25,7 @@ public class Lv1AfterBurner : ISkillBehavior
         this.afterBurnerSpeed = 50f; //afterBurner 속도 50 추가
         this.shooters = p.GetComponentsInChildren<Shooter>();
         this.magCapacity = shooters[0].magCapacity; //Shooters의 최대 탄환 수 저장해놓고
+        this.AegisSkillManager = skillManager; //AegisSkillManager 받아옴
     }
 
     public void UseSkill()
@@ -32,6 +35,11 @@ public class Lv1AfterBurner : ISkillBehavior
 
         magnumSet(0);
         afterBurnerActive(); //afterBurner 활성화
+    }
+
+    public void CancelSkill()
+    {
+
     }
 
 
@@ -61,6 +69,5 @@ public class Lv1AfterBurner : ISkillBehavior
 
     }//magnumSet
 
-
-
+     
 }
