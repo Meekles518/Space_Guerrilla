@@ -13,7 +13,9 @@ public class Lv1StreamLiner : MonoBehaviour, ISkillBehavior
     public float streamLinerRotateTime { get; set; } //포신 회전에 필요한 시간
     private int magCapacity { get; set; } //최대 탄창 수
 
-    public Lv1StreamLiner(GameObject p)
+    AegisSkillManager AegisSkillManager; //
+
+    public Lv1StreamLiner(GameObject p, AegisSkillManager skillManager)
     {
         this.shooters = p.GetComponentsInChildren<Shooter>();
         streamLinerCnt = 1;
@@ -22,7 +24,8 @@ public class Lv1StreamLiner : MonoBehaviour, ISkillBehavior
         streamLinerMax = 999;
         streamLinerRotateTime = 1.5f;
         magCapacity = shooters[0].magCapacity;
-
+        this.AegisSkillManager = skillManager;
+       
     }
 
     public void UseSkill()
@@ -30,6 +33,12 @@ public class Lv1StreamLiner : MonoBehaviour, ISkillBehavior
 
 
     }//UseSkill
+
+
+    public void CancelSkill()
+    {
+
+    }
 
 
     //shooter 회전을 제어하는 코루틴
@@ -96,4 +105,5 @@ public class Lv1StreamLiner : MonoBehaviour, ISkillBehavior
 
     }//magnumSet
 
+     
 }

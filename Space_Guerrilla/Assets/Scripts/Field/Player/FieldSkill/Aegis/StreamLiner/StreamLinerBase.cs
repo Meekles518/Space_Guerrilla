@@ -7,7 +7,7 @@ using Aegis;
 public class StreamLinerBase : AegisSkillBase
 {
 
-    public StreamLinerBase(GameObject p, int level) : base(level)
+    public StreamLinerBase(GameObject p, int level, AegisSkillManager skillManager) : base(level, skillManager)
     {
         SkillName = AegisSkillName.StreamLiner;
         player = p;
@@ -21,7 +21,7 @@ public class StreamLinerBase : AegisSkillBase
         {
             case 1:
 
-                skillBehavior = new Lv1StreamLiner(player);
+            skillBehavior = new Lv1StreamLiner(player, skillManager);
                 skillCnt = (skillBehavior as Lv1StreamLiner).streamLinerCnt;
                 skillImg = null; //레벨 별 스킬 이미지 설정
                 break;
