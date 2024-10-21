@@ -12,8 +12,6 @@ using UnityEngine;
         //실제 스킬을 사용하는 메서드
         public abstract void UseSkill();
 
-        //사용중인 스킬을 취소하는 메서드
-        public abstract void CancelSkill();
 
         //이외에도 필요한게 있다면..
 

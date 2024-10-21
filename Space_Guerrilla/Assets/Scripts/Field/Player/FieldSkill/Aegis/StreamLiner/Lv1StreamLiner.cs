@@ -6,16 +6,16 @@ public class Lv1StreamLiner : MonoBehaviour, ISkillBehavior
 {
     private Shooter[] shooters; //Shooter 배열
 
-    public float streamLinerCnt { get; set; } //사용 가능 횟수
+    public int streamLinerCnt { get; set; } //사용 가능 횟수
     public float streamLinerTime { get; set; } //지속 시간
     public float streamLinerCool {  get; set; } //과열 시간\
     public int streamLinerMax {  get; set; } //최대 탄창 수 변수
     public float streamLinerRotateTime { get; set; } //포신 회전에 필요한 시간
     private int magCapacity { get; set; } //최대 탄창 수
 
-    public Lv1StreamLiner(Shooter[] sts)
+    public Lv1StreamLiner(GameObject p)
     {
-        this.shooters = sts;
+        this.shooters = p.GetComponentsInChildren<Shooter>();
         streamLinerCnt = 1;
         streamLinerTime = 5.0f;
         streamLinerCool = 3.0f;
@@ -31,10 +31,6 @@ public class Lv1StreamLiner : MonoBehaviour, ISkillBehavior
 
     }//UseSkill
 
-    public void CancelSkill()
-    {
-
-    }//CancelSKill
 
     //shooter 회전을 제어하는 코루틴
     private IEnumerator rotateShooter(bool active)

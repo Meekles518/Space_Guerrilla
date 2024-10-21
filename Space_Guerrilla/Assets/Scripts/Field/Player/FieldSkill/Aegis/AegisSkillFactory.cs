@@ -6,17 +6,17 @@ using Aegis;
 //Aegis 스킬을 생성하는 팩토리 클래스
 public class AegisSkillFactory
 {
-    public AegisSkillBase createSkill(AegisSkillName skillName, PlayerMovement pm, Shooter[] sts, int level)
+    public AegisSkillBase createSkill(AegisSkillName skillName, GameObject player, int level)
     {
         switch (skillName)
         {
             case AegisSkillName.AfterBurner:
 
-                return new AfterBurnerBase(pm, sts, level);
+                return new AfterBurnerBase(player, level);
 
             case AegisSkillName.StreamLiner:
 
-                return new StreamLinerBase(sts, level);
+                return new StreamLinerBase(player, level);
 
 
             case AegisSkillName.LaunchCruiseMissile:
