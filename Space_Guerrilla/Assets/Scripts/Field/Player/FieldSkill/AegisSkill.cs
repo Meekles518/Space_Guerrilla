@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Skill
 {
-    public class AegisSkill : FieldSkill
+    public class AegisSkill : MonoBehaviour
     {
 
         private PlayerInput playerInput; // PlayerInput을 불러옴
@@ -62,11 +62,7 @@ namespace Skill
         public bool isSkillActive = false; //현재 동작중인 스킬이 있는지 여부
 
 
-        //미사일 발사 스킬에 관한 변수들
-        public override void SetSkillBtn()
-        {
-            
-        }
+        
 
 
         private void OnEnable()
