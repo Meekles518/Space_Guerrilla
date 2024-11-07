@@ -11,10 +11,10 @@ public class Enemy_Circle : MonoBehaviour
     //적의 행동성향 enum, 조합의 합이 랜덤이 아니라 정해져 있으니, 모든 경우의 수를 열거형 표현
     public enum Status
     {
-       RoamingHuntRun,
-       HouseHuntRun,
-       RomingRun,
-       HuntRun,
+        RoamingHuntRun,
+        HouseHuntRun,
+        RomingRun,
+        HuntRun,
 
     }
 
@@ -22,133 +22,25 @@ public class Enemy_Circle : MonoBehaviour
     public Status status; //적의 행동성향을 저장할 변수
     public bool telescopeHunt; //망원경 추적 모드를 구별할 bool 변수
     public Node targetNode; //목표 Node를 저장할 변수
-    public EnemyInfo enemyInfo;
-
     public Node currentNode; //현재 위치한 Node를 저장할 변수
 
     //virtual, 가상 함수로 적의 Ai 로직을 구현. 이 Class를 상속받는 서로 다른 종류의 적이
     //함수를 마저 완성시키기.
     public virtual void enemyAi()
     {
-        enemyInfo = GetComponent<EnemyInfo>(); //EnemyInfo 컴포넌트 가져오기
-        currentNode = GetComponentInParent<Node>(); //부모의 Node 정보 가져오기
 
-        //추적 Phase일 때
-        if (MapManager.instance.phase == Phase.Hunt)
-        {
-
-
-        }
-
-        //집결 Phase 일 때
-        else if (MapManager.instance.phase == Phase.Assemble)
-        {
-
-        }
-
-        else
-        {
-            switch (status)
-            {
-
-                case Status.RoamingHuntRun:
-
-                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-                    {
-                        Run();
-                    }
-                         
-                    
-                    else if (MapManager.instance.playerDetected)
-                    {
-                        Hunt();
-                    }
-                        
-
-                    else
-                    {
-                        Roaming();
-                    }
-                         
-                    break;
-
-
-                case Status.HouseHuntRun:
-                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-                    {
-                        Run();
-                    }
-
-                    else if (MapManager.instance.playerDetected)
-                    {
-                        Hunt();
-                    }
-
-                    else
-                    {
-                        House();
-                    }
-                     
-                    break;
-
-
-                case Status.RomingRun:
-                    if (currentNode == MapManager.instance.playerNode)
-                    {
-                        Run();
-                    }
-                         
-                    else
-                    {
-                        Roaming();
-                    }
-                     
-                    break;
-
-
-                case Status.HuntRun:
-
-                    if (enemyInfo.health / enemyInfo.maxhealth <= 0.3f)
-                    {
-                        Run();
-                    }
-                    else
-                    {
-                        Hunt();
-                    }
-                     
-                    break;
-
-
-
-                default:
-                    break;
-            }
-
-        }
-         
-
-        
 
     }//movement
 
     public void Run()
     {
-        
-            //현재 Node가 Player이 위치한 Node일 경우
-            if (currentNode == MapManager.instance.playerNode)
-            {
-                //인근의 무작위 Node로 이동
-                int ran = Random.Range(0, currentNode.connected.Count);
-                movement(currentNode.connected[ran]);
-            }
-        
+
 
     }//Run
 
     public void Hunt()
     {
-        movement(BFS(MapManager.instance.playerNode));
+
 
 
     }//Hunt
@@ -182,7 +74,7 @@ public class Enemy_Circle : MonoBehaviour
 
         visitedNodes.Add(node); //방문했던 Node에 목표 Node 추가
         //목표 Node와 연결된 Node들에 대해
-        foreach(Node nd in node.connected)
+        foreach (Node nd in node.connected)
         {
             //목표 Node가 현재 Node와 연결되어 있다면
             if (nd == currentNode)
@@ -197,15 +89,15 @@ public class Enemy_Circle : MonoBehaviour
         //queue의 길이가 0보다 클 경우
         while (true)
         {
-            List<Node> subList = new List<Node>(); 
+            List<Node> subList = new List<Node>();
 
-            while(queue.Count > 0)
+            while (queue.Count > 0)
             {
                 Node nextNode = queue[0]; //queue의 첫 번째 원소 가져오기
                 queue.Remove(queue[0]); //queue의 첫 번째 원소를 리스트에서 제거
-                
 
-                foreach(Node nd in nextNode.connected)
+
+                foreach (Node nd in nextNode.connected)
                 {
                     //nextNode와 연결된 Node 중에 현재 적이 위치한 Node가 존재한다면
                     if (nd == currentNode)
@@ -225,7 +117,7 @@ public class Enemy_Circle : MonoBehaviour
 
 
             }//while queue.Count > 0
-              
+
 
             foreach (Node nd in subList)
             {
@@ -254,7 +146,7 @@ public class Enemy_Circle : MonoBehaviour
         {
             return;
         }
-        
+
         currentNode.enemyObjects.Remove(gameObject); //Node에서 적 정보 제거
         //만약 이 Node에 적이 더 이상 없다면
         if (currentNode.enemyObjects.Count == 0)
@@ -279,7 +171,7 @@ public class Enemy_Circle : MonoBehaviour
     }//movement
 
 
-     
+
 
 
 }

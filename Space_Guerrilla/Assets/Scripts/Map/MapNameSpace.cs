@@ -16,14 +16,14 @@ namespace Map
 
     }
 
-     
+
 
     //Turn 상태를 열거 enum
     public enum Turn
     {
         Player,
         Enemy,
-        Engage,    
+        Engage,
     }
 
     public enum Phase
@@ -39,6 +39,13 @@ namespace Map
     {
         Ship1,
         Aegis,
+
+    }
+
+    //임시로 적의 이름 설정
+    public enum EnemyName
+    {
+        EnemyOne,
 
     }
 

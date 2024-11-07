@@ -36,26 +36,7 @@ public class Player_CruiseMissile : MonoBehaviour
 
     private void Awake()
     {
-        //여기 아래 값들 싹 다 삭제 및 조정 필요. OnEnable로 옮겨야 함
-
-
-        /*
-        //Map에서 가져온 PlayerBulletInfo 의 값을 부여하기
-        PlayerBulletInfo playerBulletInfo = MapManager.instance.playerInfo.GetComponent<PlayerBulletInfo>();
-
-        this.speed = playerBulletInfo.speed; //Speed 저장
-        this.lifespan = playerBulletInfo.lifespan; //lifespan 저장
-        this.Scan_range = playerBulletInfo.Scan_range; //Scan_range 저장
-        this.rotateSpeed = playerBulletInfo.rotateSpeed; //rotateSpeed 저장
-
-
-        var shipEntity = GetComponent<ShipEntity>();
-        shipEntity.getShipEntity(playerBulletInfo); //ShipEntity에 필요한 값들 저장
-
-
-        // 현재 오브젝트의 리지드바디를 가져옴
-        rb2 = gameObject.GetComponent<Rigidbody2D>();
-        */
+        
 
     }
 

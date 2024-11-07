@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using UnityEngine.SceneManagement;
-using Skill;
+
 
 namespace Map
 {
@@ -21,52 +21,32 @@ namespace Map
 
     public class MapManager : MonoBehaviour
     {
-       
+
         //MapManager Class 생성
-
-        public int turnCount; //현재 Turn 수를 저장하는 변수
-        public Turn turn; //현재 Turn 상태를 저장할 변수
-        public Phase phase; //현재 Phase를 저장할 변수
-        public int moveChance; //Player의 움직임 여부를 확인하는 bool 변수
-        public int defaultMoveChance; // Player의 기본 이동 횟수
-        public bool abilityChance; //Player의 기술 사용 여부를 확인하는 bool 변수
-        public bool playerDetected; //Player의 탐지됨 여부를 확인하는 bool 변수
-
         public static MapManager instance;
+
+        //TurnManager 가져오기
+        public TurnManager turnManager;
+        //MapSpawnManager 가져오기
+        public MapSpawnManager mapSpawnManager;
 
         //Node들에 사용되는 변수
         public List<Node> enemyNodeList; //Enemy가 위치한 Node를 저장할 List
         public Node playerNode; //PlayerNode의 정보를 저장할 변수 
 
 
-        
         [HideInInspector]
         public GameObject Nodes; //Nodes GameObject를 저장할 변수
         [HideInInspector]
         public GameObject Map;
-        
+
         public List<GameObject> enemyPrefabs; //Enemy를 Map에 표시하는 
 
-
-        //우주선에 사용되는 수치들을 관리하기 위해 컴포넌트들을 저장할 변수들
-        public GameObject playerInfo; //PlayerInfo를 저장할 변수
-   
-        public PlayerInfo playerShipInfo; //PlayerInfo의 값들을 깊은 복사해 저장할 변수
-        public PlayerBulletInfo playerBulletInfo; //PlaterBulletInfo의 값들을 깊은 복사해 저장할 변수
-        public List<float> skillMaxCooltime = new List<float>(); //스킬들의 최대 쿨타임을 저장할 변수
-        public List<float> skillCurCooltime = new List<float>(); //스킬들의 현재 쿨타임 상태 저장 변수
 
 
         //게임 시작 화면에서 Player의 우주선을 가져와 저장할 변수
         //나중에는 게임 시작 화면에서 우주선 GameObject를 가져와야 하며, 현재는 임시로 insepctor 창에서 설정
-        public GameObject playerShip; 
-      
-
-
-        //UI 및 이미지에 필요한 변수들
-        public Image Img; //Image를 저장할 변수
-        public TMP_Text ButtonText; //Button의 Text 를 저장할 변수
-
+        public GameObject playerShip;
 
         public ShipName shipName; //ShipName 저장 변수
 
@@ -81,105 +61,42 @@ namespace Map
             if (!awakeCheck)
             {
 
-                instance = this;
+                instance = this; //싱글턴 패턴 구현
 
-                Nodes = GameObject.Find("Nodes");
+                //TurnManager 가져오기
+                turnManager = this.gameObject.GetComponent<TurnManager>();
 
-                turn = Turn.Player; //시작 시 Player turn으로 설정
-                phase = Phase.Default; //시작 시 Default Phase로 설정
+                //MapSpawnManager 가져오기
+                mapSpawnManager = this.gameObject.GetComponent<MapSpawnManager>();
 
-
-
-                abilityChance = true; //기술 사용 가능을 true로 설정.
-                playerDetected = false;
-
-                //최초에만 첫 번째 Node를 Player이 위치한 Node로 설정함.
-                playerNode = Nodes.transform.GetChild(0).GetComponent<Node>();
-                playerNode.nodeType = NodeType.Player;
-                playerNode.setColor();
+                Nodes = GameObject.Find("Nodes"); //Nodes GameObject를 찾아서 저장
 
                 DontDestroyOnLoad(this); //MapManager이 씬 변경에도 유지되게 함
                 Map = GameObject.Find("Map");
                 DontDestroyOnLoad(Map); //Map이 씬 변경에도 유지되게 함.
-
-
-
-                //이 아래의 2개 값들은 외부에서 선택한 우주선의 정보를 가져와야 함
-                defaultMoveChance = 1; //Player의 기본 이동 횟수를 1로 설정. 이후에 우주선의 정보를 받아서 적용할 수 있도록 해야 함
-                moveChance = defaultMoveChance; //이동 가능 횟수를 1로 설정, 
-
-
-                //이 아래의 모든 코드들은, 실행되는 Map이 무슨 종류인지에 따라 switch문으로 구분해야 함
-                //임의로 적이 11번 노드에 있다고 가정
-                enemyNodeList.Add(Nodes.transform.GetChild(10).GetComponent<Node>()); //11번 Node 저장
-                var enemy = Instantiate(enemyPrefabs[0], enemyNodeList[0].transform); //11번 Node를 부모로 해서 생성
-
-                //적의 초기 위치의 z좌표를 1f로 해, Node에 가려져서 안보이게 함, Node들의 z좌표는 0
-                enemy.transform.localPosition = new Vector3(0f, 0f, 1f);
-                enemyNodeList[0].enemyObjects.Add(enemy); //Node의 적 List에 enemy 추가 
-
-
- 
-
-                //우주선의 정보를 가져와서, 그 우주선의 스킬을 pSkill에 저장하는 코드 필요.
-                //임시로 우주선 이름 지정, 시작 화면에서 우주선 가져오는 코드로 대체해야 함.
+          
                 shipName = ShipName.Aegis;
 
-                //맨 처음 Map 에 들어왔을 때, 초기 스탯 설정 코드 구문
-                //스탯 설정에 필요한 컴포넌트들 가져오기
-                
-                playerShipInfo = playerInfo.GetComponent<PlayerInfo>();
-                playerBulletInfo = playerInfo.GetComponent<PlayerBulletInfo>();
+                mapSpawnManager.init(); //MapSpawnManager의 초기 설정 실행
 
 
-                //스탯 부여가 여기서 필요한 과정인건가?
-                //스탯을 우주선 오브젝트에 직접 부여하는 것이 아니라, PlayerInfo 상에 수치로 적어두고,
-                //패시브나 연구 주문 등의 효과는 PlayerInfo 상의 수치를 개변하는 것으로 구현.
-                //Field 불러올 때 우주선을 생성하고 그 우주선에 PlayerInfo의 정보를 저장한 다음,
-                //각종 액티브 스킬 사용 시 우주선의 순간적 정보만 개변시켜서 필드에서만 적용되게 하자.
-
-
-
-
-
-
-                //혹시 몰라 일단 switch 구문 설정
-                switch (shipName)
-                {
-                    case ShipName.Aegis:
-
-
-
-
-                        break;
-
-
-
-                }
-
- 
 
 
                 awakeCheck = true;
-            }
-
-             
-        }
+            }//if
 
 
-         
-        //
+        }//Awake
+
+
+
+        //MapManager OnEnable시, 일반적으로 필드에서 맵으로 이동 시 실행
         private void OnEnable()
         {
-            if (turn == Turn.Engage)
-            {
-                turn = Turn.Enemy;
-                checkTurn();
-
-            }
 
 
-        }
+
+        }//OnEnable
 
         //종료 시 실행될 함수
         private void OnApplicationQuit()
@@ -189,170 +106,6 @@ namespace Map
 
 
 
-        //이 아래는 Turn과 관련된 함수들 
-
-        //현재 Turn의 상태에 따른 행동을 서술한 함수
-        public void checkTurn()
-        {
-           
-
-            //현재 Turn이 무엇인지 확인
-            switch ( turn)
-            {
-
-                //Player Turn이라면
-                case Turn.Player:
-                    turnCount++; //턴 카운트 증가
-
-                    //Player의 맵 스킬 쿨타임을 1턴 감소시키는 작업 필요
-                    for (int i = 0; i < 3; i++)
-                    {
-                       
-
-                     
-
-
-                    }
-
-                    Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
-
-                   
-                    ButtonText.text = ("Turn End");
-                  
-                    Debug.Log("Player Turn");
-
-                    break;
-
-                //Enemy Turn 이라면
-                case Turn.Enemy:
-                    turnCount++;
-                    Img.color = Color.gray;
-                    
-                    ButtonText.text = ("Turn End");
-                   
-                    Debug.Log("Enemy Turn");
-                    StartCoroutine(EnemyTurn());
-
-                    break;
-
-                //Engage Turn이라면
-                case Turn.Engage:
-
-                    Img.color = new Color(255 / 255f, 255 / 255f, 255 / 255f, 255 / 255f);
-                  
-                    ButtonText.text = ("Engage!"); //Button의 Text 변경
-                 
-
-                    break;
-
-            }
-
-
-        }//checkTurn
-
-
-
-        //Scene을 변경하는 함수가 필요
-        public void changeScene()
-        {
-            SceneManager.LoadScene("Field");
-
-        }//fieldScene
-
-
-        //Enemy Turn 동안 실행할 로직을 담은 코루틴
-        public IEnumerator EnemyTurn()
-        {
-            //1초 후에 코드 실행하기
-            yield return new WaitForSecondsRealtime(1f);
-            playerDetected = meetEnemy(); //적의 탐지 여부 확인.
-
-            //적이 있는 Node들에 접근
-            foreach(Node node in enemyNodeList)
-            {
-                //Node의 적들에게 접근
-                for(int i = 0; i < node.enemyObjects.Count; i++)
-                {
-                    //이동명령 실시
-                    node.enemyObjects[i].GetComponent<Enemy_Circle>().enemyAi();
-                }
-
-            }
-
-            //적 AI 로직 실행을 위한 코드를 작성해야 함.
-
-            Debug.Log("Enemy Turn End");
-            //1초 후에 코드 실행하기
-            yield return new WaitForSecondsRealtime(1f);
-
-
-            //Player 노드에 적이 존재한다면
-            if (meetEnemy())
-            {
-                //바로 Engage 턴으로 변경
-                 turn = Turn.Engage;
-                checkTurn();
-            }
-
-            else
-            {
-                //Player 턴으로 변경
-                 turn = Turn.Player;
-                moveChance = defaultMoveChance;
-                checkTurn();
-            }
-
-        }//EnemyTurn 코루틴
-
-
-        //턴 종료 버튼을 눌렀을 때 턴이 변경되는 설정
-        public void turnEnd()
-        {
-            //Player 의 턴이라면
-            if ( turn == Turn.Player)
-            {
-                //Player 노드에 적이 존재한다면
-                if (meetEnemy())
-                {
-                    //바로 Engage 턴으로 변경
-                    turn = Turn.Engage;
-                    checkTurn(); //Scene 변경
-                }
-
-                else
-                {
-                    //Enemy의 턴으로 변경
-                    turn = Turn.Enemy;
-                    checkTurn();
-                }
-
-            }
-
-            //Engage 턴이라면
-            else if (turn == Turn.Engage)
-            {
-                changeScene(); //Scene 변경
-            }
-
-
-        }//turnEnd
-
-        //현 Node에 적 여부를 확인하는 함수. 자주 사용하는 코드라 함수로 만듦
-        public bool meetEnemy()
-        {
-            if ( playerNode.enemyObjects.Count > 0)
-            {
-                return true;
-            }
-
-            else return false;
-
-
-        }//checkEnemy
-
-
     }
-
-
 }
 

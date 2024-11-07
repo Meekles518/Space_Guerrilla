@@ -36,45 +36,9 @@ public class ShipEntity : MonoBehaviour
         objectTag = gameObject.tag; // 자신의 태그를 태그 변수에 할당
         maxhealth = maxhealth * (1 + defensestat * 0.75f / 100);
         health = maxhealth;
-        rb2= GetComponent<Rigidbody2D>();
+        rb2 = GetComponent<Rigidbody2D>();
         GD = false;
         Degree = 180;
-    }
-
-    //ShipEntity 스크립트의 변수 값들을 외부에서 불러오는 함수. 사용 빈도가 높을 것으로 예상되고,
-    //대부분의 오브젝트들인 ShipEntity 스크립트를 가지고 있을 것이기에, 여기에 함수 정의
-
-    public void getShipEntity(PlayerInfo playerInfo)
-    {
-        this.maxhealth = playerInfo.maxhealth;
-        this.shield = playerInfo.shield;
-        this.damage = playerInfo.damage;
-        this.defensestat = playerInfo.defensestat;
-        this.health = playerInfo.health;
-        this.rebound = playerInfo.rebound;
-        this.collideRate = playerInfo.collideRate;
-    }
-
-    public void getShipEntity(PlayerBulletInfo playerBulletInfo)
-    {
-        this.maxhealth = playerBulletInfo.maxhealth;
-        this.shield = playerBulletInfo.shield;
-        this.damage = playerBulletInfo.damage;
-        this.defensestat = playerBulletInfo.defensestat;
-        this.health = playerBulletInfo.health;
-        this.rebound = playerBulletInfo.rebound;
-        this.collideRate = playerBulletInfo.collideRate;
-    }
-
-    public void getShipEntity(ShipEntity shipEntity)
-    {
-        this.maxhealth = shipEntity.maxhealth;
-        this.shield = shipEntity.shield;
-        this.damage = shipEntity.damage;
-        this.defensestat = shipEntity.defensestat;
-        this.health = shipEntity.health;
-        this.rebound = shipEntity.rebound;
-        this.collideRate = shipEntity.collideRate;
     }
 
 
@@ -88,7 +52,7 @@ public class ShipEntity : MonoBehaviour
         {
             StartCoroutine("GiveDamage"); // 공격 코루틴 실행
         }
-        
+
     }
 
     // 충돌이 끝나는 시점에 실행
@@ -106,12 +70,12 @@ public class ShipEntity : MonoBehaviour
         GD = true;
         // 충돌중이고 충돌한 상대의 태그가 나와 다를 때
         if (inCollision == true && collideEnemy.tag != objectTag)
-        {          
-                // 상대로부터 ShipEntity 가져오기 시도    
-                ShipEntity shipEntity = collideEnemy.GetComponent<ShipEntity>();
-                // 상대의 ShipEntity가 성공적으로 가져와졌을 때
-                if (shipEntity != null)
-                {
+        {
+            // 상대로부터 ShipEntity 가져오기 시도    
+            ShipEntity shipEntity = collideEnemy.GetComponent<ShipEntity>();
+            // 상대의 ShipEntity가 성공적으로 가져와졌을 때
+            if (shipEntity != null)
+            {
                 if (collideEnemy.tag == "Player" || collideEnemy.tag == "Enemy")
                 {
                     ShipCollide(shipEntity.moveDirection, shipEntity.rebound);
@@ -121,7 +85,7 @@ public class ShipEntity : MonoBehaviour
                     // 상대의 피격 매서드를 실행
                     shipEntity.TakeDamage(damage + (defensestat / 6));
                 }
-                }           
+            }
         }
         // 피격주기마다 반복
         yield return new WaitForSeconds(collideRate);

@@ -21,8 +21,6 @@ public class Shooter : MonoBehaviour
     public Rigidbody2D objectRigidbody;  // 발사자의  Rigidbody
     private float lastFireTime; // 총을 마지막으로 발사한 시점
 
-    public int shooterType = 0;
-
     [Header("총 성능 조정")]
     public int bulletType; // 발사하는 총알의 타입 예) 플레이어 총알, 적 총알 등
     public int magCapacity; // 탄창 용량
@@ -45,22 +43,8 @@ public class Shooter : MonoBehaviour
         state = State.Ready;
         // 마지막으로 투사체를 쏜 시점을 초기화
         lastFireTime = 0;
-        //마지막으로 장전한 시점을 초기화
-        lastReloadTime = 0;
         // 발사기의 리지드바디 컴포넌트를 가져옴
         objectRigidbody = GetComponentInParent<Rigidbody2D>();
-
-        bulletType = GameManager.instance.shooters[shooterType].bulletType;
-        magCapacity = GameManager.instance.shooters[shooterType].magCapacity;
-        magAmmo = GameManager.instance.shooters[shooterType].magAmmo;
-        recoil = GameManager.instance.shooters[shooterType].recoil;
-        reloadTime = GameManager.instance.shooters[shooterType].reloadTime;
-        timeBetFire = GameManager.instance.shooters[shooterType].timeBetFire;
-        projectilesPerFire = GameManager.instance.shooters[shooterType].projectilesPerFire;
-        timeBetProjectiles = GameManager.instance.shooters[shooterType].timeBetProjectiles;
-        reloadInterval = GameManager.instance.shooters[shooterType].reloadInterval;
-
-
     }
 
     private void FixedUpdate()
@@ -81,40 +65,40 @@ public class Shooter : MonoBehaviour
             lastFireTime = Time.time;
             // 실제 발사 처리 실행
             Shot();
-          
+
         }
     }
 
     // 실제 발사 처리
     private void Shot()
-    {      
+    {
         // 발사로직 코루틴 실행
         StartCoroutine("ShotLogic");
 
         // 남은 탄환의 수를 -1
         magAmmo--;
-        
+
         if (magAmmo <= 0)
         {
             // 탄창에 남은 탄약이 없다면, 현재 상태를 Empty으로 갱신
             state = State.Empty;
-            
+
         }
     }
 
     // 한번 클릭시 투사체 발사 개수와 발사간의 간격을 조절하는 기능
     IEnumerator ShotLogic()
-    {        
-            // 한번의 클릭에 발사하는 투사체수 만큼 for문 안을 반복
-            for (int i = 0; i < projectilesPerFire; i++)
-            {               
-                // 실제 투사체 발사 메서드 ShootProjectiles가 클릭당 발사 속도마다 작동
-                Invoke("ShootProjectiles", timeBetProjectiles * i);
-                
-            }
-            
-            // 투사체 발사 간격만큼 대기
-            yield return new WaitForSeconds(timeBetFire);         
+    {
+        // 한번의 클릭에 발사하는 투사체수 만큼 for문 안을 반복
+        for (int i = 0; i < projectilesPerFire; i++)
+        {
+            // 실제 투사체 발사 메서드 ShootProjectiles가 클릭당 발사 속도마다 작동
+            Invoke("ShootProjectiles", timeBetProjectiles * i);
+
+        }
+
+        // 투사체 발사 간격만큼 대기
+        yield return new WaitForSeconds(timeBetFire);
     }
 
     // 필요한 투사체를 생성해서 발사
