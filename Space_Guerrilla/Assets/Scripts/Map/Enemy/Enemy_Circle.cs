@@ -23,6 +23,7 @@ public class Enemy_Circle : MonoBehaviour
     public bool telescopeHunt; //망원경 추적 모드를 구별할 bool 변수
     public Node targetNode; //목표 Node를 저장할 변수
     public Node currentNode; //현재 위치한 Node를 저장할 변수
+    public Node lastNode = null; //이동 이전에 위치한 Node를 저장할 변수
 
     //virtual, 가상 함수로 적의 Ai 로직을 구현. 이 Class를 상속받는 서로 다른 종류의 적이
     //함수를 마저 완성시키기.
@@ -165,6 +166,10 @@ public class Enemy_Circle : MonoBehaviour
 
         gameObject.transform.parent = node.gameObject.transform; //부모 변경
 
+        //실제 Enemy_Circle의 좌표를 변경하는 코드도 추가 작성 필요. 우선 로직만 구현하자.
+
+        lastNode = currentNode; //이전 Node 변경
+        currentNode = node; //현재 Node 변경
 
 
 

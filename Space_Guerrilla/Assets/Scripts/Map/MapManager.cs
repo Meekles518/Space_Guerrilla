@@ -32,16 +32,13 @@ namespace Map
 
         //Node들에 사용되는 변수
         public List<Node> enemyNodeList; //Enemy가 위치한 Node를 저장할 List
-        public Node playerNode; //PlayerNode의 정보를 저장할 변수 
-
+        public Node playerNode; //Player가 현재 위치한 Node 정보를 저장할 변수 
+        public Node lastPlayerNode = null; // Player가 이동 전에 위치했던 Node 정보를 저장할 변수
 
         [HideInInspector]
         public GameObject Nodes; //Nodes GameObject를 저장할 변수
         [HideInInspector]
         public GameObject Map;
-
-        public List<GameObject> enemyPrefabs; //Enemy를 Map에 표시하는 
-
 
 
         //게임 시작 화면에서 Player의 우주선을 가져와 저장할 변수

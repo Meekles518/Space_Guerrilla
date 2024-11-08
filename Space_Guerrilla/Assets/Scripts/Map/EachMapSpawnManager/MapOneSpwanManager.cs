@@ -22,7 +22,7 @@ public class MapOneSpwanManager : MapSpawnManager
         int playerSpawnNode = 0;
         int enemyOneSpawnNode = 11;
 
-        switch(MapManager.instance.shipName)
+        switch (MapManager.instance.shipName)
         {
             case ShipName.Aegis:
                 MapManager.instance.playerShip = Instantiate(playerShip[ShipName.Aegis]);
@@ -36,14 +36,31 @@ public class MapOneSpwanManager : MapSpawnManager
 
 
         //EnemyOne의 Node 설정
-        MapManager.instance.enemyNodeList.Add(MapManager.instance.Nodes.transform.GetChild(enemyOneSpawnNode).GetComponent<Node>());
-        MapManager.instance.enemyNodeList[0].nodeType = NodeType.Enemy;
-        var enemyOne = Instantiate(enemyCircle[EnemyName.EnemyOne], MapManager.instance.enemyNodeList[0].transform.position, Quaternion.identity);
-        MapManager.instance.enemyNodeList[0].enemyObjects.Add(enemyOne);
+        spawnEnemy(enemyName: EnemyName.EnemyOne, enemySpawnNode: enemyOneSpawnNode);
 
 
 
 
+
+    }
+
+    public void spawnEnemy(EnemyName enemyName, int enemySpawnNode)
+    {
+        var enemyNodeList = MapManager.instance.enemyNodeList; //MapManager의 enemyNodeList 가져오기
+        var nodes = MapManager.instance.Nodes; //MapManager의 Nodes 가져오기
+        var enemyNode = nodes.transform.GetChild(enemySpawnNode).GetComponent<Node>(); //적을 생성하려는 Node 가져오기
+
+        //현재 적을 생성하려는 Node가 MapManager의 enemyNodeList 에 없다면, 추가하기 
+        if (!enemyNodeList.Contains(enemyNode))
+        {
+            enemyNodeList.Add(enemyNode);
+            enemyNode.nodeType = NodeType.Enemy; //NodeType 설정
+        }
+
+        //enemyCircle 인스턴스 새로 생성, 임시로 좌표는 생성 Node와 동일하게. 이후 수정 필요
+        var enemy = Instantiate(enemyCircle[enemyName], enemyNode.transform.position, Quaternion.identity, enemyNode.transform);
+        enemyNode.enemyObjects.Add(enemy); //Node의 enemyObjects에 추가
+        enemy.GetComponent<Enemy_Circle>().currentNode = enemyNode; //Enemy_Circle의 node 설정
 
     }
 }

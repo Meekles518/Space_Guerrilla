@@ -101,7 +101,7 @@ namespace Map
                 //playerNode의 connected 리스트에, 클릭한 Node가 존재한다면
                 if (MapManager.instance.playerNode.connected.Contains(this))
                 {
-
+                    MapManager.instance.lastPlayerNode = MapManager.instance.playerNode; //이전 Node 저장
                     playerMovement(this);
 
                     //턴 당 1번만 움직일 수 있다고 가정하고 코드 작성, 이후에 우주선의 설정에
