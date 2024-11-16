@@ -222,11 +222,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpawn: {x: 0, y: 0, z: 0}
   reinforceSpawn: {x: 0, y: 0, z: 0}
+  gateSpawn: {x: 0, y: 0, z: 0}
   player: {fileID: 0}
+  Enemies: []
+  Gate: {fileID: 1454542063726509468, guid: bde39cb71ef741146b86141faf888885, type: 3}
   isAtk: 0
   atkDirection: 0
   escapeRange: 50
+  gateDist: 0
+  gateAngle: 0
   enemySpawnInfo: []
+  gateSpawninfo: []
 --- !u!4 &170515249
 Transform:
   m_ObjectHideFlags: 0

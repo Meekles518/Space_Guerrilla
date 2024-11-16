@@ -11,7 +11,5 @@ public class EnemySpawnInfo : MonoBehaviour
     {
         EnemyTypes = enemyTypes;
         EnemySpawn = enemySpawn;
-    }
-
-   
+    }   
 }
