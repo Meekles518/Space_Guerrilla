@@ -2,16 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyReinforceInfo : MonoBehaviour
+public class ReinforceInfo : MonoBehaviour
 {
     public int EnemyTypes;
     public int ReinforceTime;
-    public float GateAngle;
+    public int GateNumber;
 
-    public EnemyReinforceInfo(int enemyTypes, int reinforceTime, float gateAngle)
+    public ReinforceInfo(int enemyTypes, int reinforceTime, int gateNumber)
     {
         EnemyTypes = enemyTypes;
         ReinforceTime = reinforceTime;
-        GateAngle = gateAngle;
+        GateNumber= gateNumber;
     }
 }
