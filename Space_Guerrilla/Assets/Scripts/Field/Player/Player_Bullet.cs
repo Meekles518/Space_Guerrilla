@@ -23,24 +23,11 @@ public class Player_Bullet : MonoBehaviour
     public float spreadRange; // 탄퍼짐 정도
 
 
-    //Player_Bullet 스크립트의 Awake, OnEnable 함수를 재조정해야 한다.
-    private void Awake()
-    {
-
-    }
-
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드
     private void OnEnable()
     {
-
-
         // 현재 오브젝트의 리지드바디를 가져옴
         rb2 = gameObject.GetComponent<Rigidbody2D>();
-        // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
-        spread = Random.Range(-spreadRange, spreadRange);
-
-
-
 
         // 총알의 비활성화 여부를 거짓으로 바꿈
         dead = false;
@@ -52,6 +39,14 @@ public class Player_Bullet : MonoBehaviour
         moveDirection2 = (Vector2)moveDirection3;
         // 총알이 계속 남아있지 않도록 하는 코루틴 Disable을 실행
         StartCoroutine(Disable());
+    }
+
+    //탄퍼짐을 조절하는 메서드. Bullet이 PoolManager로 생성된 후에 우주선에 할당되어 있는 BulletInfo의 데이터를 옮기므로,
+    //OnEnable 후에 Bullet의 데이터를 업로드 하게 되는 것이다. 따라서 탄퍼짐 정도를 생성 이후에 호출할 수 있게 메서드화 시킴.
+    public void setSpread()
+    {
+        // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
+        spread = Random.Range(-spreadRange, spreadRange);
     }
 
     // 총알에 velocity를 부여해줌

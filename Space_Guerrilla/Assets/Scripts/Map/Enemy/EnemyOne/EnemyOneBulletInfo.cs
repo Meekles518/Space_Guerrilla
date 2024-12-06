@@ -4,11 +4,8 @@ using UnityEngine;
 
 public class EnemyOneBulletInfo : BulletInfo
 {
-
-
-    //생성자에 EnemyOne의 기본 데이터를 설정
-    //모든 값들은 임의 부여
-    public EnemyOneBulletInfo()
+    //초기값 초기화
+    public override void init()
     {
         //Enemy Bullet 스크립트에 넣어야 할 변수값들
         speed = 10f; // 총알의 속도
@@ -22,17 +19,27 @@ public class EnemyOneBulletInfo : BulletInfo
         health = 30f;
         rebound = 0f;
         collideRate = 0.1f;
-
-    }//생성자 끝
-
-    public override void init()
-    {
-        throw new System.NotImplementedException();
     }
 
     public override void lvlUp()
     {
         throw new System.NotImplementedException();
+    }
+
+    public override void loadDataFromMap(BulletInfo mapBulletInfo)
+    {
+        // mapShipInfo가 EnemyOneBulletInfo 타입인지 확인
+        if (mapBulletInfo is not EnemyOneBulletInfo)
+        {
+            Debug.LogError("mapBulletInfo is not of type EnemyOneBulletInfo");
+            return;
+        }
+
+        // mapBulletInfo를 EnemyOneBulletInfo로 캐스팅
+        EnemyOneBulletInfo enemyOneBulletInfo = (EnemyOneBulletInfo)mapBulletInfo;
+
+        base.loadPublicData(enemyOneBulletInfo); // 부모 클래스의 loadDataFromMap 호출
+
     }
 
 }

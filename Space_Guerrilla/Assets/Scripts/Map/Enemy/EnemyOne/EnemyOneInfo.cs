@@ -20,7 +20,8 @@ public class EnemyOneInfo : ShipInfo
     public float OptimalAtkRange; // 적정 공격 사거리
 
 
-    public EnemyOneInfo()
+    //초기값 초기화
+    public override void init()
     {
         //Shooter 스크립트에 들어가야 하는 변수값들
         bulletType1 = 1; // 발사하는 총알의 타입 예) 플레이어 총알, 적 총알 등
@@ -31,8 +32,6 @@ public class EnemyOneInfo : ShipInfo
         timeBetFire1 = 1f; // 투사체 발사 간격
         projectilesPerFire1 = 1; // 한번 클릭시 발사하는 투사체 수
         timeBetProjectiles1 = 0.2f; // 한번 클릭시 발사되는 투사체 간의 시간 간격
-
-        //Shooter 및 Enemy Shooter 스크립트에 들어가야 하는 변수값들
         reloadInterval1 = 0.1f;
 
         //Enemy Movement 스크립트에 들어가야 하는 변수값들
@@ -54,14 +53,6 @@ public class EnemyOneInfo : ShipInfo
         health = 30f;
         rebound = 0f;
         collideRate = 0.1f;
-
-
-
-    }
-
-    public override void init()
-    {
-        throw new System.NotImplementedException();
     }
 
 
@@ -69,5 +60,44 @@ public class EnemyOneInfo : ShipInfo
     {
         throw new System.NotImplementedException();
     }
+
+    //Enemy_Circle에 있는 ShipInfo에서 데이터를 가져와 우주선의 ShipInfo에 저장하는 메서드
+    public override void loadDataFromMap(ShipInfo mapShipInfo)
+    {
+        // mapShipInfo가 AegisInfo 타입인지 확인
+        if (mapShipInfo is not EnemyOneInfo)
+        {
+            Debug.LogError("mapShipInfo is not of type EnemyOneInfo");
+            return;
+        }
+
+        // mapShipInfo를 AegisInfo로 캐스팅
+        EnemyOneInfo enemyOneInfo = (EnemyOneInfo)mapShipInfo;
+
+        base.loadPublicData(enemyOneInfo);
+
+        this.OptimalAtkRange = enemyOneInfo.OptimalAtkRange;
+
+
+        this.MaxAtkRange = enemyOneInfo.MaxAtkRange;
+        this.smallAgrro = enemyOneInfo.smallAgrro;
+        this.largeAgrro = enemyOneInfo.largeAgrro;
+        this.TimeTillAtk = enemyOneInfo.TimeTillAtk;
+
+        var enemyMovement = GetComponent<Enemy_Movement>(); //EnemyMovement 가져오기
+        var enemyControl = GetComponent<Enemy_Control>(); //EnemyControl 가져오기
+
+        enemyMovement.moveSpeed = moveSpeed; //EnemyMovement에 moveSpeed 할당
+        enemyMovement.rotateSpeed = rotateSpeed; //EnemyMovement에 rotateSpeed 할당
+        enemyMovement.OptimalAtkRange = OptimalAtkRange; //EnemyMovement에 OptimalAtkRange 할당
+
+        enemyControl.MaxAtkRange = MaxAtkRange; //EnemyControl에 MaxAtkRange 할당
+        enemyControl.smallAgrro = smallAgrro; //EnemyControl에 smallAgrro 할당
+        enemyControl.largeAgrro = largeAgrro; //EnemyControl에 largeAgrro 할당
+        enemyControl.TimeTillAtk = TimeTillAtk; //EnemyControl에 TimeTillAtk 할당
+
+
+
+    }//loadDataFromMap
 
 }

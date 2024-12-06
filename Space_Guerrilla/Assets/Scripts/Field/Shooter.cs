@@ -104,8 +104,52 @@ public class Shooter : MonoBehaviour
     // 필요한 투사체를 생성해서 발사
     private void ShootProjectiles()
     {
-        // 풀에서 투사체를 불러와 발사기 위치에 생성
-        GameManager.instance.poolManager.Get(bulletType, fireTransform);
+        // 풀에서 투사체를 불러와 발사기 위치에 생성(미사일에는 ShipEntity 스크립트가 안들어가있음, 오류인가 의도인가?
+        var projectile = GameManager.instance.poolManager.Get(bulletType, fireTransform);
+
+        //투사체 생성 후 투사체에 필요한 데이터 부여
+        var bulletInfo = GetComponentInParent<BulletInfo>(); //Shooter의 부모 오브젝트에 있는 BulletInfo 컴포넌트 가져오기
+
+        bulletInfo.insertDataToShipEntity(projectile.GetComponent<ShipEntity>()); //투사체의 ShipEntity 스크립트에 데이터 부여
+
+
+        //null이라면 Prefab 설정 오류임, 12/06 기준 모든 Shooter 컴포넌트는 우주선 오브젝트의 자식 오브젝트 안에 들어가있음
+        //임시로 if 분기문으로 스크립트 존재 유무를 확인해 데이터를 부여하는 하드코딩으로 구현
+        //이후에 스크립트 개수가 늘어난다면, 데이터 부여 부분을 BulletInfo에 이전에 최적화하는 과정이 필요함.
+        if (bulletInfo == null)
+        {
+            if (projectile.TryGetComponent(out Player_Bullet playerBullet))
+            {
+                //Player_Bullet 스크립트에 BulletInfo의 값 부여하기
+                playerBullet.speed = bulletInfo.speed;
+                playerBullet.spreadRange = bulletInfo.spreadRange;
+            }
+            else if (projectile.TryGetComponent(out Enemy_Bullet enemyBullet))
+            {
+                //Enemy_Bullet 스크립트에 BulletInfo의 값 부여하기
+                enemyBullet.speed = bulletInfo.speed;
+                enemyBullet.spreadRange = bulletInfo.spreadRange;
+            }
+            else if (projectile.TryGetComponent(out Player_CruiseMissile playerCruiseMissile))
+            {
+                //Player_CruiseMissile 스크립트에 BulletInfo의 값 부여하기
+                playerCruiseMissile.speed = bulletInfo.missileSpeed;
+                playerCruiseMissile.lifespan = bulletInfo.lifespan;
+                playerCruiseMissile.Scan_range = bulletInfo.Scan_range;
+                playerCruiseMissile.rotateSpeed = bulletInfo.rotateSpeed;
+            }
+            else if (projectile.TryGetComponent(out Enemy_CruiseMissile enemyCruiseMissile))
+            {
+                //Enemy_CruiseMissile 스크립트에 BulletInfo의 값 부여하기
+                enemyCruiseMissile.speed = bulletInfo.missileSpeed;
+                enemyCruiseMissile.lifespan = bulletInfo.lifespan;
+                enemyCruiseMissile.Scan_range = bulletInfo.Scan_range;
+                enemyCruiseMissile.rotateSpeed = bulletInfo.rotateSpeed;
+            }
+
+        }
+
+
         //투사체를 발사한 위치 반대 방향으로 플레이어에게 반동을 줌
         objectRigidbody.AddForce(-fireTransform.up.normalized * recoil);
     }

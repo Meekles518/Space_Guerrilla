@@ -25,7 +25,7 @@ public class MapOneSpwanManager : MapSpawnManager
         switch (MapManager.instance.shipName)
         {
             case ShipName.Aegis:
-                MapManager.instance.playerShip = Instantiate(playerShip[ShipName.Aegis]);
+                MapManager.instance.playerShip = playerShip[ShipName.Aegis];
                 break;
         }
 

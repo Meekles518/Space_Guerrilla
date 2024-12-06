@@ -23,21 +23,15 @@ public class Enemy_Bullet : MonoBehaviour
     public LayerMask Target_layer; // 검색을 시행할 레이어(Enemy 레이어)
     public Transform Nearest_enemy; // 검색된 오브젝트중 가장 가까운 Enemy 오브젝트
 
-    private void Awake()
-    {
-        // 현재 오브젝트의 리지드바디를 가져옴
-        rb2 = gameObject.GetComponent<Rigidbody2D>();
-        // 속도 선언
-        speed = 10f;
-        // 탄퍼짐 정도 선언
-        spreadRange = 5f;
-        // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
-        spread = Random.Range(-spreadRange, spreadRange);
-    }
+    //Awake와 OnEnable이 혼용되어 사용되고 있음. Bullet은 PoolManager를 통해 생성 및 관리되기에, OnEnable로 통제하는 것이 좋아보임
 
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드
     private void OnEnable()
     {
+        // 현재 오브젝트의 리지드바디를 가져옴
+        rb2 = gameObject.GetComponent<Rigidbody2D>();
+
+
         // 검색 레이어를 Enemy로 설정
         Target_layer = LayerMask.GetMask("Enemy");
         // 근처 모든 Enemy 오브젝트를 검색
@@ -54,6 +48,14 @@ public class Enemy_Bullet : MonoBehaviour
         bulletPosition = new Vector2(transform.position.x, transform.position.y);       
         // 총알이 계속 남아있지 않도록 하는 코루틴 Disable을 실행
         StartCoroutine(Disable());
+    }
+
+    //탄퍼짐을 조절하는 메서드. Bullet이 PoolManager로 생성된 후에 우주선에 할당되어 있는 BulletInfo의 데이터를 옮기므로,
+    //OnEnable 후에 Bullet의 데이터를 업로드 하게 되는 것이다. 따라서 탄퍼짐 정도를 생성 이후에 호출할 수 있게 메서드화 시킴.
+    public void setSpread()
+    {
+        // 최종 탄퍼짐을 탄퍼짐 정도 사이에서 랜덤하게 결정
+        spread = Random.Range(-spreadRange, spreadRange);
     }
 
     Transform Nearest() {

@@ -5,8 +5,9 @@ using Map;
 
 //적을 Map에 나타내는 데에 사용하는 Circle이 모두 가지고 있을 클래스,
 //모든 Ai 스크립트는 Enemy_Circle 클래스를 상속받는다??
-public class Enemy_Circle : MonoBehaviour
+public abstract class Enemy_Circle : MonoBehaviour
 {
+     
 
     //적의 행동성향 enum, 조합의 합이 랜덤이 아니라 정해져 있으니, 모든 경우의 수를 열거형 표현
     public enum Status
@@ -18,20 +19,17 @@ public class Enemy_Circle : MonoBehaviour
 
     }
 
-
+    public EnemyName enemyName; //적의 이름을 저장할 변수
     public Status status; //적의 행동성향을 저장할 변수
     public bool telescopeHunt; //망원경 추적 모드를 구별할 bool 변수
     public Node targetNode; //목표 Node를 저장할 변수
     public Node currentNode; //현재 위치한 Node를 저장할 변수
     public Node lastNode = null; //이동 이전에 위치한 Node를 저장할 변수
 
-    //virtual, 가상 함수로 적의 Ai 로직을 구현. 이 Class를 상속받는 서로 다른 종류의 적이
+    //함수로 적의 Ai 로직을 구현. 이 Class를 상속받는 서로 다른 종류의 적이
     //함수를 마저 완성시키기.
-    public virtual void enemyAi()
-    {
+    public abstract void enemyAi();
 
-
-    }//movement
 
     public void Run()
     {

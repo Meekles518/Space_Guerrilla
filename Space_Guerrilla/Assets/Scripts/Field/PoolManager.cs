@@ -68,6 +68,7 @@ public class PoolManager : MonoBehaviour
         }
 
         // 할당된 게임 오브젝트를 리턴
+        //Get 메서드를 호출하는 우주선이 생성한 오브젝트(총알 등)에 값을 부여하기 위해 할당된 게임 오브젝트 반환
         return Select;
 
     }

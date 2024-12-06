@@ -10,9 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 268487114828119007}
   - component: {fileID: 2820127486374422131}
-  - component: {fileID: 2973177885374849558}
   - component: {fileID: -7283887531405553422}
   - component: {fileID: -5288548914532224106}
+  - component: {fileID: 6614600173608939458}
   m_Layer: 0
   m_Name: EnemyOneCircle
   m_TagString: Untagged
@@ -87,22 +87,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2973177885374849558
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3584721335691465119}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a617008ea00be94d9a3be655afd876f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  status: 0
-  telescopeHunt: 0
-  targetNode: {fileID: 0}
-  currentNode: {fileID: 0}
 --- !u!114 &-7283887531405553422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -154,6 +138,7 @@ MonoBehaviour:
   level: 1
   speed: 10
   spreadRange: 0.3
+  missileSpeed: 0
   lifespan: 0
   Scan_range: 0
   rotateSpeed: 0
@@ -164,3 +149,21 @@ MonoBehaviour:
   health: 30
   rebound: 0
   collideRate: 0.1
+--- !u!114 &6614600173608939458
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3584721335691465119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: af1a72fe31dab5f4b88115a06029882d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyName: 0
+  status: 0
+  telescopeHunt: 0
+  targetNode: {fileID: 0}
+  currentNode: {fileID: 0}
+  lastNode: {fileID: 0}

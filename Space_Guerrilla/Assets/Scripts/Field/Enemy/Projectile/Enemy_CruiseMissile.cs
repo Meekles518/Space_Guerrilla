@@ -31,17 +31,12 @@ public class Enemy_CruiseMissile : MonoBehaviour
     public LayerMask Target_layer1; // 검색을 시행할 레이어(Enemy 레이어)
     public Transform Nearest_enemy1; // 검색된 오브젝트중 가장 가까운 Enemy 오브젝트
 
-    private void Awake()
-    {
-        // 현재 오브젝트의 리지드바디를 가져옴
-        rb2 = gameObject.GetComponent<Rigidbody2D>();
-        // 속도 선언
-        //speed = 20f;
-    }
 
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드
     private void OnEnable()
     {
+        // 현재 오브젝트의 리지드바디를 가져옴
+        rb2 = gameObject.GetComponent<Rigidbody2D>();
         // 총알의 비활성화 여부를 거짓으로 바꿈
         dead = false;
         Target_layer = LayerMask.GetMask("Enemy");

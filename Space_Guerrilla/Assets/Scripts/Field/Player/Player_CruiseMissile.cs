@@ -34,11 +34,6 @@ public class Player_CruiseMissile : MonoBehaviour
     public float Scan_range;
     public float rotateSpeed; // 회전 속도
 
-    private void Awake()
-    {
-        
-
-    }
 
     // 풀매니저에서 비활성화된 총알이 활성화 될때 마다 작동할 매서드
     private void OnEnable()

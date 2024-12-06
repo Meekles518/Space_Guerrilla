@@ -61,13 +61,16 @@ namespace Map
         {
             switch (turn)
             {
+                //전투를 진행한 후에 Map으로 돌아왔다면
                 case Turn.Engage:
 
+                    //이전이 Player 턴 이었으면
                     if (lastTurn == Turn.Player)
                     {
                         changeTurn(Turn.Enemy);
                     }
 
+                    //이전이 Enemy 턴 이었으면
                     else if (lastTurn == Turn.Enemy)
                     {
                         changeTurn(Turn.Player);

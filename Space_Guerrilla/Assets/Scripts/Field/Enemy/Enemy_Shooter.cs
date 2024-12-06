@@ -13,9 +13,14 @@ public class Enemy_Shooter : MonoBehaviour
     public Enemy_Control control; // 이 적 오브젝트의 Enemy_Control
     private float lastReloadTime; // 마지막 장전 시점
 
+
+    //Enemy_Control 및 shooter의 변수들과 중복되기에, 혼용을 방지하고자 각각 할당된 shooter 및 Enemy_Control에서 변수를 가져와 사용하게 함.
+    //즉 이거 일단 냅두긴 한다만 사용은 안하는 변수들임.
     [Header("적 발사 수치")]
     public float reloadInterval; // 재장전 시기간의 시간 간격   
     public float MaxAtkRange; // 최대 공격 사거리
+
+
     [Header("발사 확인용")]
     public bool isShoot; // 발사를 제어하는 불 변수
 
@@ -41,7 +46,7 @@ public class Enemy_Shooter : MonoBehaviour
         isShoot = control.isShoot;
 
         // 최대 공격 사거리 안으로 플레이어가 들어오면
-        if (control.EnemytoPlayer <= MaxAtkRange)
+        if (control.EnemytoPlayer <= control.MaxAtkRange)
         {
             // 발사가 가능할 때
             if (isShoot == true)
@@ -51,7 +56,7 @@ public class Enemy_Shooter : MonoBehaviour
                 Debug.Log("fire");
 
                 // 마지막 장전 시간으로 부터의 시간이 장전주기보다 길고 탄창의 탄수가 최대 탄수보다 적을 때
-                if (Time.time - lastReloadTime >= reloadInterval && shooter.magAmmo != shooter.magCapacity)
+                if (Time.time - lastReloadTime >= shooter.reloadInterval && shooter.magAmmo != shooter.magCapacity)
                 {
                     // 장전을 하는 Reload 매서드 실행
                     shooter.Reload();
