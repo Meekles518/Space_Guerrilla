@@ -128,40 +128,27 @@ public class SpawnManager : MonoBehaviour
         return player;
     }
 
-    public void EnemyInstantiate(Node targetNode, Vector3 targetVector)
+    //적을 Instantiate 하고 필요한 데이터를 부여해주는 메서드
+    public void EnemyInstantiate(Vector3 targetVector, GameObject targetEnemyObject)
     {
-        //인자가 null이면 코드 로직 오류
-        if (targetNode == null || targetVector == null)
+        var enemyCircle = targetEnemyObject.GetComponent<Enemy_Circle>(); //Enemy_Circle 컴포넌트 가져오기
+        var enemyShipInfo = targetEnemyObject.GetComponent<ShipInfo>(); //ShipInfo 컴포넌트 가져오기
+        var enemyBulletInfo = targetEnemyObject.GetComponent<BulletInfo>(); //BulletInfo 컴포넌트 가져오기
+
+        //enemyShipObject에 해당 EnemyName으로 적 Prefab이 지정되어 있다면
+        if (enemyShipObject.ContainsKey(enemyCircle.enemyName))
         {
-            Debug.LogError("targetNode or targetVector is null");
+            //해당 EnemyName에 해당하는 GameObject를 Instantiate, 위치는 targetVector로
+            var enemyObject = Instantiate(enemyShipObject[enemyCircle.enemyName], targetVector, Quaternion.identity);
+            enemyObject.GetComponent<ShipInfo>().loadDataFromMap(enemyShipInfo); //ShipInfo 정보를 가져와서 적용
+            enemyObject.GetComponent<BulletInfo>().loadDataFromMap(enemyBulletInfo); //BulletInfo 정보를 가져와서 적용
+        }
+        else
+        {
+            Debug.LogError("enemyShipObject does not contain enemy prefab " + enemyCircle.enemyName);
             return;
         }
-
-        //Node의 enemyObjects 배열 순환
-        foreach (GameObject enemy in targetNode.enemyObjects)
-        {
-            //Enemy_Circle 컴포넌트 가져오기
-            var enemyCircle = enemy.GetComponent<Enemy_Circle>(); //Enemy_Circle 컴포넌트 가져오기
-            var enemyShipInfo = enemy.GetComponent<ShipInfo>(); //ShipInfo 컴포넌트 가져오기
-            var enemyBulletInfo = enemy.GetComponent<BulletInfo>(); //BulletInfo 컴포넌트 가져오기
-
-
-            //enemyShipObject에 해당 EnemyName으로 적 Prefab이 지정되어 있다면
-            if (enemyShipObject.ContainsKey(enemyCircle.enemyName)) 
-            {
-                //해당 EnemyName에 해당하는 GameObject를 Instantiate, 위치는 targetVector로
-                var enemyObject = Instantiate(enemyShipObject[enemyCircle.enemyName], targetVector, Quaternion.identity);
-                enemyObject.GetComponent<ShipInfo>().loadDataFromMap(enemyShipInfo); //ShipInfo 정보를 가져와서 적용
-                enemyObject.GetComponent<BulletInfo>().loadDataFromMap(enemyBulletInfo); //BulletInfo 정보를 가져와서 적용
-            }
-            else
-            {
-                Debug.LogError("enemyShipObject does not contain enemy prefab " + enemyCircle.enemyName);
-                return;
-            }
-        }
-
-    }
+    }    
    
 
     public void setObjects()
@@ -185,6 +172,8 @@ public class SpawnManager : MonoBehaviour
                 // 게이트를 해당 좌표값에 instantiate
                 GameObject currGate = Instantiate(Gate, gatePosition, Quaternion.identity);
 
+                currGate.GetComponent<Gate>().gateNode = node; // 게이트 오브젝트에 노드 정보 부여
+
                 gateObjects.Add(currGate); // 게이트 오브젝트를 리스트에 추가
 
                 //생성하는 Gate가 가리키는 Node가 Player이 이전에 위치했던 Node라면
@@ -194,8 +183,11 @@ public class SpawnManager : MonoBehaviour
                 }
             }
 
-           //Player 공격 시, 모든 적을 맵 정 중앙에 생성
-           EnemyInstantiate(targetNode: curPlayerNode, targetVector: new Vector3(0, 0, 0)); 
+            //현재 플레이어가 위치한 Node의 적 리스트들 중에서
+            foreach (GameObject enemy in curPlayerNode.enemyObjects)
+            {
+                EnemyInstantiate(targetVector: new Vector3(0, 0, 0), targetEnemyObject: enemy);
+            }
 
         }
         else if (whoAttacked == Turn.Enemy) //Enemy의 이동으로 전투가 발생하였다면
@@ -213,8 +205,25 @@ public class SpawnManager : MonoBehaviour
                 // 게이트를 해당 좌표값에 instantiate
                 GameObject currGate = Instantiate(Gate, gatePosition, Quaternion.identity);
 
+                currGate.GetComponent<Gate>().gateNode = node; // 게이트 오브젝트에 노드 정보 부여
+
                 gateObjects.Add(currGate); // 게이트 오브젝트를 리스트에 추가
-                EnemyInstantiate(targetNode: node, targetVector: gatePosition); //해당 노드에 위치한 적들 생성
+
+                //현재 플레이어가 위치한 Node의 적 리스트들 중에서
+                foreach (GameObject enemy in curPlayerNode.enemyObjects)
+                {
+                    //Enemy_Circle 컴포넌트 가져오기
+                    var enemyCircle = enemy.GetComponent<Enemy_Circle>(); //Enemy_Circle 컴포넌트 가져오기
+
+
+                    //이 Enemy가 이동 전에 위치했던 Node가 현재 상위 foreach 문에서 생성하는 Gate를 의미한다면
+                    if (enemyCircle.lastNode == node)
+                    {
+                        EnemyInstantiate(targetVector: gatePosition, targetEnemyObject: enemy); //해당 Enemy를 게이트 위치에 생성
+                    }
+                }
+                
+
 
             }
 
